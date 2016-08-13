@@ -17,7 +17,7 @@ const app = express();
 const users = require('./routes/users');
 const jobs = require('./routes/jobs');
 const contacts = require('./routes/contacts');
-const contacts_jobs = require('./routes/contacts-jobs');
+const contacts_jobs = require('./routes/contacts_jobs');
 const token = require('./routes/token');
 
 app.disable('x-powered-by');
