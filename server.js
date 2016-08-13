@@ -17,7 +17,7 @@ const app = express();
 const users = require('./routes/users');
 const jobs = require('./routes/jobs');
 const contacts = require('./routes/contacts');
-const contacts_jobs = require('./routes/contacts_jobs');
+const contacts_jobs = require('./routes/contacts-jobs');
 const token = require('./routes/token');
 
 app.disable('x-powered-by');
@@ -39,11 +39,11 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(users);
-app.use(jobs);
-app.use(contacts);
-app.use(contacts_jobs);
-app.use(token);
+// app.use(users);
+// app.use(jobs);
+// app.use(contacts);
+// app.use(contacts_jobs);
+// app.use(token);
 
 app.use((_req, res) => {
   res.sendStatus(404);
