@@ -14,7 +14,9 @@ const { camelizeKeys, decamelizeKeys } = require('humps');
 
 router.get('/api/jobs', (req, res, next) => {
   knex('jobs')
-    .then((jobs) => {
+    .then((rows) => {
+      const jobs = camelizeKeys(rows);
+
       res.send(jobs);
     })
     .catch((err) => {
@@ -40,6 +42,26 @@ router.get('/api/jobs/:id', (req, res, next) => {
       const job = camelizeKeys(row);
 
       res.send(job);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.get('/api/jobs/:id/contacts', (req, res, next) => {
+  const jobId = Number.parseInt(req.params.id);
+
+  if (Number.isNaN(jobId)) {
+    return next();
+  }
+
+  knex('contacts')
+    .innerJoin('contacts_jobs', 'contacts_jobs.contact_id', 'contacts.id')
+    .where('contacts_jobs.job_id', jobId)
+    .then((rows) => {
+      const contacts = camelizeKeys(rows);
+
+      res.send(contacts);
     })
     .catch((err) => {
       next(err);
