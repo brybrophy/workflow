@@ -102,10 +102,8 @@ router.patch('/api/contacts/:contactId', ev(validations.patch), (req, res, next)
       if (!linkedInUrl) {
         linkedInUrl = contact.lined_in_url;
       }
-      console.log(phoneNumber);
 
       const phone = phoneNumber.replace(/[^\d]/g, '');
-      console.log(phone);
       const updatedContact = {
         firstName,
         lastName,
