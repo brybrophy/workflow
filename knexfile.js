@@ -3,12 +3,12 @@
 module.exports = {
   development: {
     client: 'pg',
-    connection: 'postgres://localhost/blueit_dev'
+    connection: 'postgres://localhost/workflow_dev'
   },
 
   test: {
     client: 'pg',
-    connection: 'postgres://localhost/blueit_test'
+    connection: 'postgres://localhost/workflow_test'
   },
 
   production: {
