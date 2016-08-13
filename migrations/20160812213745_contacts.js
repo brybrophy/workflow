@@ -6,7 +6,7 @@ exports.up = function(knex) {
     table.string('first_name').notNullable().defaultTo('');
     table.string('last_name').notNullable().defaultTo('');
     table.string('email').unique().notNullable().defaultTo('');
-    table.string('phone', 10).unique().notNullable().defaultTo('');
+    table.string('phone').unique().notNullable().defaultTo('');
     table.string('linked_in_url').notNullable().defaultTo('');
     table.integer('user_id')
     .notNullable()

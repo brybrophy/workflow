@@ -17,7 +17,8 @@ module.exports.post = {
       .trim()
       .required(),
     phoneNumber: Joi.string()
-      .length(10)
+      .min(10)
+      .max(13)
       .label('phoneNumber')
       .trim()
       .required(),

@@ -24,7 +24,7 @@ router.post('/api/contacts', ev(validations.post), (req, res, next) => {
     userId
   } = req.body;
 
-  const phone = phoneNumber.replace('\\D', '');
+  const phone = phoneNumber.replace(/[^\d]/g, '');
 
   knex('contacts')
     .select(knex.raw('1=1'))
@@ -71,24 +71,61 @@ router.get('/api/contacts', (req, res, next) => {
     });
 });
 
-// router.patch('/api/contacts/:contactId', checkAuth, ev(validations.patch), (req, res, next) => {
-//   const postId = Number.parseInt(req.params.postId);
-//   const rating = req.body.rating;
-//
-//   if (Number.isNaN(postId)) {
-//     throw boom.create(400, 'Invalid Post Id');
-//   };
-//
-//   knex('posts')
-//     .update({ rating }, '*')
-//     .where('id', postId)
-//     .then((posts) => {
-//       res.send(posts[0]);
-//     })
-//     .catch((err) => {
-//       next(err);
-//     });
-// });
+router.patch('/api/contacts/:contactId', (req, res, next) => {
+  const contactId = Number.parseInt(req.params.contactId);
+  let { firstName, lastName, email, phoneNumber, linkedInUrl } = req.body;
+
+  if (Number.isNaN(contactId)) {
+    throw boom.create(400, 'Invalid Contact Id');
+  }
+
+  knex('contacts')
+    .where('id', contactId)
+    .first()
+    .then((contact) => {
+      if (!firstName) {
+        firstName = contact.first_name;
+      }
+
+      if (!lastName) {
+        lastName = contact.last_name;
+      }
+
+      if (!email) {
+        email = contact.email;
+      }
+
+      if (!phoneNumber) {
+        phoneNumber = contact.phone;
+      }
+
+      if (!linkedInUrl) {
+        linkedInUrl = contact.lined_in_url;
+      }
+      console.log(phoneNumber);
+
+      const phone = phoneNumber.replace(/[^\d]/g, '');
+      console.log(phone);
+      const updatedContact = {
+        firstName,
+        lastName,
+        email,
+        phone,
+        linkedInUrl,
+      }
+      const row = decamelizeKeys(updatedContact);
+
+      return knex('contacts')
+        .update(row, '*')
+        .where('id', contactId)
+    })
+    .then((contacts) => {
+      res.send(contacts[0]);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
 
 
 module.exports = router;
