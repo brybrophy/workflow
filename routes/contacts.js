@@ -71,7 +71,7 @@ router.get('/api/contacts', (req, res, next) => {
     });
 });
 
-router.patch('/api/contacts/:contactId', (req, res, next) => {
+router.patch('/api/contacts/:contactId', ev(validations.patch), (req, res, next) => {
   const contactId = Number.parseInt(req.params.contactId);
   let { firstName, lastName, email, phoneNumber, linkedInUrl } = req.body;
 
