@@ -40,7 +40,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(users);
-// app.use(jobs);
+app.use(jobs);
 app.use(contacts);
 // app.use(contacts_jobs);
 // app.use(token);
