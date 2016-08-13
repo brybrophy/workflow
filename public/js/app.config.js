@@ -1,9 +1,9 @@
 (function() {
   'use strict';
 
-  angular
-    .module('workflowApp')
-    .config(config);
+  // angular
+  //   .module('workflowApp')
+  //   .config(config);
 
     // function config($routeProvider) {
     //   $routeProvider
