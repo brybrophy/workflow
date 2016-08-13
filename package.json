@@ -1,0 +1,59 @@
+{
+  "name": "workflow",
+  "version": "0.1.0",
+  "description": "A job interview managment app",
+  "main": "server.js",
+  "scripts": {
+    "knex": "knex",
+    "heroku-postbuild": "knex migrate:latest",
+    "nf": "nf start",
+    "nodemon": "nodemon server.js",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brybrophy/workflow.git"
+  },
+  "keywords": [
+    "work",
+    "flow",
+    "workflow"
+  ],
+  "author": "bryanbrophy <brybrophy@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "angular-moment": "^1.0.0-beta.6",
+    "bcrypt-as-promised": "^1.1.0",
+    "body-parser": "^1.15.2",
+    "boom": "^3.2.2",
+    "chai-http": "^3.0.0",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-alpha.1",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "express-validation": "^1.0.0",
+    "humps": "^1.1.0",
+    "joi": "^8.4.2",
+    "jsonwebtoken": "^7.1.7",
+    "knex": "^0.11.9",
+    "momentjs": "^1.1.14",
+    "morgan": "^1.7.0",
+    "pg": "^6.0.3"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "dotenv": "^2.0.0",
+    "mocha": "^2.5.3",
+    "nodemon": "^1.9.2",
+    "request": "^2.74.0",
+    "request-promise": "^4.0.2",
+    "supertest": "^1.2.0"
+  },
+  "engines": {
+    "node": "6.3.1"
+  },
+  "bugs": {
+    "url": "https://github.com/brybrophy/workflow/issues"
+  },
+  "homepage": "https://github.com/brybrophy/workflow#readme"
+}
