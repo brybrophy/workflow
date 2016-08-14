@@ -120,7 +120,7 @@ router.patch('/api/contacts/:contactId', ev(validations.patch), (req, res, next)
       }
 
       if (!linkedInUrl) {
-        linkedInUrl = contact.lined_in_url;
+        linkedInUrl = contact.linked_in_url;
       }
 
       const phone = phoneNumber.replace(/[^\d]/g, '');
