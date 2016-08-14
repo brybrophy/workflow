@@ -43,7 +43,7 @@ app.use(users);
 app.use(jobs);
 app.use(contacts);
 // app.use(contacts_jobs);
-// app.use(token);
+app.use(token);
 
 app.use((_req, res) => {
   res.sendStatus(404);
