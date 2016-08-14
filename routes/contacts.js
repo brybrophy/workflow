@@ -71,6 +71,26 @@ router.get('/api/contacts', (req, res, next) => {
     });
 });
 
+router.get('/api/contacts/:id/jobs', (req, res, next) => {
+  const contactId = Number.parseInt(req.params.id);
+
+  if (Number.isNaN(contactId)) {
+    return next();
+  }
+
+  knex('jobs')
+    .innerJoin('contacts_jobs', 'contacts_jobs.job_id', 'jobs.id')
+    .where('contacts_jobs.contact_id', contactId)
+    .then((rows) => {
+      const jobs = camelizeKeys(rows);
+
+      res.send(jobs);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 router.patch('/api/contacts/:contactId', ev(validations.patch), (req, res, next) => {
   const contactId = Number.parseInt(req.params.contactId);
   let { firstName, lastName, email, phoneNumber, linkedInUrl } = req.body;
