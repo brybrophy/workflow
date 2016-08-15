@@ -68,7 +68,7 @@ router.get('/api/jobs/:id/contacts', (req, res, next) => {
     });
 });
 
-router.post('/api/jobs', (req, res, next) => {
+router.post('/api/jobs', ev(validations.post), (req, res, next) => {
   const { title, jobPostUrl, companyName, companyAddress_1, companyAddress_2, companyCity, companyState, companyZip, companyWebsite, interviewStatus, interviewInformational, interviewApplied, interviewPhone, interviewTechnical, interviewOnsite, interviewTakeHome, interviewOffer, interviewRejected, notes, userId } = req.body;
 
   if (!title || !title.trim()) {
@@ -93,7 +93,7 @@ router.post('/api/jobs', (req, res, next) => {
     });
 });
 
-router.patch('/api/jobs/:id', (req, res, next) => {
+router.patch('/api/jobs/:id', ev(validations.patch), (req, res, next) => {
   const id = Number.parseInt(req.params.id);
 
   if (Number.isNaN(id)) {
