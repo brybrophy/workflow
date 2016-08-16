@@ -14,8 +14,8 @@ exports.seed = function(knex) {
         id: 2,
         contact_id: 1,
         job_id: 2,
-        created_at: new Date('2016-08-13 19:25:00 UTC'),
-        updated_at: new Date('2016-08-13 19:25:00 UTC')
+        created_at: new Date('2016-08-13 19:26:00 UTC'),
+        updated_at: new Date('2016-08-13 19:26:00 UTC')
       }]);
     })
     .then(() => {
