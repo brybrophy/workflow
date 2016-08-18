@@ -3,7 +3,11 @@ import React from 'react';
 
 const App = React.createClass({
   render() {
-    return <RaisedButton label="Hello Jake!" />;
+    return <div>
+      <RaisedButton label="Hello Jake!" />
+
+      <img src="assets/images/pngs/cloud_3.png" />
+    </div>
   }
 });
 
