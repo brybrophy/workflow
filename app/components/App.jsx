@@ -6,7 +6,7 @@ const App = React.createClass({
     return <div>
       <RaisedButton label="Hello Jake!" />
 
-      <img src="assets/images/pngs/cloud_3.png" />
+      
     </div>
   }
 });
