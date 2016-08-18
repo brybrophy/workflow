@@ -51,7 +51,6 @@
     "brunch": "^2.8.2",
     "clean-css-brunch": "^2.0.0",
     "chai": "^3.5.0",
-    "dotenv": "^2.0.0",
     "eslint": "^3.2.2",
     "eslint-config-ryansobol": "^8.0.0",
     "javascript-brunch": "^2.0.0",
