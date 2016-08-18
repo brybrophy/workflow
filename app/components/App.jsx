@@ -6,7 +6,8 @@ const App = React.createClass({
     return <div>
       <RaisedButton label="Hello Jake!" />
 
-      <img src="pipes_right.svg" />
+      <img src="cloud_1.svg" />
+      <img src="cloud_2.svg" />
     </div>
   }
 });
