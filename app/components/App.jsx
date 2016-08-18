@@ -1,10 +1,9 @@
+import RaisedButton from 'material-ui/RaisedButton';
 import React from 'react';
 
 const App = React.createClass({
   render() {
-    return <div>
-      Hello Jake!
-    </div>
+    return <RaisedButton label="Hello Jake!" />;
   }
 });
 
