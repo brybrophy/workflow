@@ -41,6 +41,7 @@
     "pg": "^6.0.3",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
+    "react-parallax": "^0.4.3",
     "react-tap-event-plugin": "^1.0.0"
   },
   "devDependencies": {
