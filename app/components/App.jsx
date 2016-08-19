@@ -1,7 +1,10 @@
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
+import FooterLogo from 'components/FooterLogo';
+import GithubLogo from 'components/GithubLogo';
 import NavLogo from 'components/NavLogo';
 import React from 'react';
+import TwitterLogo from 'components/TwitterLogo';
 
 const App = React.createClass({
   render() {
@@ -11,14 +14,23 @@ const App = React.createClass({
     };
 
     const styleAppBarBottom = {
+      backgroundColor: 'black',
       top: '200px',
-      height: '100px',
+      height: '120px',
       postion: 'fixed'
     };
+
     const styleFlatButton = {
       height: '125px',
       lineHeight: '125px',
       minWidth: '60px'
+    };
+
+    const styleFlatButtonBottom = {
+      height: '120px',
+      lineHeight: '120px',
+      padding: '20px 0 0',
+      width: '90px'
     };
 
     const styleFlatButtonLabel = {
@@ -79,7 +91,21 @@ const App = React.createClass({
         />
       </AppBar>
 
-      <div style={styleAppBarBottom}> HELLO WORLD</div>
+      <AppBar
+        style={styleAppBarBottom}
+        title="workflow © 2016-2017"
+        iconElementLeft={<FooterLogo/>}
+        iconStyleLeft={styleIconLeft}
+      >
+        <FlatButton
+          label={<GithubLogo />}
+          style={styleFlatButtonBottom}
+        />
+        <FlatButton
+          label={<TwitterLogo />}
+          style={styleFlatButtonBottom}
+        />
+      </AppBar>
     </div>
   }
 });

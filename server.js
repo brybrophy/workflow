@@ -42,8 +42,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(users);
 app.use(jobs);
 app.use(contacts);
-// app.use(contacts_jobs);
 app.use(token);
+
+app.use((_req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 app.use((_req, res) => {
   res.sendStatus(404);
