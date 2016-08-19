@@ -10,6 +10,11 @@ const App = React.createClass({
       height: '125px'
     };
 
+    const styleAppBarBottom = {
+      top: '200px',
+      height: '100px',
+      postion: 'fixed'
+    };
     const styleFlatButton = {
       height: '125px',
       lineHeight: '125px',
@@ -73,6 +78,8 @@ const App = React.createClass({
           style={styleFlatButton}
         />
       </AppBar>
+
+      <div style={styleAppBarBottom}> HELLO WORLD</div>
     </div>
   }
 });
