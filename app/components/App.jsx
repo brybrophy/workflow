@@ -22,15 +22,35 @@ const App = React.createClass({
     };
 
     const styleIconLeft = {
-      marginLeft: '35px'
+      height: '125px',
+      lineHeight: '125px',
+      marginLeft: '35px',
+      marginTop: '14px'
+    };
+
+    const styleSubTitle = {
+      fontSize: '.9rem',
+      marginLeft: '10px',
+      position: 'relative',
+      top: '-5px'
+    };
+
+    const styleTitle = {
+      cursor: 'pointer',
+      fontSize: '1.1rem',
+      height: '125px',
+      lineHeight: '71px'
     };
 
     return <div>
       <AppBar
-        style={styleAppBar}
-        title="workflow | Job Search Management"
         iconElementLeft={<NavLogo/>}
         iconStyleLeft={styleIconLeft}
+        style={styleAppBar}
+        title={<h1>workflow |
+          <span style={styleSubTitle}>Job Search Management</span>
+        </h1>}
+        titleStyle={styleTitle}
       >
         <FlatButton
           label="Dashboard"
