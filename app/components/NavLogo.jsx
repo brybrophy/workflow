@@ -2,7 +2,7 @@ import React from 'react';
 
 const NavLogo = React.createClass({
   render() {
-    return <svg width="25px" height="41px" viewBox="0 0 38 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    return <svg width="31px" height="50px" viewBox="0 0 38 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
           <g id="Group-11" transform="translate(-95.000000, -80.000000)" stroke="#FFFFFF">
               <g id="Group-5">

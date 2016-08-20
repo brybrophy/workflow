@@ -1,7 +1,43 @@
 @import 'normalize';
 
+@font-face {
+  font-family: 'Montserrat';
+  src: url('montserrat/Montserrat-Regular.otf');
+}
 
+@font-face {
+  font-family: 'MontserratBold';
+  src: url('montserrat/Montserrat-Bold.otf');
+}
+
+@font-face {
+  font-family: 'MontserratLight';
+  src: url('montserrat/Montserrat-Light.otf');
+}
+
+@font-face {
+  font-family: 'MontserratHairline';
+  src: url('montserrat/Montserrat-Hairline.otf');
+}
 
 body {
-  font-family: 'Montserrat';
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+.hairline-font {
+  font-family: 'MontserratHairline';
+}
+
+.light-font {
+  font-family: 'MontserratLight';
+}
+
+.space-letters {
+  letter-spacing: 0.12rem;
 }

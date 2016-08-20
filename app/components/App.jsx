@@ -15,9 +15,9 @@ const App = React.createClass({
 
     const styleAppBarBottom = {
       backgroundColor: 'black',
-      top: '200px',
+      display: 'flex',
       height: '120px',
-      postion: 'fixed'
+      width: '100%'
     };
 
     const styleFlatButton = {
@@ -27,8 +27,8 @@ const App = React.createClass({
     };
 
     const styleFlatButtonBottom = {
-      height: '120px',
-      lineHeight: '120px',
+      height: '100px',
+      lineHeight: '100px',
       padding: '20px 0 0',
       width: '90px'
     };
@@ -45,6 +45,11 @@ const App = React.createClass({
       marginTop: '14px'
     };
 
+    const styleIconLeftBottom = {
+      marginLeft: '35px',
+      marginTop: '25px'
+    };
+
     const styleSubTitle = {
       fontSize: '.9rem',
       marginLeft: '10px',
@@ -59,12 +64,20 @@ const App = React.createClass({
       lineHeight: '71px'
     };
 
+    const styleTextBottom = {
+      color: 'white',
+      cursor: 'pointer',
+      fontSize: '1.1rem',
+      marginLeft: '15px',
+      marginTop: '60px'
+    };
+
     return <div>
       <AppBar
         iconElementLeft={<NavLogo/>}
         iconStyleLeft={styleIconLeft}
         style={styleAppBar}
-        title={<h1>workflow |
+        title={<h1 className="hairline-font space-letters">workflow |
           <span style={styleSubTitle}>Job Search Management</span>
         </h1>}
         titleStyle={styleTitle}
@@ -91,12 +104,20 @@ const App = React.createClass({
         />
       </AppBar>
 
-      <AppBar
+      <main>Test</main>
+      <div className="flex-container">
+      <footer
+
         style={styleAppBarBottom}
-        title="workflow © 2016-2017"
+        title={<p className="hairline-font space-letters">workflow © 2016-2017</p>}
         iconElementLeft={<FooterLogo/>}
-        iconStyleLeft={styleIconLeft}
       >
+      <FooterLogo style={styleIconLeftBottom} />
+
+      <p className="hairline-font space-letters" style={styleTextBottom}>
+        workflow © 2016-2017
+      </p>
+
         <FlatButton
           label={<GithubLogo />}
           style={styleFlatButtonBottom}
@@ -105,7 +126,8 @@ const App = React.createClass({
           label={<TwitterLogo />}
           style={styleFlatButtonBottom}
         />
-      </AppBar>
+      </footer>
+      </div>
     </div>
   }
 });
