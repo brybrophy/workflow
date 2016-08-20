@@ -1,40 +1,14 @@
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import NavLogo from 'components/NavLogo';
-import PipesHero from 'components/PipesHero';
 import React from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
 
 const WelcomeNav = React.createClass({
   render() {
-
     const styleAppBar = {
-      height: '100vh',
+      boxShadow: 'none',
+      height: '125px',
       paddingRight: '70px'
-    };
-
-    const styleCloud1 = {
-      bottom: '130px',
-      position: 'relative',
-      right: '10px',
-      width: '200px',
-      zIndex: '-1000'
-    };
-
-    const styleCloud2 = {
-      bottom: '730px',
-      left: '530px',
-      position: 'relative',
-      width: '200px',
-      zIndex: '-1000'
-    };
-
-    const styleCloud3 = {
-      bottom: '630px',
-      left: '830px',
-      position: 'relative',
-      width: '200px',
-      zIndex: '-1000'
     };
 
     const styleFlatButton = {
@@ -68,7 +42,7 @@ const WelcomeNav = React.createClass({
     const styleIconLeft = {
       height: '125px',
       lineHeight: '125px',
-      marginLeft: '35px',
+      marginLeft: '5%',
       marginTop: '20px'
     };
 
@@ -79,12 +53,6 @@ const WelcomeNav = React.createClass({
       marginLeft: '18px',
       marginRight: '15px',
       paddingTop: '30px'
-    };
-
-    const stylePipesHero = {
-      left: '45px',
-      position: 'absolute',
-      top: '125px'
     };
 
     const styleSubTitle = {
@@ -105,7 +73,6 @@ const WelcomeNav = React.createClass({
       marginTop: '20px'
     };
 
-
     return <AppBar
       iconElementLeft={<NavLogo />}
       iconStyleLeft={styleIconLeft}
@@ -116,33 +83,24 @@ const WelcomeNav = React.createClass({
         titleStyle={styleTitle}
       >
 
-      <div style={stylePipesHero}>
-        <PipesHero />
-        <div style={styleCloud1}><img src="images/cloud_1.svg"/></div>
-        <div style={styleCloud2}><img src="images/cloud_2.svg"/></div>
-        <div style={styleCloud3}><img src="images/cloud_3.svg"/></div>
+      <h1 className="hide-on-small" style={styleNavbarLine}> | </h1>
 
-        <h1>
-          JOB SEARCH MANAGMENT<br />
-          FOR A NEW ERA
-        </h1>
-      </div>
+      <span className="hide-on-small">
+        <FlatButton
+          label="Login"
+          labelStyle={styleFlatButtonLabel}
+          style={styleFlatButton}
+        />
+      </span>
 
-      <h1 style={styleNavbarLine}> | </h1>
-
-      <FlatButton
-        label="Login"
-        labelStyle={styleFlatButtonLabel}
-        style={styleFlatButton}
-      />
-
-      <FlatButton
-        label="Sign Up"
-        style={styleFlatButtonAlt}
-        labelStyle={styleFlatButtonLabelAlt}
-      />
-
-
+      <span className="hide-on-small">
+        <FlatButton
+          className="hide-on-small"
+          label="Sign Up"
+          style={styleFlatButtonAlt}
+          labelStyle={styleFlatButtonLabelAlt}
+        />
+      </span>
     </AppBar>
   }
 });

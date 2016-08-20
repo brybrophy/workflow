@@ -35,3 +35,9 @@ main {
 .hairline-font {
   font-family: 'MontserratHairline'
 }
+
+@media (max-width: 900px) {
+    .hide-on-small {
+      display: none;
+    }
+  }
