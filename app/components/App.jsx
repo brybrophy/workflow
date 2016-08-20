@@ -10,14 +10,15 @@ const App = React.createClass({
   render() {
 
     const styleAppBar = {
-      height: '125px'
+      height: '125px',
+      paddingRight: '70px'
     };
 
-    const styleAppBarBottom = {
+    const styleFooter = {
       backgroundColor: 'black',
       display: 'flex',
       height: '120px',
-      width: '100%'
+      width: '100vw'
     };
 
     const styleFlatButton = {
@@ -27,13 +28,13 @@ const App = React.createClass({
     };
 
     const styleFlatButtonBottom = {
-      height: '100px',
-      lineHeight: '100px',
-      padding: '20px 0 0',
-      width: '90px'
+      height: '120px',
+      lineHeight: '120px',
+      padding: '20px 0 0'
     };
 
     const styleFlatButtonLabel = {
+      fontFamily: 'MontserratHairline',
       fontSize: '.7rem',
       padding: '0'
     };
@@ -42,12 +43,25 @@ const App = React.createClass({
       height: '125px',
       lineHeight: '125px',
       marginLeft: '35px',
-      marginTop: '14px'
+      marginTop: '20px'
     };
 
-    const styleIconLeftBottom = {
-      marginLeft: '35px',
+    const styleFooterLogo = {
+      marginLeft: '50px',
       marginTop: '25px'
+    };
+
+    const styleNavbarLine = {
+      color: 'white',
+      fontSize: '2rem',
+      marginLeft: '15px',
+      marginRight: '5px',
+      paddingTop: '20px'
+    };
+
+    const stylePullRight = {
+      position: 'absolute',
+      right: '50px'
     };
 
     const styleSubTitle = {
@@ -67,9 +81,9 @@ const App = React.createClass({
     const styleTextBottom = {
       color: 'white',
       cursor: 'pointer',
-      fontSize: '1.1rem',
-      marginLeft: '15px',
-      marginTop: '60px'
+      fontSize: '0.9rem',
+      marginLeft: '10px',
+      marginTop: '70px'
     };
 
     return <div>
@@ -97,6 +111,9 @@ const App = React.createClass({
           labelStyle={styleFlatButtonLabel}
           style={styleFlatButton}
         />
+        <h1 className="hairline-font space-letters" style={styleNavbarLine}>
+          |
+        </h1>
         <FlatButton
           label="Logout"
           labelStyle={styleFlatButtonLabel}
@@ -104,30 +121,27 @@ const App = React.createClass({
         />
       </AppBar>
 
-      <main>Test</main>
-      <div className="flex-container">
-      <footer
+      <footer style={styleFooter}>
 
-        style={styleAppBarBottom}
-        title={<p className="hairline-font space-letters">workflow © 2016-2017</p>}
-        iconElementLeft={<FooterLogo/>}
-      >
-      <FooterLogo style={styleIconLeftBottom} />
+        <div style={styleFooterLogo}>
+          <FooterLogo />
+        </div>
 
-      <p className="hairline-font space-letters" style={styleTextBottom}>
-        workflow © 2016-2017
-      </p>
+        <p className="hairline-font space-letters" style={styleTextBottom}>
+          workflow © 2016-2017
+        </p>
 
-        <FlatButton
-          label={<GithubLogo />}
-          style={styleFlatButtonBottom}
-        />
-        <FlatButton
-          label={<TwitterLogo />}
-          style={styleFlatButtonBottom}
-        />
+        <div style={stylePullRight}>
+          <FlatButton
+            label={<GithubLogo />}
+            style={styleFlatButtonBottom}
+          />
+          <FlatButton
+            label={<TwitterLogo />}
+            style={styleFlatButtonBottom}
+          />
+        </div>
       </footer>
-      </div>
     </div>
   }
 });
