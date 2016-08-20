@@ -42,11 +42,26 @@ const WelcomeNav = React.createClass({
       minWidth: '60px'
     };
 
+    const styleFlatButtonAlt = {
+      height: '125px',
+      lineHeight: '125px',
+      minWidth: '60px'
+    };
+
     const styleFlatButtonLabel = {
       fontFamily: 'MontserratLight',
       fontSize: '1.2rem',
       letterSpacing: '0.12rem',
       padding: '0'
+    };
+
+    const styleFlatButtonLabelAlt = {
+      border: '3px solid white',
+      fontFamily: 'MontserratLight',
+      fontSize: '1.4rem',
+      letterSpacing: '0.12rem',
+      margin: '0 10px',
+      padding: '8px'
     };
 
     const styleIconLeft = {
@@ -107,29 +122,21 @@ const WelcomeNav = React.createClass({
         <div style={styleCloud3}><img src="images/cloud_3.svg"/></div>
       </div>
 
-      <FlatButton
-        label="Dashboard"
-        labelStyle={styleFlatButtonLabel}
-        style={styleFlatButton}
-      />
-      <FlatButton
-        label="Jobs"
-        labelStyle={styleFlatButtonLabel}
-        style={styleFlatButton}
-      />
-      <FlatButton
-        label="Contacts"
-        labelStyle={styleFlatButtonLabel}
-        style={styleFlatButton}
-      />
-
       <h1 style={styleNavbarLine}> | </h1>
 
       <FlatButton
-        label="Logout"
+        label="Login"
         labelStyle={styleFlatButtonLabel}
         style={styleFlatButton}
       />
+
+      <FlatButton
+        label="Sign Up"
+        style={styleFlatButtonAlt}
+        labelStyle={styleFlatButtonLabelAlt}
+      />
+
+
     </AppBar>
   }
 });
