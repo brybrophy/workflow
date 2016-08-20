@@ -35,7 +35,7 @@ const App = React.createClass({
 
     const styleFlatButtonLabel = {
       fontFamily: 'MontserratHairline',
-      fontSize: '.7rem',
+      fontSize: '1.2rem',
       padding: '0'
     };
 
@@ -54,9 +54,9 @@ const App = React.createClass({
     const styleNavbarLine = {
       color: 'white',
       fontSize: '2rem',
-      marginLeft: '15px',
-      marginRight: '5px',
-      paddingTop: '20px'
+      marginLeft: '18px',
+      marginRight: '10px',
+      paddingTop: '30px'
     };
 
     const stylePullRight = {
@@ -65,7 +65,7 @@ const App = React.createClass({
     };
 
     const styleSubTitle = {
-      fontSize: '.9rem',
+      fontSize: '1.3rem',
       marginLeft: '10px',
       position: 'relative',
       top: '-5px'
@@ -73,9 +73,10 @@ const App = React.createClass({
 
     const styleTitle = {
       cursor: 'pointer',
-      fontSize: '1.1rem',
+      fontSize: '1.2rem',
       height: '125px',
-      lineHeight: '71px'
+      lineHeight: '71px',
+      marginTop: '20px'
     };
 
     const styleTextBottom = {
