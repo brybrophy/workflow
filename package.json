@@ -43,6 +43,7 @@
     "react-bootstrap": "^0.30.2",
     "react-dom": "^15.3.0",
     "react-fittext": "0.0.7",
+    "react-google-maps": "^4.11.0",
     "react-parallax": "^0.4.3",
     "react-tap-event-plugin": "^1.0.0"
   },
