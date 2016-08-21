@@ -1,4 +1,5 @@
 import Footer from 'components/Footer';
+import Jobs from 'components/Jobs';
 import MainNav from 'components/MainNav';
 import React from 'react';
 import WelcomeInfo from 'components/WelcomeInfo';
@@ -10,8 +11,9 @@ const App = React.createClass({
   render() {
     return <div>
       <WelcomeNav />
-      <WelcomeHero />
-      <WelcomeInfo />
+      {/* <WelcomeHero />
+      <WelcomeInfo /> */}
+      <Jobs />
       <Footer />
     </div>
   }
