@@ -15,15 +15,17 @@ const WelcomeHero = React.createClass({
 
     const styleHero = {
       backgroundColor: '#47B4E0',
+      margin: '0',
       paddingBottom: '200px'
     };
 
     const styleHeroHeader = {
       color: 'white',
       fontFamily: 'MontserratLight',
+      paddingLeft: '50px',
       position: 'relative',
       textAlign: 'center',
-      top: '170px'
+      top: '190px'
     }
 
     const styleHeroText= {
@@ -34,7 +36,7 @@ const WelcomeHero = React.createClass({
 
     const stylePipes = {
       position: 'relative',
-      left: '48px'
+      left: '32px'
     }
 
     const styleRaisedButton = {
