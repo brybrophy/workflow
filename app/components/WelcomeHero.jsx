@@ -15,7 +15,7 @@ const WelcomeHero = React.createClass({
 
     const styleHero = {
       backgroundColor: '#47B4E0',
-      height: '90vh'
+      paddingBottom: '200px'
     };
 
     const styleHeroHeader = {
