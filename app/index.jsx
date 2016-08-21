@@ -14,7 +14,8 @@ const muiTheme = getMuiTheme({
   },
 
   palette: {
-    primary1Color: '#47B4E0'
+    primary1Color: '#47B4E0',
+    accent1Color: 'black'
   }
 });
 
