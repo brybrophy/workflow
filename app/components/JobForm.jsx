@@ -42,13 +42,19 @@ const JobForm = React.createClass({
       padding: '0 3px'
     };
 
+    const styleDropDownArrow = {
+      top: '6px'
+    };
+
     const styleFlatButton = {
       borderRadius: '3px',
+      fontFamily: 'MontserratLight',
       margin: '5px',
       width: '100%'
     };
 
     const styleMenuItem = {
+      fontFamily: 'MontserratLight',
       left: '-10px',
       lineHeight: '35px',
       padding: '0 10px',
@@ -59,6 +65,7 @@ const JobForm = React.createClass({
     const styleSelectField = {
       border: '1px solid lightgray',
       borderRadius: '3px',
+      fontFamily: 'MontserratLight',
       height: '35px',
       margin: '5px',
       padding: '5px 10px',
@@ -68,6 +75,7 @@ const JobForm = React.createClass({
     const styleTextField = {
       border: '1px solid lightgray',
       borderRadius: '3px',
+      fontFamily: 'MontserratLight',
       height: '35px',
       margin: '5px',
       padding: '5px 10px',
@@ -75,7 +83,8 @@ const JobForm = React.createClass({
     };
 
     const styleTextFieldHint = {
-      bottom: '3px'
+      bottom: '3px',
+      fontFamily: 'MontserratLight'
     };
 
     const states = ['', 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'];
@@ -127,9 +136,9 @@ const JobForm = React.createClass({
       </Col>
       <Col xs={12} md={2} style={styleColumn}>
         <SelectField
-          // autoWidth={true}
           hintStyle={styleTextFieldHint}
           hintText="State"
+          iconStyle={styleDropDownArrow}
           maxHeight={200}
           menuStyle={styleMenuItem}
           name="state"
