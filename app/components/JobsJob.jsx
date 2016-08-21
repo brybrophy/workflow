@@ -1,10 +1,17 @@
+import Timestamp from 'react-timestamp';
 import Toggle from 'material-ui/Toggle';
 import Paper from 'material-ui/Paper';
 import React from 'react';
+import weakKey from 'weak-key';
 import { Grid, Row, Col } from 'react-bootstrap';
 
 const JobsJob = React.createClass({
   render() {
+    console.log(this.props.jobs);
+    let { jobs } = this.props;
+
+    jobs.sort((p1, p2) => p1.companyName > p2.companyName);
+
     const styleColumnBorders = {
         borderRight: '1px solid #A6A399'
     };
@@ -18,10 +25,11 @@ const JobsJob = React.createClass({
       backgroundColor: '#E7E4DB',
       borderRadius: '3px',
       color: '#A6A399',
+      marginBottom: '10px',
       padding: '10px 20px'
     };
 
-    const styleMarginBottom = {
+    const styleProgress = {
       marginBottom: '30px'
     };
 
@@ -50,63 +58,92 @@ const JobsJob = React.createClass({
     };
 
     return <Col xs={12} md={9} style={{padding: '20px 40px 0 10px'}}>
-      <Paper style={styleJob}>
-        <Row>
-          <Col md={2} style={styleColumnBorders}>
-            <h4
-              style={{fontFamily: 'MontserratBold', marginBottom: '30px'}}
-            >
-              Amazon
-            </h4>
-            <h5>Software Engineer, Front End</h5>
-          </Col>
+      {jobs.map((job) => {
+        let timeInformational = 'Not scheduled yet';
+        let timePhone = 'Not scheduled yet';
+        let timeOnSite = 'Not scheduled yet';
+        let timeTechnical = 'Not scheduled yet';
+        let timeOffer = 'Offer not recieved';
 
-          <Col md={3} style={styleColumnBorders}>
-            <div style={styleSudoColumnOdd}>
-              <h5 style={styleMarginBottom}>Applied On</h5>
-              <p style={styleDateText}>Mon, August 29th 9:00 AM</p>
-            </div>
+        if (job.interviewInformational) {
+          <Timestamp time={job.interviewInformational} format="full" />;
+        }
 
-            <div style={styleSudoColumnEven}>
-              <h5 style={styleMarginBottom}>Informational</h5>
-              <p style={styleDateText}>Mon, August 29th 9:00 AM</p>
-            </div>
-          </Col>
+        if (job.interviewPhone) {
+          <Timestamp time={job.interviewPhone} format="full" />;
+        }
 
-          <Col md={3} style={styleColumnBorders}>
-            <div style={styleSudoColumnOdd}>
-              <h5 style={styleMarginBottom}>Phone Screen</h5>
-              <p style={styleDateText}>Mon, August 29th 9:00 AM</p>
-            </div>
+        if (job.interviewOnsite) {
+          <Timestamp time={job.interviewOnsite} format="full" />;
+        }
 
-            <div style={styleSudoColumnEven}>
-              <h5 style={styleMarginBottom}>On Site</h5>
-              <p style={styleDateText}>Mon, August 29th 9:00 AM</p>
-            </div>
-          </Col>
+        if (job.interviewTechnical) {
+          <Timestamp time={job.interviewTechnical} format="full" />;
+        }
 
-          <Col md={3} style={styleColumnBorders}>
-            <div style={styleSudoColumnOdd}>
-              <h5 style={styleMarginBottom}>Technical</h5>
-              <p style={styleDateText}>Mon, August 29th 9:00 AM</p>
-            </div>
+        if (job.interviewOffer) {
+          <Timestamp time={job.interviewOffer} format="full" />;
+        }
 
-            <div style={styleSudoColumnEven}>
-              <h5 style={styleMarginBottom}>Offer Date</h5>
-              <p style={styleDateText}>Mon, August 29th 9:00 AM</p>
-            </div>
-          </Col>
+        return <Paper style={styleJob} key={weakKey(job)}>
+          <Row>
+            <Col md={2} style={styleColumnBorders}>
+              <h4 style={{fontFamily: 'MontserratBold', marginBottom: '30px'}}>
+                {job.companyName}
+              </h4>
+              <h5>{job.title}</h5>
+            </Col>
 
-          <Col md={1} style={{textAlign: 'center'}}>
-            <p style={styleDateText}>Accepted</p>
-            <Toggle style={styleToggle}/>
+            <Col md={3} style={styleColumnBorders}>
+              <div style={styleSudoColumnOdd}>
+                <h5 style={styleProgress}>Applied On</h5>
+                <p style={styleDateText}>
+                  <Timestamp time={job.interviewApplied} format="full" />
+                </p>
+              </div>
 
-            <p style={styleDateText}>Rejected</p>
-            <Toggle style={styleToggle}/>
-          </Col>
-        </Row>
-      </Paper>
+              <div style={styleSudoColumnEven}>
+                <h5 style={styleProgress}>Informational</h5>
+                <p style={styleDateText}>{timeInformational}</p>
+              </div>
+            </Col>
+
+            <Col md={3} style={styleColumnBorders}>
+              <div style={styleSudoColumnOdd}>
+                <h5 style={styleProgress}>Phone Screen</h5>
+                <p style={styleDateText}>{timePhone}</p>
+              </div>
+
+              <div style={styleSudoColumnEven}>
+                <h5 style={styleProgress}>On Site</h5>
+                <p style={styleDateText}>{timeOnSite}</p>
+              </div>
+            </Col>
+
+            <Col md={3} style={styleColumnBorders}>
+              <div style={styleSudoColumnOdd}>
+                <h5 style={styleProgress}>Technical</h5>
+                <p style={styleDateText}>{timeTechnical}</p>
+              </div>
+
+              <div style={styleSudoColumnEven}>
+                <h5 style={styleProgress}>Offer Date</h5>
+                <p style={styleDateText}>{timeOffer}</p>
+              </div>
+            </Col>
+
+            <Col md={1} style={{textAlign: 'center'}}>
+              <p style={styleDateText}>Accepted</p>
+              <Toggle style={styleToggle}/>
+
+              <p style={styleDateText}>Rejected</p>
+              <Toggle style={styleToggle}/>
+            </Col>
+          </Row>
+        </Paper>
+      })}
     </Col>
+
   }
 });
 

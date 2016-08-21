@@ -47,7 +47,7 @@ const JobsSideBar = React.createClass({
 
     const styleRaisedButtonLabel = {
       fontFamily: 'Montserrathairline',
-      fontSize: '1.8rem',
+      fontSize: '1.5rem',
       position: 'relative',
       top: '10px'
     }
