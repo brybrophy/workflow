@@ -57,7 +57,7 @@ const JobsSideBar = React.createClass({
       padding: '30px 30px 30px 20px'
     }
 
-    return <Col xs={3}>
+    return <Col xs={12} md={3}>
       <Paper style={styleSearchMenu}>
         <TextField
           hintStyle={styleTextFieldHint}

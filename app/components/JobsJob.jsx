@@ -49,7 +49,7 @@ const JobsJob = React.createClass({
       },
     };
 
-    return <Col xs={9} style={{padding: '20px 40px 0 10px'}}>
+    return <Col xs={12} md={9} style={{padding: '20px 40px 0 10px'}}>
       <Paper style={styleJob}>
         <Row>
           <Col md={2} style={styleColumnBorders}>
