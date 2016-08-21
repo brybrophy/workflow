@@ -11,9 +11,8 @@ const App = React.createClass({
   render() {
     return <div>
       <WelcomeNav />
-      {/* <WelcomeHero />
-      <WelcomeInfo /> */}
-      <Jobs />
+      <WelcomeHero />
+      <WelcomeInfo />
       <Footer />
     </div>
   }

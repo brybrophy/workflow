@@ -3,7 +3,6 @@ import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import React from 'react';
-import SearchIcon from 'material-ui/svg-icons/action/search';
 import SelectField from 'material-ui/SelectField';
 import TextField from 'material-ui/TextField';
 import { Grid, Row, Col } from 'react-bootstrap';
@@ -22,14 +21,14 @@ const JobsSideBar = React.createClass({
     };
 
     const styleTextFieldHint = {
-      color: '#EAE3DC',
+      color: '#A6A399',
       fontFamily: 'MontserratHairline',
       position: 'relative',
       top: '5px'
     };
 
     const styleFilter = {
-      color: '#EAE3DC',
+      color: '#A6A399',
       fontFamily: 'MontserratHairline',
       width: '86%'
     }
@@ -58,7 +57,7 @@ const JobsSideBar = React.createClass({
       padding: '30px 30px 30px 20px'
     }
 
-    return <div>
+    return <Col xs={3}>
       <Paper style={styleSearchMenu}>
         <TextField
           hintStyle={styleTextFieldHint}
@@ -69,7 +68,7 @@ const JobsSideBar = React.createClass({
 
         <RaisedButton
           label="add job"
-          labelColor="#EAE3DC"
+          labelColor="#A6A399"
           labelStyle={styleRaisedButtonLabel}
           style={styleRaisedButton}
         />
@@ -88,7 +87,7 @@ const JobsSideBar = React.createClass({
           <MenuItem primaryText="Least Progress" style={styleFilter} />
         </Menu>
       </Paper>
-  </div>
+  </Col>
   }
 });
 
