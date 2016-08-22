@@ -205,7 +205,7 @@ const ContactForm = React.createClass({
         </Col>
         <Col xs={12} sm={6} style={styleColumn}>
           <FlatButton
-            backgroundColor="red"
+            backgroundColor="#F5DADA"
             label="Cancel"
             style={styleFlatButton}
           />
