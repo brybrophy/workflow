@@ -43,6 +43,7 @@ const JobForm = React.createClass({
     };
 
     const styleDropDownArrow = {
+      left: '95%',
       top: '6px'
     };
 
@@ -198,7 +199,7 @@ const JobForm = React.createClass({
       </Col>
       <Col xs={12} style={styleColumn}>
         <FlatButton
-          backgroundColor="red"
+          backgroundColor="#F5DADA"
           label="Remove Job"
           style={styleFlatButton}
         />
