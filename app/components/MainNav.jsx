@@ -58,7 +58,7 @@ const MainNav = React.createClass({
     };
 
 
-    return <AppBar
+    return <div><AppBar
       iconElementLeft={<NavLogo />}
       iconStyleLeft={styleIconLeft}
       style={styleAppBar}
@@ -90,7 +90,7 @@ const MainNav = React.createClass({
         labelStyle={styleFlatButtonLabel}
         style={styleFlatButton}
       />
-    </AppBar>
+    </AppBar>{this.props.children}</div>;
   }
 });
 

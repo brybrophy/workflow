@@ -1,11 +1,7 @@
 import axios from 'axios';
 import Footer from 'components/Footer';
-import Jobs from 'components/Jobs';
 import MainNav from 'components/MainNav';
 import React from 'react';
-import WelcomeInfo from 'components/WelcomeInfo';
-import WelcomeHero from 'components/WelcomeHero';
-import WelcomeNav from 'components/WelcomeNav';
 
 
 const App = React.createClass({
@@ -27,10 +23,10 @@ const App = React.createClass({
 
   render() {
     return <div>
-      <WelcomeNav />
-      {/* <WelcomeHero />
-      <WelcomeInfo /> */}
-      <Jobs jobs={this.state.jobs} />
+      <MainNav />
+      {React.cloneElement(this.props.children, {
+        jobs: this.state.jobs
+      })}
       <Footer />
     </div>
   }

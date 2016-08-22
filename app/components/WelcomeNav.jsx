@@ -73,7 +73,7 @@ const WelcomeNav = React.createClass({
       marginTop: '20px'
     };
 
-    return <AppBar
+    return <div><AppBar
       iconElementLeft={<NavLogo />}
       iconStyleLeft={styleIconLeft}
       style={styleAppBar}
@@ -102,6 +102,8 @@ const WelcomeNav = React.createClass({
         />
       </span>
     </AppBar>
+    {this.props.children}
+    </div>;
   }
 });
 

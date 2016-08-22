@@ -8,7 +8,7 @@ const JobSubNav = React.createClass({
       fontFamily: 'MontserratLight'
     }
 
-    return <Tabs
+    return <div><Tabs
       inkBarStyle={{ backgroundColor: '#47B4E0' }}
       style={{ margin: '0 auto', width: '50%' }}
       tabItemContainerStyle={{ backgroundColor: 'none' }}
@@ -17,7 +17,7 @@ const JobSubNav = React.createClass({
       <Tab label="Contacts" style={styleTab} />
       <Tab label="Progress" style={styleTab} />
       <Tab label="Notes" style={styleTab} />
-    </Tabs>;
+    </Tabs>{this.props.children}</div>;
   }
 });
 

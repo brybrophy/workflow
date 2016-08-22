@@ -8,9 +8,6 @@ const JobInfo = React.createClass({
   render() {
     return <Grid style={{maxWidth: '960px'}}>
       <Row>
-        <Col xs={12}>
-          <JobSubNav />
-        </Col>
         <Col xs={12} sm={7}>
           <JobForm />
         </Col>
