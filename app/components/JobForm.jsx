@@ -8,17 +8,16 @@ import TextField from 'material-ui/TextField';
 const JobForm = React.createClass({
   getInitialState() {
     return {
-      job: {
-        companyName: 'Amazon',
-        jobTitle: 'Software Engineer, Front-End',
-        streetAddress: '440 Terry Ave. N',
-        city: 'Seattle',
-        state: 'WA',
-        zip: 98109,
-        phoneNumber:'(206) 266-1000',
-        jobUrl: 'www.amazon.jobs'
-      }
+      job: {}
     }
+  },
+
+  componentWillMount() {
+    this.setState({ job: this.props.job });
+  },
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ job: nextProps.job });
   },
 
   handleChange(event) {
@@ -110,7 +109,7 @@ const JobForm = React.createClass({
           onChange={this.handleChange}
           style={styleTextField}
           underlineShow={false}
-          value={this.state.job.jobTitle}
+          value={this.state.job.title}
         />
       </Col>
       <Col xs={12} md={6} style={styleColumn}>
@@ -121,7 +120,7 @@ const JobForm = React.createClass({
           onChange={this.handleChange}
           style={styleTextField}
           underlineShow={false}
-          value={this.state.job.streetAddress}
+          value={this.state.job.companyAddress1}
         />
       </Col>
       <Col xs={12} md={4} style={styleColumn}>
@@ -132,7 +131,7 @@ const JobForm = React.createClass({
           onChange={this.handleChange}
           style={styleTextField}
           underlineShow={false}
-          value={this.state.job.city}
+          value={this.state.job.companyCity}
         />
       </Col>
       <Col xs={12} md={2} style={styleColumn}>
@@ -146,7 +145,7 @@ const JobForm = React.createClass({
           onChange={this.handleSelectFieldChange}
           style={styleSelectField}
           underlineShow={false}
-          value={this.state.job.state}
+          value={this.state.job.companyState}
         >
           {states.map((state, index) => {
             return <MenuItem
@@ -165,7 +164,7 @@ const JobForm = React.createClass({
           onChange={this.handleChange}
           style={styleTextField}
           underlineShow={false}
-          value={this.state.job.zip}
+          value={this.state.job.companyZip}
         />
       </Col>
       <Col xs={12} md={6} style={styleColumn}>
@@ -187,7 +186,7 @@ const JobForm = React.createClass({
           onChange={this.handleChange}
           style={styleTextField}
           underlineShow={false}
-          value={this.state.job.jobUrl}
+          value={this.state.job.jobPostUrl}
         />
       </Col>
       <Col xs={12} style={styleColumn}>

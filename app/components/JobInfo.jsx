@@ -6,10 +6,10 @@ import { Grid, Row, Col } from 'react-bootstrap';
 
 const JobInfo = React.createClass({
   render() {
-    return <Grid style={{maxWidth: '960px'}}>
+    return <Grid style={{ margin: '30px auto', maxWidth: '960px'}}>
       <Row>
         <Col xs={12} sm={7}>
-          <JobForm />
+          <JobForm job={this.props.job} />
         </Col>
         <Col xs={12} sm={4} smOffset={1}>
           <JobMap />

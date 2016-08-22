@@ -47,6 +47,7 @@
     "morgan": "^1.7.0",
     "pg": "^6.0.3",
     "react": "^15.3.0",
+    "react-addons-css-transition-group": "^15.3.1",
     "react-bootstrap": "^0.30.2",
     "react-dom": "^15.3.0",
     "react-fittext": "0.0.7",

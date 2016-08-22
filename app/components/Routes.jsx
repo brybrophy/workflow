@@ -14,7 +14,7 @@ const Routes = React.createClass({
     return <Router history={browserHistory}>
       <Route component={Welcome} path="/home" />
       <Route component={App} path="/">
-        <Route component={JobSubNav} path="/job">
+        <Route component={JobSubNav} path="/job/:id">
           <IndexRoute component={JobInfo} />
           <Route component={ContactForm} path="contacts" />
           <Route component={JobProgress} path="progress" />
