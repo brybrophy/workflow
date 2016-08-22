@@ -7,17 +7,12 @@ import JobProgress from 'components/JobProgress';
 import Jobs from 'components/Jobs';
 import JobSubNav from 'components/JobSubNav';
 import React from 'react';
-import WelcomeHero from 'components/WelcomeHero';
-import WelcomeInfo from 'components/WelcomeInfo';
-import WelcomeNav from 'components/WelcomeNav';
+import Welcome from 'components/Welcome';
 
 const Routes = React.createClass({
   render() {
     return <Router history={browserHistory}>
-      <Route component={WelcomeNav} path="/home">
-        <IndexRoute component={WelcomeHero} />
-        <Route component={WelcomeInfo} />
-      </Route>
+      <Route component={Welcome} path="/home" />
       <Route component={App} path="/">
         <Route component={JobSubNav} path="/job">
           <IndexRoute component={JobInfo} />
