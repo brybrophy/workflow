@@ -17,6 +17,18 @@ router.get('/jobs', (req, res, next) => {
     .then((rows) => {
       const jobs = camelizeKeys(rows);
 
+      for (const job of jobs) {
+        job.interviewApplied = job.interviewStatus.applied;
+        job.interviewInformational = job.interviewStatus.informational;
+        job.interviewPhone = job.interviewStatus.phone;
+        job.interviewTakeHome = job.interviewStatus.takeHome;
+        job.interviewTechnical = job.interviewStatus.technical;
+        job.interviewOnsite = job.interviewStatus.onsite;
+        job.interviewOffer = job.interviewStatus.offer;
+        job.interviewRejected = job.interviewStatus.rejected;
+        delete job.interviewStatus;
+      }
+
       res.send(jobs);
     })
     .catch((err) => {
@@ -40,6 +52,17 @@ router.get('/jobs/:id', (req, res, next) => {
       }
 
       const job = camelizeKeys(row);
+
+      job.interviewApplied = job.interviewStatus.applied;
+      job.interviewInformational = job.interviewStatus.informational;
+      job.interviewPhone = job.interviewStatus.phone;
+      job.interviewTakeHome = job.interviewStatus.takeHome;
+      job.interviewTechnical = job.interviewStatus.technical;
+      job.interviewOnsite = job.interviewStatus.onsite;
+      job.interviewOffer = job.interviewStatus.offer;
+      job.interviewRejected = job.interviewStatus.rejected;
+
+      delete job.interviewStatus;
 
       res.send(job);
     })
@@ -69,7 +92,18 @@ router.get('/jobs/:id/contacts', (req, res, next) => {
 });
 
 router.post('/jobs', ev(validations.post), (req, res, next) => {
-  const { title, jobPostUrl, companyName, companyAddress_1, companyCity, companyState, companyZip, companyPhone, interviewStatus, interviewInformational, interviewApplied, interviewPhone, interviewTechnical, interviewOnsite, interviewTakeHome, interviewOffer, interviewRejected, notes, userId } = req.body;
+  const { title, jobPostUrl, companyName, companyAddress_1, companyCity, companyState, companyZip, companyPhone, interviewInformational, interviewApplied, interviewPhone, interviewTechnical, interviewOnsite, interviewTakeHome, interviewOffer, interviewRejected, notes, userId } = req.body;
+
+  const interviewStatus = JSON.stringify({
+    informational: interviewInformational,
+    applied: interviewApplied,
+    phone: interviewPhone,
+    technical: interviewTechnical,
+    onsite: interviewOnsite,
+    takeHome: interviewTakeHome,
+    offer: interviewOffer,
+    rejected: interviewRejected
+  });
 
   if (!title || !title.trim()) {
     return next(boom.create(400, 'Job title must not be blank'));
@@ -79,12 +113,23 @@ router.post('/jobs', ev(validations.post), (req, res, next) => {
     return next(boom.create(400, 'Company name must not be blank'));
   }
 
-  const insertJob = { title, jobPostUrl, companyName, companyAddress_1, companyCity, companyState, companyZip, companyPhone, interviewStatus, interviewInformational, interviewApplied, interviewPhone, interviewTechnical, interviewOnsite, interviewTakeHome, interviewOffer, interviewRejected, notes, userId };
+  const insertJob = { title, jobPostUrl, companyName, companyAddress_1, companyCity, companyState, companyZip, companyPhone, interviewStatus, notes, userId };
 
   knex('jobs')
     .insert(decamelizeKeys(insertJob), '*')
     .then((rows) => {
       const job = camelizeKeys(rows[0]);
+
+      job.interviewApplied = job.interviewStatus.applied;
+      job.interviewInformational = job.interviewStatus.informational;
+      job.interviewPhone = job.interviewStatus.phone;
+      job.interviewTakeHome = job.interviewStatus.takeHome;
+      job.interviewTechnical = job.interviewStatus.technical;
+      job.interviewOnsite = job.interviewStatus.onsite;
+      job.interviewOffer = job.interviewStatus.offer;
+      job.interviewRejected = job.interviewStatus.rejected;
+
+      delete job.interviewStatus;
 
       res.send(job);
     })
@@ -108,7 +153,19 @@ router.patch('/jobs/:id', ev(validations.patch), (req, res, next) => {
         throw boom.create(404, 'Not Found');
       }
 
-      const { title, jobPostUrl, companyName, companyAddress_1, companyCity, companyState, companyZip, companyPhone, interviewStatus, interviewInformational, interviewApplied, interviewPhone, interviewTechnical, interviewOnsite, interviewTakeHome, interviewOffer, interviewRejected, notes } = req.body;
+      const { title, jobPostUrl, companyName, companyAddress_1, companyCity, companyState, companyZip, companyPhone, interviewInformational, interviewApplied, interviewPhone, interviewTechnical, interviewOnsite, interviewTakeHome, interviewOffer, interviewRejected, notes } = req.body;
+
+      const interviewStatus = {
+        informational: interviewInformational,
+        applied: interviewApplied,
+        phone: interviewPhone,
+        technical: interviewTechnical,
+        onsite: interviewOnsite,
+        takeHome: interviewTakeHome,
+        offer: interviewOffer,
+        rejected: interviewRejected
+      };
+
       const updateJob = {};
 
       if (title) {
@@ -147,38 +204,6 @@ router.patch('/jobs/:id', ev(validations.patch), (req, res, next) => {
         updateJob.interviewStatus = interviewStatus;
       }
 
-      if (interviewInformational) {
-        updateJob.interviewInformational = interviewInformational;
-      }
-
-      if (interviewApplied) {
-        updateJob.interviewApplied = interviewApplied;
-      }
-
-      if (interviewPhone) {
-        updateJob.interviewPhone = interviewPhone;
-      }
-
-      if (interviewTechnical) {
-        updateJob.interviewTechnical = interviewTechnical;
-      }
-
-      if (interviewOnsite) {
-        updateJob.interviewOnsite = interviewOnsite;
-      }
-
-      if (interviewTakeHome) {
-        updateJob.interviewTakeHome = interviewTakeHome;
-      }
-
-      if (interviewOffer) {
-        updateJob.interviewOffer = interviewOffer;
-      }
-
-      if (interviewRejected) {
-        updateJob.interviewRejected = interviewRejected;
-      }
-
       if (notes) {
         updateJob.notes = notes;
       }
@@ -189,6 +214,17 @@ router.patch('/jobs/:id', ev(validations.patch), (req, res, next) => {
     })
     .then((rows) => {
       const job = camelizeKeys(rows[0]);
+
+      job.interviewApplied = job.interviewStatus.applied;
+      job.interviewInformational = job.interviewStatus.informational;
+      job.interviewPhone = job.interviewStatus.phone;
+      job.interviewTakeHome = job.interviewStatus.takeHome;
+      job.interviewTechnical = job.interviewStatus.technical;
+      job.interviewOnsite = job.interviewStatus.onsite;
+      job.interviewOffer = job.interviewStatus.offer;
+      job.interviewRejected = job.interviewStatus.rejected;
+
+      delete job.interviewStatus;
 
       res.send(job);
     })
@@ -222,6 +258,17 @@ router.delete('/jobs/:id', (req, res, next) => {
     })
     .then(() => {
       delete job.id;
+
+      job.interviewApplied = job.interviewStatus.applied;
+      job.interviewInformational = job.interviewStatus.informational;
+      job.interviewPhone = job.interviewStatus.phone;
+      job.interviewTakeHome = job.interviewStatus.takeHome;
+      job.interviewTechnical = job.interviewStatus.technical;
+      job.interviewOnsite = job.interviewStatus.onsite;
+      job.interviewOffer = job.interviewStatus.offer;
+      job.interviewRejected = job.interviewStatus.rejected;
+
+      delete job.interviewStatus;
 
       res.send(job);
     })

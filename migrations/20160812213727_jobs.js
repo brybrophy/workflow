@@ -11,15 +11,7 @@ exports.up = function(knex) {
     table.specificType('company_state', 'char(2)').notNullable().defaultTo('');
     table.string('company_zip').notNullable().defaultTo('');
     table.string('company_phone').notNullable().defaultTo('');
-    table.string('interview_status').notNullable().defaultTo('');
-    table.dateTime('interview_informational');
-    table.dateTime('interview_applied');
-    table.dateTime('interview_phone');
-    table.dateTime('interview_technical');
-    table.dateTime('interview_onsite');
-    table.dateTime('interview_take_home');
-    table.dateTime('interview_offer');
-    table.dateTime('interview_rejected');
+    table.json('interview_status').notNullable().defaultTo('{}');
     table.text('notes').notNullable().defaultTo('');
     table.integer('user_id')
       .notNullable()

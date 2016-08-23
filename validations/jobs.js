@@ -41,42 +41,22 @@ module.exports.post = {
       .min(7)
       .label('Company Phone Number')
       .trim(),
-    interviewStatus: Joi.string()
-      .min(3)
-      .label('Interview Status')
-      .trim(),
-    interviewInformational: Joi.string()
-      .isoDate()
-      .label('Informational Interview')
-      .trim(),
-    interviewApplied: Joi.string()
-      .isoDate()
-      .label('Applied')
-      .trim(),
-    interviewPhone: Joi.string()
-      .isoDate()
-      .label('Phone Interview')
-      .trim(),
-    interviewTechnical: Joi.string()
-      .isoDate()
-      .label('Technical Interview')
-      .trim(),
-    interviewOnsite: Joi.string()
-      .isoDate()
-      .label('On-site Interview')
-      .trim(),
-    interviewTakeHome: Joi.string()
-      .isoDate()
-      .label('Take-home Interview')
-      .trim(),
-    interviewOffer: Joi.string()
-      .isoDate()
-      .label('Offer')
-      .trim(),
-    interviewRejected: Joi.string()
-      .isoDate()
-      .label('Rejected')
-      .trim(),
+    interviewInformational: Joi.object()
+      .label('Informational Interview'),
+    interviewApplied: Joi.object()
+      .label('Applied'),
+    interviewPhone: Joi.object()
+      .label('Phone Interview'),
+    interviewTechnical: Joi.object()
+      .label('Technical Interview'),
+    interviewOnsite: Joi.object()
+      .label('On-site Interview'),
+    interviewTakeHome: Joi.object()
+      .label('Take-home Interview'),
+    interviewOffer: Joi.object()
+      .label('Offer'),
+    interviewRejected: Joi.object()
+      .label('Rejected'),
     notes: Joi.string()
       .label('Notes')
       .trim()
@@ -120,42 +100,22 @@ module.exports.patch = {
       .min(7)
       .label('Company Phone Number')
       .trim(),
-    interviewStatus: Joi.string()
-      .min(3)
-      .label('Interview Status')
-      .trim(),
-    interviewInformational: Joi.string()
-      .isoDate()
-      .label('Informational Interview')
-      .trim(),
-    interviewApplied: Joi.string()
-      .isoDate()
-      .label('Applied')
-      .trim(),
-    interviewPhone: Joi.string()
-      .isoDate()
-      .label('Phone Interview')
-      .trim(),
-    interviewTechnical: Joi.string()
-      .isoDate()
-      .label('Technical Interview')
-      .trim(),
-    interviewOnsite: Joi.string()
-      .isoDate()
-      .label('On-site Interview')
-      .trim(),
-    interviewTakeHome: Joi.string()
-      .isoDate()
-      .label('Take-home Interview')
-      .trim(),
-    interviewOffer: Joi.string()
-      .isoDate()
-      .label('Offer')
-      .trim(),
-    interviewRejected: Joi.string()
-      .isoDate()
-      .label('Rejected')
-      .trim(),
+    interviewInformational: Joi.object()
+      .label('Informational Interview'),
+    interviewApplied: Joi.object()
+      .label('Applied'),
+    interviewPhone: Joi.object()
+      .label('Phone Interview'),
+    interviewTechnical: Joi.object()
+      .label('Technical Interview'),
+    interviewOnsite: Joi.object()
+      .label('On-site Interview'),
+    interviewTakeHome: Joi.object()
+      .label('Take-home Interview'),
+    interviewOffer: Joi.object()
+      .label('Offer'),
+    interviewRejected: Joi.object()
+      .label('Rejected'),
     notes: Joi.string()
       .label('Notes')
       .trim()

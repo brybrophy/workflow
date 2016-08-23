@@ -147,59 +147,10 @@ suite('Migrations', () => {
           },
 
           interview_status: {
-            type: 'character varying',
-            maxLength: 255,
+            type: 'json',
+            maxLength: null,
             nullable: false,
-            defaultValue: '\'\'::character varying'
-          },
-
-          interview_informational: {
-            type: 'timestamp with time zone',
-            maxLength: null,
-            nullable: true,
-            defaultValue: null
-          },
-
-          interview_applied: {
-            type: 'timestamp with time zone',
-            maxLength: null,
-            nullable: true,
-            defaultValue: null
-          },
-
-          interview_phone: {
-            type: 'timestamp with time zone',
-            maxLength: null,
-            nullable: true,
-            defaultValue: null
-          },
-
-          interview_technical: {
-            type: 'timestamp with time zone',
-            maxLength: null,
-            nullable: true,
-            defaultValue: null
-          },
-
-          interview_onsite: {
-            type: 'timestamp with time zone',
-            maxLength: null,
-            nullable: true,
-            defaultValue: null
-          },
-
-          interview_take_home: {
-            type: 'timestamp with time zone',
-            maxLength: null,
-            nullable: true,
-            defaultValue: null
-          },
-
-          interview_offer: {
-            type: 'timestamp with time zone',
-            maxLength: null,
-            nullable: true,
-            defaultValue: null
+            defaultValue: '\'{}\'::json'
           },
 
           notes: {
@@ -213,13 +164,6 @@ suite('Migrations', () => {
             type: 'integer',
             maxLength: null,
             nullable: false,
-            defaultValue: null
-          },
-
-          interview_rejected: {
-            type: 'timestamp with time zone',
-            maxLength: null,
-            nullable: true,
             defaultValue: null
           },
 
