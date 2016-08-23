@@ -6,7 +6,17 @@ const Dashboard = React.createClass({
     return <div>
       <Grid>
         <Row>
-          <Col xs={1}>Hello</Col>
+          <Col xs={1}>
+            <a href="#">
+              <img src="images/back_arrow.svg" />
+            </a>
+          </Col>
+
+          <Col xs={1}>
+            <a href="#">
+              <img src="images/forward_arrow.svg" />
+            </a>
+          </Col>
         </Row>
       </Grid>
     </div>
