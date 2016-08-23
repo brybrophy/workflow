@@ -1,4 +1,5 @@
 import AppBar from 'material-ui/AppBar';
+import Cookie from 'react-cookie';
 import FlatButton from 'material-ui/FlatButton';
 import NavLogo from 'components/NavLogo';
 import React from 'react';
@@ -6,6 +7,13 @@ import { withRouter } from 'react-router';
 
 const MainNav = React.createClass({
   handleTouchTap(event) {
+    console.log(event.target.textContent);
+    if (event.target.textContent === 'Logout') {
+      Cookie.remove('token', { path: '/' });
+
+      return this.props.router.push('/');
+    }
+
     const path = '/' + event.target.textContent.toLowerCase();
     this.props.router.push(path);
   },
@@ -75,20 +83,20 @@ const MainNav = React.createClass({
       <FlatButton
         label="Dashboard"
         labelStyle={styleFlatButtonLabel}
-        style={styleFlatButton}
         onTouchTap={this.handleTouchTap}
+        style={styleFlatButton}
       />
       <FlatButton
         label="Jobs"
         labelStyle={styleFlatButtonLabel}
-        style={styleFlatButton}
         onTouchTap={this.handleTouchTap}
+        style={styleFlatButton}
       />
       <FlatButton
         label="Contacts"
         labelStyle={styleFlatButtonLabel}
-        style={styleFlatButton}
         onTouchTap={this.handleTouchTap}
+        style={styleFlatButton}
       />
 
       <h1 style={styleNavbarLine}> | </h1>
@@ -96,6 +104,7 @@ const MainNav = React.createClass({
       <FlatButton
         label="Logout"
         labelStyle={styleFlatButtonLabel}
+        onTouchTap={this.handleTouchTap}
         style={styleFlatButton}
       />
     </AppBar>{this.props.children}</div>;

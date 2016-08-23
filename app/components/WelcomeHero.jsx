@@ -2,8 +2,13 @@ import PipesHero from 'components/PipesHero';
 import RaisedButton from 'material-ui/RaisedButton';
 import React from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
+import { withRouter } from 'react-router';
 
 const WelcomeHero = React.createClass({
+  handleTouchTap() {
+    this.props.router.push('/auth');
+  },
+
   render() {
     const styleCloud3 = {
       display: 'inline-block',
@@ -81,6 +86,7 @@ const WelcomeHero = React.createClass({
             label="sign up for free"
             labelColor="white"
             labelStyle={styleRaisedButtonLabel}
+            onTouchTap={this.handleTouchTap}
             style={styleRaisedButton}
           />
       </Col>
@@ -90,4 +96,4 @@ const WelcomeHero = React.createClass({
   }
 });
 
-export default WelcomeHero;
+export default withRouter(WelcomeHero);

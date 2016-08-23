@@ -50,6 +50,7 @@
     "react": "^15.3.0",
     "react-addons-css-transition-group": "^15.3.1",
     "react-bootstrap": "^0.30.2",
+    "react-cookie": "^0.4.8",
     "react-dom": "^15.3.0",
     "react-fittext": "0.0.7",
     "react-google-maps": "^4.11.0",

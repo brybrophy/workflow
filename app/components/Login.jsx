@@ -3,6 +3,10 @@ import LinkedInIcon from 'components/LinkedIn';
 import React from 'react';
 
 const Login = React.createClass({
+  handleLogin() {
+    window.location.href = '/api/oauth/linkedin';
+  },
+
   handleTouchTap() {
     this.props.toggleLoginState();
   },
@@ -98,6 +102,7 @@ const Login = React.createClass({
         label="linkedIn"
         labelStyle={styleFlatButtonLabelAlt}
         icon={<LinkedInIcon />}
+        onTouchTap={this.handleLogin}
         style={styleFlatButtonAlt}
       />
 

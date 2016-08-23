@@ -34,7 +34,6 @@ router.get('/oauth/linkedin/callback', function(req, res) {
         });
 
         res.cookie('token', token);
-        res.cookie('me', me);
         return res.redirect('/jobs');
     });
     console.log(me);
