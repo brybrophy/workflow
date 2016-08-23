@@ -1,8 +1,13 @@
+import axios from 'axios';
 import FlatButton from 'material-ui/FlatButton';
 import LinkedInIcon from 'components/LinkedIn';
 import React from 'react';
 
 const SignUp = React.createClass({
+  handleSignUp() {
+    window.location.href = '/api/oauth/linkedin';
+  },
+
   handleTouchTap() {
     this.props.toggleLoginState();
   },
@@ -97,6 +102,7 @@ const SignUp = React.createClass({
       <FlatButton
         label="linkedIn"
         labelStyle={styleFlatButtonLabelAlt}
+        onTouchTap={this.handleSignUp}
         icon={<LinkedInIcon />}
         style={styleFlatButtonAlt}
       />

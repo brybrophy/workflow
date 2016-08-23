@@ -45,6 +45,7 @@
     "knex": "^0.11.9",
     "material-ui": "^0.15.4",
     "morgan": "^1.7.0",
+    "node-linkedin": "^0.5.4",
     "pg": "^6.0.3",
     "react": "^15.3.0",
     "react-addons-css-transition-group": "^15.3.1",

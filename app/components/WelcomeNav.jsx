@@ -2,8 +2,13 @@ import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import NavLogo from 'components/NavLogo';
 import React from 'react';
+import { withRouter } from 'react-router';
 
 const WelcomeNav = React.createClass({
+  handleTouchTap() {
+    this.props.router.push('/auth');
+  },
+
   render() {
     const styleAppBar = {
       boxShadow: 'none',
@@ -89,6 +94,7 @@ const WelcomeNav = React.createClass({
         <FlatButton
           label="Login"
           labelStyle={styleFlatButtonLabel}
+          onTouchTap={this.handleTouchTap}
           style={styleFlatButton}
         />
       </span>
@@ -97,6 +103,7 @@ const WelcomeNav = React.createClass({
         <FlatButton
           className="hide-on-small"
           label="Sign Up"
+          onTouchTap={this.handleTouchTap}
           style={styleFlatButtonAlt}
           labelStyle={styleFlatButtonLabelAlt}
         />
@@ -107,4 +114,4 @@ const WelcomeNav = React.createClass({
   }
 });
 
-export default WelcomeNav;
+export default withRouter(WelcomeNav);

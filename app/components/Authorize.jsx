@@ -11,10 +11,10 @@ const Authorize = React.createClass({
 
   toggleLoginState() {
     if (this.state.login) {
-      return setTimeout(() => { this.setState({ login: false }); }, 200);
+      return setTimeout(() => { this.setState({ login: false }); }, 100);
     }
 
-    setTimeout(() => { this.setState({ login: true }); }, 200);
+    setTimeout(() => { this.setState({ login: true }); }, 100);
   },
 
   render() {
