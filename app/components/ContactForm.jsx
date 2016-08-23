@@ -1,4 +1,5 @@
 import { Grid, Row, Col } from 'react-bootstrap';
+import Contact from 'components/Contact';
 import FlatButton from 'material-ui/FlatButton';
 import MenuItem from 'material-ui/MenuItem';
 import React from 'react';
@@ -47,7 +48,7 @@ const ContactForm = React.createClass({
 
     const styleFlatButton = {
       borderRadius: '3px',
-      fontFamily: 'MontserratLight',
+      fontFamily: 'MontserratHairline',
       margin: '5px',
       width: '100%'
     };
@@ -62,6 +63,7 @@ const ContactForm = React.createClass({
     };
 
     const styleSelectField = {
+      backgroundColor: '#E7E4DB',
       border: '1px solid lightgray',
       borderRadius: '3px',
       fontFamily: 'MontserratLight',
@@ -132,8 +134,9 @@ const ContactForm = React.createClass({
         </Col>
         <Col xs={12} sm={3} style={styleColumn}>
           <FlatButton
-            backgroundColor="lightgray"
+            backgroundColor="#E7E4DB"
             label="Import"
+            labelStyle={{ color: '#A6A399' }}
             style={styleFlatButton}
           />
         </Col>
@@ -212,12 +215,14 @@ const ContactForm = React.createClass({
         </Col>
         <Col xs={12} sm={6} style={styleColumn}>
           <FlatButton
-            backgroundColor="lightgray"
+            backgroundColor="#E7E4DB"
             label="Save and Next"
+            labelStyle={{ color: '#A6A399' }}
             style={styleFlatButton}
           />
         </Col>
       </Row>
+      <Contact contact={this.state.contact}/>
     </Grid>;
   }
 });

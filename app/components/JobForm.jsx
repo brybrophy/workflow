@@ -48,7 +48,7 @@ const JobForm = React.createClass({
 
     const styleFlatButton = {
       borderRadius: '3px',
-      fontFamily: 'MontserratLight',
+      fontFamily: 'MontserratHairline',
       margin: '5px',
       width: '100%'
     };
@@ -191,8 +191,9 @@ const JobForm = React.createClass({
       </Col>
       <Col xs={12} style={styleColumn}>
         <FlatButton
-          backgroundColor="lightgray"
+          backgroundColor="#E7E4DB"
           label="Save and Next"
+          labelStyle={{ color: '#A6A399' }}
           style={styleFlatButton}
         />
       </Col>
