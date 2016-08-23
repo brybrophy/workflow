@@ -2,10 +2,15 @@ import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import NavLogo from 'components/NavLogo';
 import React from 'react';
+import { withRouter } from 'react-router';
 
 const MainNav = React.createClass({
-  render() {
+  handleTouchTap(event) {
+    const path = '/' + event.target.textContent.toLowerCase();
+    this.props.router.push(path);
+  },
 
+  render() {
     const styleAppBar = {
       height: '125px',
       paddingRight: '70px'
@@ -71,16 +76,19 @@ const MainNav = React.createClass({
         label="Dashboard"
         labelStyle={styleFlatButtonLabel}
         style={styleFlatButton}
+        onTouchTap={this.handleTouchTap}
       />
       <FlatButton
         label="Jobs"
         labelStyle={styleFlatButtonLabel}
         style={styleFlatButton}
+        onTouchTap={this.handleTouchTap}
       />
       <FlatButton
         label="Contacts"
         labelStyle={styleFlatButtonLabel}
         style={styleFlatButton}
+        onTouchTap={this.handleTouchTap}
       />
 
       <h1 style={styleNavbarLine}> | </h1>
@@ -94,4 +102,4 @@ const MainNav = React.createClass({
   }
 });
 
-export default MainNav;
+export default withRouter(MainNav);

@@ -7,7 +7,6 @@ import { Grid, Row, Col } from 'react-bootstrap';
 
 const JobsJob = React.createClass({
   render() {
-    console.log(this.props.jobs);
     let { jobs } = this.props;
 
     jobs.sort((p1, p2) => p1.companyName > p2.companyName);
