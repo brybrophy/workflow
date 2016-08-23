@@ -14,7 +14,7 @@ const { checkAuth } = require('../middleware');
 const boom = require('boom');
 const { camelizeKeys, decamelizeKeys } = require('humps');
 
-router.post('/api/contacts', ev(validations.post), (req, res, next) => {
+router.post('/contacts', ev(validations.post), (req, res, next) => {
   const {
     firstName,
     lastName,
@@ -55,7 +55,7 @@ router.post('/api/contacts', ev(validations.post), (req, res, next) => {
     });
 });
 
-router.get('/api/contacts', (req, res, next) => {
+router.get('/contacts', (req, res, next) => {
   knex('contacts')
     .where('user_id', userId)
     .orderBy('first_name')
@@ -71,7 +71,7 @@ router.get('/api/contacts', (req, res, next) => {
     });
 });
 
-router.get('/api/contacts/:id/jobs', (req, res, next) => {
+router.get('/contacts/:id/jobs', (req, res, next) => {
   const contactId = Number.parseInt(req.params.id);
 
   if (Number.isNaN(contactId)) {
@@ -91,7 +91,7 @@ router.get('/api/contacts/:id/jobs', (req, res, next) => {
     });
 });
 
-router.patch('/api/contacts/:contactId', ev(validations.patch), (req, res, next) => {
+router.patch('/contacts/:contactId', ev(validations.patch), (req, res, next) => {
   const contactId = Number.parseInt(req.params.contactId);
   let { firstName, lastName, email, phoneNumber, linkedInUrl } = req.body;
 

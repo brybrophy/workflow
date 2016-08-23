@@ -34,6 +34,7 @@ suite('Routes Users', () => {
   test('POST /api/users', (done) => {
     request(server)
       .post('/api/users')
+      .set('Accept', 'application/json')
       .send({
         username: 'geneBelcher',
         email: 'royalBaby@bobsburger.biz',

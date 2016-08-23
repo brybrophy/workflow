@@ -13,7 +13,7 @@ const { checkAuth } = require('../middleware');
 const boom = require('boom');
 const { camelizeKeys, decamelizeKeys } = require('humps');
 
-router.post('/api/users', ev(validations.post), (req, res, next) => {
+router.post('/users', ev(validations.post), (req, res, next) => {
   const { username, email, password } = req.body;
 
   knex('users')

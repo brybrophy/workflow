@@ -34,6 +34,7 @@ suite('Routes jobs', () => {
   test('GET /api/jobs', (done) => {
     request(server)
       .get('/api/jobs')
+      .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200, [{
         id: 1,
@@ -41,11 +42,10 @@ suite('Routes jobs', () => {
         jobPostUrl: 'https://us-amazon.icims.com/jobs/429406/software-engineer%2c-front-end/job',
         companyName: 'Amazon',
         companyAddress1: '410 Terry Ave. North',
-        companyAddress2: '',
         companyCity: 'Seattle',
         companyState: 'WA',
         companyZip: '98109-5210',
-        companyWebsite: 'https://www.amazon.com',
+        companyPhone: '',
         interviewStatus: 'Applied',
         interviewInformational: null,
         interviewApplied: new Date('2016-08-12 17:00:00 UTC').toISOString(),
@@ -65,12 +65,11 @@ suite('Routes jobs', () => {
         title: 'Clown',
         jobPostUrl: 'http://en.ext.casting.cirquedusoleil.com/ts2mmx__JobDetails?jobId=a0xA00000012HcsIAE',
         companyName: 'Cirque du Soleil',
-        companyAddress1: 'MGM Grand Las Vegas Hotel and Casino',
-        companyAddress2: '3799 South Las Vegas Blvd',
+        companyAddress1: '3799 South Las Vegas Blvd',
         companyCity: 'Las Vegas',
         companyState: 'NV',
         companyZip: '89109',
-        companyWebsite: 'https://www.cirquedusoleil.com',
+        companyPhone: '',
         interviewStatus: 'Waiting for offer',
         interviewInformational: null,
         interviewApplied: new Date('2016-06-20 14:00:00 UTC').toISOString(),
@@ -90,6 +89,7 @@ suite('Routes jobs', () => {
   test('GET /api/jobs/:id', (done) => {
     request(server)
       .get('/api/jobs/1')
+      .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200, {
         id: 1,
@@ -97,11 +97,10 @@ suite('Routes jobs', () => {
         jobPostUrl: 'https://us-amazon.icims.com/jobs/429406/software-engineer%2c-front-end/job',
         companyName: 'Amazon',
         companyAddress1: '410 Terry Ave. North',
-        companyAddress2: '',
         companyCity: 'Seattle',
         companyState: 'WA',
         companyZip: '98109-5210',
-        companyWebsite: 'https://www.amazon.com',
+        companyPhone: '',
         interviewStatus: 'Applied',
         interviewInformational: null,
         interviewApplied: new Date('2016-08-12 17:00:00 UTC').toISOString(),
@@ -121,6 +120,7 @@ suite('Routes jobs', () => {
   test('GET /api/jobs/:id/contacts', (done) => {
     request(server)
       .get('/api/jobs/1/contacts')
+      .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200, [{
         contactId: 1,
@@ -140,6 +140,7 @@ suite('Routes jobs', () => {
   test('POST /api/jobs', (done) => {
     request(server)
       .post('/api/jobs')
+      .set('Accept', 'application/json')
       .send({
         title: 'User Experience (UX) Designer',
         jobPostUrl: 'http://www.indeed.jobs/career/JobDetail/User-Experience-UX-Designer/896',
@@ -147,7 +148,6 @@ suite('Routes jobs', () => {
         companyCity: 'Seattle',
         companyState: 'WA',
         companyZip: '98104',
-        companyWebsite: 'https://www.indeed.com',
         interviewStatus: 'Applied',
         interviewApplied: new Date('2016-06-20 14:00:00 UTC').toISOString(),
         notes: 'I applied online and reached out to my friend Sam who works at Indeed.',
@@ -164,11 +164,10 @@ suite('Routes jobs', () => {
         jobPostUrl: 'http://www.indeed.jobs/career/JobDetail/User-Experience-UX-Designer/896',
         companyName: 'Indeed',
         companyAddress1: '',
-        companyAddress2: '',
         companyCity: 'Seattle',
         companyState: 'WA',
         companyZip: '98104',
-        companyWebsite: 'https://www.indeed.com',
+        companyPhone: '',
         interviewStatus: 'Applied',
         interviewInformational: null,
         interviewApplied: new Date('2016-06-20 14:00:00 UTC').toISOString(),
@@ -186,6 +185,7 @@ suite('Routes jobs', () => {
   test('PATCH /api/jobs/:id', (done) => {
     request(server)
       .patch('/api/jobs/2')
+      .set('Accept', 'application/json')
       .send({
         interviewOffer: new Date('2016-09-10 15:00:00 UTC'),
         notes: 'I\'ve always wanted to be a clown. Here\'s my chance! I got an offer but I\'ll have to give it some thought.'
@@ -200,12 +200,11 @@ suite('Routes jobs', () => {
         title: 'Clown',
         jobPostUrl: 'http://en.ext.casting.cirquedusoleil.com/ts2mmx__JobDetails?jobId=a0xA00000012HcsIAE',
         companyName: 'Cirque du Soleil',
-        companyAddress1: 'MGM Grand Las Vegas Hotel and Casino',
-        companyAddress2: '3799 South Las Vegas Blvd',
+        companyAddress1: '3799 South Las Vegas Blvd',
         companyCity: 'Las Vegas',
         companyState: 'NV',
         companyZip: '89109',
-        companyWebsite: 'https://www.cirquedusoleil.com',
+        companyPhone: '',
         interviewStatus: 'Waiting for offer',
         interviewInformational: null,
         interviewApplied: new Date('2016-06-20 14:00:00 UTC').toISOString(),
@@ -223,17 +222,17 @@ suite('Routes jobs', () => {
   test('DELETE /api/jobs/:id', (done) => {
     request(server)
     .delete('/api/jobs/2')
+    .set('Accept', 'application/json')
     .expect('Content-Type', /json/)
     .expect(200, {
       title: 'Clown',
       jobPostUrl: 'http://en.ext.casting.cirquedusoleil.com/ts2mmx__JobDetails?jobId=a0xA00000012HcsIAE',
       companyName: 'Cirque du Soleil',
-      companyAddress1: 'MGM Grand Las Vegas Hotel and Casino',
-      companyAddress2: '3799 South Las Vegas Blvd',
+      companyAddress1: '3799 South Las Vegas Blvd',
       companyCity: 'Las Vegas',
       companyState: 'NV',
       companyZip: '89109',
-      companyWebsite: 'https://www.cirquedusoleil.com',
+      companyPhone: '',
       interviewStatus: 'Waiting for offer',
       interviewInformational: null,
       interviewApplied: new Date('2016-06-20 14:00:00 UTC').toISOString(),

@@ -12,7 +12,7 @@ const { checkAuth } = require('../middleware');
 const boom = require('boom');
 const { camelizeKeys, decamelizeKeys } = require('humps');
 
-router.get('/api/jobs', (req, res, next) => {
+router.get('/jobs', (req, res, next) => {
   knex('jobs')
     .then((rows) => {
       const jobs = camelizeKeys(rows);
@@ -24,7 +24,7 @@ router.get('/api/jobs', (req, res, next) => {
     });
 });
 
-router.get('/api/jobs/:id', (req, res, next) => {
+router.get('/jobs/:id', (req, res, next) => {
   const id = Number.parseInt(req.params.id);
 
   if (Number.isNaN(id)) {
@@ -48,7 +48,7 @@ router.get('/api/jobs/:id', (req, res, next) => {
     });
 });
 
-router.get('/api/jobs/:id/contacts', (req, res, next) => {
+router.get('/jobs/:id/contacts', (req, res, next) => {
   const jobId = Number.parseInt(req.params.id);
 
   if (Number.isNaN(jobId)) {
@@ -68,8 +68,8 @@ router.get('/api/jobs/:id/contacts', (req, res, next) => {
     });
 });
 
-router.post('/api/jobs', ev(validations.post), (req, res, next) => {
-  const { title, jobPostUrl, companyName, companyAddress_1, companyAddress_2, companyCity, companyState, companyZip, companyWebsite, interviewStatus, interviewInformational, interviewApplied, interviewPhone, interviewTechnical, interviewOnsite, interviewTakeHome, interviewOffer, interviewRejected, notes, userId } = req.body;
+router.post('/jobs', ev(validations.post), (req, res, next) => {
+  const { title, jobPostUrl, companyName, companyAddress_1, companyCity, companyState, companyZip, companyPhone, interviewStatus, interviewInformational, interviewApplied, interviewPhone, interviewTechnical, interviewOnsite, interviewTakeHome, interviewOffer, interviewRejected, notes, userId } = req.body;
 
   if (!title || !title.trim()) {
     return next(boom.create(400, 'Job title must not be blank'));
@@ -79,7 +79,7 @@ router.post('/api/jobs', ev(validations.post), (req, res, next) => {
     return next(boom.create(400, 'Company name must not be blank'));
   }
 
-  const insertJob = { title, jobPostUrl, companyName, companyAddress_1, companyAddress_2, companyCity, companyState, companyZip, companyWebsite, interviewStatus, interviewInformational, interviewApplied, interviewPhone, interviewTechnical, interviewOnsite, interviewTakeHome, interviewOffer, interviewRejected, notes, userId };
+  const insertJob = { title, jobPostUrl, companyName, companyAddress_1, companyCity, companyState, companyZip, companyPhone, interviewStatus, interviewInformational, interviewApplied, interviewPhone, interviewTechnical, interviewOnsite, interviewTakeHome, interviewOffer, interviewRejected, notes, userId };
 
   knex('jobs')
     .insert(decamelizeKeys(insertJob), '*')
@@ -93,7 +93,7 @@ router.post('/api/jobs', ev(validations.post), (req, res, next) => {
     });
 });
 
-router.patch('/api/jobs/:id', ev(validations.patch), (req, res, next) => {
+router.patch('/jobs/:id', ev(validations.patch), (req, res, next) => {
   const id = Number.parseInt(req.params.id);
 
   if (Number.isNaN(id)) {
@@ -108,7 +108,7 @@ router.patch('/api/jobs/:id', ev(validations.patch), (req, res, next) => {
         throw boom.create(404, 'Not Found');
       }
 
-      const { title, jobPostUrl, companyName, companyAddress_1, companyAddress_2, companyCity, companyState, companyZip, companyWebsite, interviewStatus, interviewInformational, interviewApplied, interviewPhone, interviewTechnical, interviewOnsite, interviewTakeHome, interviewOffer, interviewRejected, notes } = req.body;
+      const { title, jobPostUrl, companyName, companyAddress_1, companyCity, companyState, companyZip, companyPhone, interviewStatus, interviewInformational, interviewApplied, interviewPhone, interviewTechnical, interviewOnsite, interviewTakeHome, interviewOffer, interviewRejected, notes } = req.body;
       const updateJob = {};
 
       if (title) {
@@ -127,10 +127,6 @@ router.patch('/api/jobs/:id', ev(validations.patch), (req, res, next) => {
         updateJob.companyAddress_1 = companyAddress_1;
       }
 
-      if (companyAddress_2) {
-        updateJob.companyAddress_2 = companyAddress_2;
-      }
-
       if (companyCity) {
         updateJob.companyCity = companyCity;
       }
@@ -143,8 +139,8 @@ router.patch('/api/jobs/:id', ev(validations.patch), (req, res, next) => {
         updateJob.companyZip = companyZip;
       }
 
-      if (companyWebsite) {
-        updateJob.companyWebsite = companyWebsite;
+      if (companyPhone) {
+        updateJob.companyPhone = companyPhone;
       }
 
       if (interviewStatus) {
@@ -201,7 +197,7 @@ router.patch('/api/jobs/:id', ev(validations.patch), (req, res, next) => {
     });
 });
 
-router.delete('/api/jobs/:id', (req, res, next) => {
+router.delete('/jobs/:id', (req, res, next) => {
   const id = Number.parseInt(req.params.id);
 
   if (Number.isNaN(id)) {

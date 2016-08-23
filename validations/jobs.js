@@ -21,11 +21,7 @@ module.exports.post = {
       .required(),
     companyAddress1: Joi.string()
       .min(3)
-      .label('Company Address Line 1')
-      .trim(),
-    companyAddress2: Joi.string()
-      .min(3)
-      .label('Company Address Line 2')
+      .label('Company Street Address')
       .trim(),
     companyCity: Joi.string()
       .min(3)
@@ -41,11 +37,10 @@ module.exports.post = {
       .min(5)
       .label('Company Zip')
       .trim(),
-    companyWebsite: Joi.string()
-      .min(5)
-      .label('Company Website')
-      .trim()
-      .uri(),
+    companyPhone: Joi.string()
+      .min(7)
+      .label('Company Phone Number')
+      .trim(),
     interviewStatus: Joi.string()
       .min(3)
       .label('Interview Status')
@@ -105,11 +100,7 @@ module.exports.patch = {
       .trim(),
     companyAddress1: Joi.string()
       .min(3)
-      .label('Company Address Line 1')
-      .trim(),
-    companyAddress2: Joi.string()
-      .min(3)
-      .label('Company Address Line 2')
+      .label('Company Street Address')
       .trim(),
     companyCity: Joi.string()
       .min(3)
@@ -125,11 +116,10 @@ module.exports.patch = {
       .min(5)
       .label('Company Zip')
       .trim(),
-    companyWebsite: Joi.string()
-      .min(5)
-      .label('Company Website')
-      .trim()
-      .uri(),
+    companyPhone: Joi.string()
+      .min(7)
+      .label('Company Phone Number')
+      .trim(),
     interviewStatus: Joi.string()
       .min(3)
       .label('Interview Status')

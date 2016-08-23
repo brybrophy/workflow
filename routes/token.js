@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 
 const router = express.Router(); // eslint-disable-line new-cap
 
-router.post('/api/token', (req, res, next) => {
+router.post('/token', (req, res, next) => {
   let user;
 
   knex('users')
@@ -49,7 +49,7 @@ router.post('/api/token', (req, res, next) => {
     });
 });
 
-router.delete('/api/token', (req, res) => {
+router.delete('/token', (req, res) => {
   res.clearCookie('accessToken');
   res.clearCookie('loggedIn');
   res.sendStatus(200);

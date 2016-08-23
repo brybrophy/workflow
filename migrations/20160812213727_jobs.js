@@ -7,11 +7,10 @@ exports.up = function(knex) {
     table.string('job_post_url').notNullable().defaultTo('');
     table.string('company_name').notNullable().defaultTo('');
     table.string('company_address_1').notNullable().defaultTo('');
-    table.string('company_address_2').notNullable().defaultTo('');
     table.string('company_city').notNullable().defaultTo('');
     table.specificType('company_state', 'char(2)').notNullable().defaultTo('');
     table.string('company_zip').notNullable().defaultTo('');
-    table.string('company_website').notNullable().defaultTo('');
+    table.string('company_phone').notNullable().defaultTo('');
     table.string('interview_status').notNullable().defaultTo('');
     table.dateTime('interview_informational');
     table.dateTime('interview_applied');

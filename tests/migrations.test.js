@@ -118,13 +118,6 @@ suite('Migrations', () => {
             defaultValue: '\'\'::character varying'
           },
 
-          company_address_2: {
-            type: 'character varying',
-            maxLength: 255,
-            nullable: false,
-            defaultValue: '\'\'::character varying'
-          },
-
           company_city: {
             type: 'character varying',
             maxLength: 255,
@@ -146,7 +139,7 @@ suite('Migrations', () => {
             defaultValue: '\'\'::character varying'
           },
 
-          company_website: {
+          company_phone: {
             type: 'character varying',
             maxLength: 255,
             nullable: false,

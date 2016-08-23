@@ -33,15 +33,24 @@ switch (app.get('env')) {
   default:
 }
 
+app.use(express.static(path.join(__dirname, 'public')));
+
+// CSRF protection
+app.use('/api', (req, res, next) => {
+  if (/json/.test(req.get('Accept'))) {
+    return next();
+  }
+
+  res.sendStatus(406);
+});
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(users);
-app.use(jobs);
-app.use(contacts);
-app.use(token);
+app.use('/api', users);
+app.use('/api', jobs);
+app.use('/api', contacts);
+app.use('/api', token);
 
 app.use((_req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));

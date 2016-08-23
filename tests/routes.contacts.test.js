@@ -34,6 +34,7 @@ suite('Routes contacts', () => {
   test('GET /api/contacts', (done) => {
     request(server)
       .get('/api/contacts')
+      .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200, [{
         id: 1,
@@ -51,6 +52,7 @@ suite('Routes contacts', () => {
   test('POST /api/contacts', (done) => {
     request(server)
       .post('/api/contacts')
+      .set('Accept', 'application/json')
       .send({
         firstName: 'neil',
         lastName: 'armstrong',
@@ -78,6 +80,7 @@ suite('Routes contacts', () => {
   test('PATCH /api/contacts/:contactsId', (done) => {
     request(server)
       .patch('/api/contacts/1')
+      .set('Accept', 'application/json')
       .send({
         firstName: 'Bobby',
         lastName: 'Kennedy'
