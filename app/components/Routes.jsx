@@ -1,5 +1,6 @@
 import { browserHistory, IndexRoute, Route, Router } from 'react-router';
 import App from 'components/App';
+import Authorize from 'components/Authorize';
 import ContactForm from 'components/ContactForm';
 import JobInfo from 'components/JobInfo';
 import JobNotes from 'components/JobNotes';
@@ -13,6 +14,7 @@ const Routes = React.createClass({
   render() {
     return <Router history={browserHistory}>
       <Route component={Welcome} path="/home" />
+      <Route component={Authorize} path="/auth" />
       <Route component={App} path="/">
         <Route component={JobSubNav} path="/job/:id">
           <IndexRoute component={JobInfo} />
@@ -20,8 +22,6 @@ const Routes = React.createClass({
           <Route component={JobProgress} path="progress" />
           <Route component={JobNotes} path="notes" />
         </Route>
-        {/* <Route component={Login} path="/login" /> */}
-        {/* <Route component={Signup} path="/signup" /> */}
         {/* <Route component={Dashboard} path="/dashboard" /> */}
         <Route component={Jobs} path="jobs" />
         {/* <Route component={Contacts} path="contacts" /> */}
