@@ -19,7 +19,7 @@ module.exports.post = {
       .label('Company Name')
       .trim()
       .required(),
-    companyAddress1: Joi.string()
+    companyStreetAddress: Joi.string()
       .min(3)
       .label('Company Street Address')
       .trim(),
@@ -78,7 +78,7 @@ module.exports.patch = {
       .min(2)
       .label('Company Name')
       .trim(),
-    companyAddress1: Joi.string()
+    companyStreetAddress: Joi.string()
       .min(3)
       .label('Company Street Address')
       .trim(),

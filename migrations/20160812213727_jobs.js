@@ -6,7 +6,7 @@ exports.up = function(knex) {
     table.string('title').notNullable().defaultTo('');
     table.string('job_post_url').notNullable().defaultTo('');
     table.string('company_name').notNullable().defaultTo('');
-    table.string('company_address_1').notNullable().defaultTo('');
+    table.string('company_street_address').notNullable().defaultTo('');
     table.string('company_city').notNullable().defaultTo('');
     table.specificType('company_state', 'char(2)').notNullable().defaultTo('');
     table.string('company_zip').notNullable().defaultTo('');

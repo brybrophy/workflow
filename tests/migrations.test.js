@@ -111,7 +111,7 @@ suite('Migrations', () => {
             defaultValue: '\'\'::character varying'
           },
 
-          company_address_1: {
+          company_street_address: {
             type: 'character varying',
             maxLength: 255,
             nullable: false,

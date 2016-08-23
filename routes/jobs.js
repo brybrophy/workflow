@@ -92,7 +92,7 @@ router.get('/jobs/:id/contacts', (req, res, next) => {
 });
 
 router.post('/jobs', ev(validations.post), (req, res, next) => {
-  const { title, jobPostUrl, companyName, companyAddress_1, companyCity, companyState, companyZip, companyPhone, interviewInformational, interviewApplied, interviewPhone, interviewTechnical, interviewOnsite, interviewTakeHome, interviewOffer, interviewRejected, notes, userId } = req.body;
+  const { title, jobPostUrl, companyName, companyStreetAddress, companyCity, companyState, companyZip, companyPhone, interviewInformational, interviewApplied, interviewPhone, interviewTechnical, interviewOnsite, interviewTakeHome, interviewOffer, interviewRejected, notes, userId } = req.body;
 
   const interviewStatus = JSON.stringify({
     informational: interviewInformational,
@@ -113,7 +113,7 @@ router.post('/jobs', ev(validations.post), (req, res, next) => {
     return next(boom.create(400, 'Company name must not be blank'));
   }
 
-  const insertJob = { title, jobPostUrl, companyName, companyAddress_1, companyCity, companyState, companyZip, companyPhone, interviewStatus, notes, userId };
+  const insertJob = { title, jobPostUrl, companyName, companyStreetAddress, companyCity, companyState, companyZip, companyPhone, interviewStatus, notes, userId };
 
   knex('jobs')
     .insert(decamelizeKeys(insertJob), '*')
@@ -153,7 +153,7 @@ router.patch('/jobs/:id', ev(validations.patch), (req, res, next) => {
         throw boom.create(404, 'Not Found');
       }
 
-      const { title, jobPostUrl, companyName, companyAddress_1, companyCity, companyState, companyZip, companyPhone, interviewInformational, interviewApplied, interviewPhone, interviewTechnical, interviewOnsite, interviewTakeHome, interviewOffer, interviewRejected, notes } = req.body;
+      const { title, jobPostUrl, companyName, companyStreetAddress, companyCity, companyState, companyZip, companyPhone, interviewInformational, interviewApplied, interviewPhone, interviewTechnical, interviewOnsite, interviewTakeHome, interviewOffer, interviewRejected, notes } = req.body;
 
       const interviewStatus = {
         informational: interviewInformational,
@@ -180,8 +180,8 @@ router.patch('/jobs/:id', ev(validations.patch), (req, res, next) => {
         updateJob.companyName = companyName;
       }
 
-      if (companyAddress_1) {
-        updateJob.companyAddress_1 = companyAddress_1;
+      if (companyStreetAddress) {
+        updateJob.companyStreetAddress = companyStreetAddress;
       }
 
       if (companyCity) {
