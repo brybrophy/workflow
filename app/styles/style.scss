@@ -27,12 +27,21 @@ body {
   font-family: 'Montserrat';
 }
 
+h3 {
+  font-family: 'MontserratLight';
+  font-size: 1.7rem;
+}
+
 main {
   flex: 1;
 }
 
+p {
+  font-family: 'MontserratHairline';
+}
+
 .hairline-font {
-  font-family: 'MontserratHairline'
+  font-family: 'MontserratHairline';
 }
 
 @media (max-width: 900px) {
