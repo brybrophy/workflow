@@ -8,15 +8,14 @@ const JobMap = React.createClass({
       latLngLocation: {
         lat: 0,
         lng: 0
-      },
-      address: '410 Terry Ave. N, Seattle WA'
+      }
     }
   },
 
   componentWillMount() {
     let geocoder = new google.maps.Geocoder();
 
-    geocoder.geocode({address: this.state.address}, (res, status) => {
+    geocoder.geocode({address: this.props.address}, (res, status) => {
       if(status == google.maps.GeocoderStatus.OK) {
         const newLat = res[0].geometry.location.lat();
         const newLng = res[0].geometry.location.lng();

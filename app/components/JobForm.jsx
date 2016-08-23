@@ -1,4 +1,5 @@
 import { Grid, Row, Col } from 'react-bootstrap';
+import axios from 'axios';
 import FlatButton from 'material-ui/FlatButton';
 import MenuItem from 'material-ui/MenuItem';
 import React from 'react';
@@ -28,9 +29,20 @@ const JobForm = React.createClass({
     this.setState({ job: nextJob });
   },
 
+  handleSaveTouchTap() {
+    console.log(this.state.job);
+    axios.patch(`/api/jobs/${this.state.job.id}`, this.state.job)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
+
   handleSelectFieldChange(event, index, value) {
     const nextJob = Object.assign({}, this.state.job, {
-      state: value
+      companyState: value
     });
 
     this.setState({ job: nextJob });
@@ -105,7 +117,7 @@ const JobForm = React.createClass({
         <TextField
           hintStyle={styleTextFieldHint}
           hintText="Job Title"
-          name="jobTitle"
+          name="title"
           onChange={this.handleChange}
           style={styleTextField}
           underlineShow={false}
@@ -116,18 +128,18 @@ const JobForm = React.createClass({
         <TextField
           hintStyle={styleTextFieldHint}
           hintText="Street Address"
-          name="streetAddress"
+          name="companyStreetAddress"
           onChange={this.handleChange}
           style={styleTextField}
           underlineShow={false}
-          value={this.state.job.companyAddress1}
+          value={this.state.job.companyStreetAddress}
         />
       </Col>
       <Col xs={12} md={4} style={styleColumn}>
         <TextField
           hintStyle={styleTextFieldHint}
           hintText="City"
-          name="city"
+          name="companyCity"
           onChange={this.handleChange}
           style={styleTextField}
           underlineShow={false}
@@ -141,7 +153,7 @@ const JobForm = React.createClass({
           iconStyle={styleDropDownArrow}
           maxHeight={200}
           menuStyle={styleMenuItem}
-          name="state"
+          name="companyState"
           onChange={this.handleSelectFieldChange}
           style={styleSelectField}
           underlineShow={false}
@@ -160,7 +172,7 @@ const JobForm = React.createClass({
         <TextField
           hintStyle={styleTextFieldHint}
           hintText="Zip Code"
-          name="zip"
+          name="companyZip"
           onChange={this.handleChange}
           style={styleTextField}
           underlineShow={false}
@@ -171,18 +183,18 @@ const JobForm = React.createClass({
         <TextField
           hintStyle={styleTextFieldHint}
           hintText="Phone Number"
-          name="phoneNumber"
+          name="companyPhone"
           onChange={this.handleChange}
           style={styleTextField}
           underlineShow={false}
-          value={this.state.job.phoneNumber}
+          value={this.state.job.companyPhone}
         />
       </Col>
       <Col xs={12} style={styleColumn}>
         <TextField
           hintStyle={styleTextFieldHint}
           hintText="Job URL"
-          name="jobUrl"
+          name="jobPostUrl"
           onChange={this.handleChange}
           style={styleTextField}
           underlineShow={false}
@@ -194,6 +206,7 @@ const JobForm = React.createClass({
           backgroundColor="#E7E4DB"
           label="Save and Next"
           labelStyle={{ color: '#A6A399' }}
+          onTouchTap={this.handleSaveTouchTap}
           style={styleFlatButton}
         />
       </Col>
