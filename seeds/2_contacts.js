@@ -5,10 +5,12 @@ exports.seed = function(knex) {
     .then(() => {
       return knex('contacts').insert([{
         id: 1,
-        first_name: 'bobby',
-        last_name: 'kennedy',
+        first_name: 'Bobby',
+        last_name: 'Kennedy',
         email: 'admin@workflow.com',
         phone: '5555555555',
+        title: 'President and CEO',
+        company: 'ABC Company',
         linked_in_url: 'https://www.linkedin.com/in/bobby-joe-kennedy-40b5b0a2',
         user_id: 1,
         created_at: new Date('2016-08-13 11:14:00 UTC'),
