@@ -20,6 +20,8 @@ router.post('/contacts', ev(validations.post), (req, res, next) => {
     lastName,
     email,
     phoneNumber,
+    title,
+    company,
     linkedInUrl,
     userId
   } = req.body;
@@ -40,6 +42,8 @@ router.post('/contacts', ev(validations.post), (req, res, next) => {
         lastName,
         email,
         phone,
+        title,
+        company,
         linkedInUrl,
         userId
       }
@@ -47,8 +51,8 @@ router.post('/contacts', ev(validations.post), (req, res, next) => {
 
       return knex('contacts').insert(row, '*');
     })
-    .then((newUsers) => {
-      res.send(newUsers[0]);
+    .then((newContacts) => {
+      res.send(newContacts[0]);
     })
     .catch((err) => {
       next(err);
@@ -93,7 +97,14 @@ router.get('/contacts/:id/jobs', (req, res, next) => {
 
 router.patch('/contacts/:contactId', ev(validations.patch), (req, res, next) => {
   const contactId = Number.parseInt(req.params.contactId);
-  let { firstName, lastName, email, phoneNumber, linkedInUrl } = req.body;
+  let {
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    title,
+    company,
+    linkedInUrl } = req.body;
 
   if (Number.isNaN(contactId)) {
     throw boom.create(400, 'Invalid Contact Id');
@@ -119,6 +130,14 @@ router.patch('/contacts/:contactId', ev(validations.patch), (req, res, next) => 
         phoneNumber = contact.phone;
       }
 
+      if (!title) {
+        title = contact.title;
+      }
+
+      if (!company) {
+        company = contact.company;
+      }
+
       if (!linkedInUrl) {
         linkedInUrl = contact.linked_in_url;
       }
@@ -129,7 +148,9 @@ router.patch('/contacts/:contactId', ev(validations.patch), (req, res, next) => 
         lastName,
         email,
         phone,
-        linkedInUrl,
+        title,
+        company,
+        linkedInUrl
       }
       const row = decamelizeKeys(updatedContact);
 
