@@ -5,7 +5,7 @@ import React from 'react';
 
 const SignUp = React.createClass({
   handleSignUp() {
-    window.location.href = '/api/oauth/linkedin';
+    window.location.href = '/api/users/oauth/linkedin';
   },
 
   handleTouchTap() {

@@ -11,16 +11,16 @@ const router = express.Router(); // eslint-disable-line new-cap
 const appId = process.env.APP_ID;
 const appSecret = process.env.APP_SECRET;
 
-const Linkedin = require('node-linkedin')(appId, appSecret, 'http://localhost:8000/api/oauth/linkedin/callback');
+const Linkedin = require('node-linkedin')(appId, appSecret, 'http://localhost:8000/api/token/oauth/linkedin/callback');
 
 const scope = ['r_basicprofile', 'r_emailaddress'];
 let me;
 
-router.get('/oauth/linkedin', function(req, res) {
+router.get('/token/oauth/linkedin', function(req, res) {
     Linkedin.auth.authorize(res, scope);
 });
 
-router.get('/oauth/linkedin/callback', function(req, res) {
+router.get('/token/oauth/linkedin/callback', function(req, res) {
     Linkedin.auth.getAccessToken(res, req.query.code, req.query.state, function(err, result) {
         if ( err ) {
           console.error(err);
@@ -33,13 +33,12 @@ router.get('/oauth/linkedin/callback', function(req, res) {
 
         const linkedin = Linkedin.init(token);
         linkedin.people.me(function(err, $in) {
-          console.log($in);
+          console.log($in.emailAddress);
         });
 
         res.cookie('token', token);
         return res.redirect('/jobs');
     });
-    console.log(me);
 });
 
 router.post('/token', (req, res, next) => {

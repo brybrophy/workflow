@@ -35,6 +35,7 @@ switch (app.get('env')) {
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', token);
+app.use('/api', users);
 
 // CSRF protection
 app.use('/api', (req, res, next) => {
@@ -48,7 +49,6 @@ app.use('/api', (req, res, next) => {
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use('/api', users);
 app.use('/api', jobs);
 app.use('/api', contacts);
 
