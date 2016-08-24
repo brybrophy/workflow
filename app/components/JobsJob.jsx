@@ -64,8 +64,8 @@ const JobsJob = React.createClass({
         let timeTechnical = 'Not scheduled yet';
         let timeOffer = 'Offer not recieved';
 
-        if (job.interviewInformational) {
-          <Timestamp time={job.interviewInformational} format="full" />;
+        if (job.interviewInformational.date) {
+          <Timestamp time={job.interviewInformational.date} format="full" />;
         }
 
         if (job.interviewPhone) {
@@ -97,7 +97,7 @@ const JobsJob = React.createClass({
               <div style={styleSudoColumnOdd}>
                 <h5 style={styleProgress}>Applied On</h5>
                 <p style={styleDateText}>
-                  <Timestamp time={job.interviewApplied} format="full" />
+                  <Timestamp time={job.interviewApplied.date} format="full" />
                 </p>
               </div>
 

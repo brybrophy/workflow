@@ -27,10 +27,13 @@ router.get('/oauth/linkedin/callback', function(req, res) {
           res.redirect('/auth');
         }
 
+        console.log(result);
+
         const token = (result.accessToken || result.access_token);
 
         const linkedin = Linkedin.init(token);
         linkedin.people.me(function(err, $in) {
+          console.log($in);
         });
 
         res.cookie('token', token);
