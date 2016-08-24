@@ -1,14 +1,19 @@
-import axios from 'axios';
 import { Tab, Tabs } from 'material-ui/Tabs';
 import { Link, withRouter } from 'react-router';
+import axios from 'axios';
+import ContactView from 'components/ContactView';
+import JobInfo from 'components/JobInfo';
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import SwipeableViews from 'react-swipeable-views';
 
 const JobSubNav = React.createClass({
   getInitialState() {
     return {
       job: {},
-      contacts: []
+      contacts: [],
+      editing: null,
+      slideIndex: 0
     };
   },
 
@@ -30,8 +35,16 @@ const JobSubNav = React.createClass({
       });
   },
 
-  handleActiveTab(event) {
-    this.props.router.push(`/job/${this.state.job.id}/${event.props.value}`);
+  // handleActiveTab(event) {
+  //   this.props.router.push(`/job/${this.state.job.id}/${event.props.value}`);
+  // },
+
+  handleChange(value) {
+    this.setState({ slideIndex: value });
+  },
+
+  updateContacts(nextEditing, nextContacts) {
+    this.setState({ contacts: nextContacts, editing: nextEditing });
   },
 
   render() {
@@ -50,44 +63,56 @@ const JobSubNav = React.createClass({
         inkBarStyle={{ backgroundColor: '#47B4E0' }}
         style={styleTabs}
         tabItemContainerStyle={{ backgroundColor: 'none' }}
+        onChange={this.handleChange}
+        value={this.state.slideIndex}
       >
         <Tab
           label="Job"
-          onActive={this.handleActiveTab}
+          // onActive={this.handleActiveTab}
           style={styleTab}
-          value=""
+          value={0}
         />
         <Tab
           label="Contacts"
-          onActive={this.handleActiveTab}
+          // onActive={this.handleActiveTab}
           style={styleTab}
-          value="contacts"
+          value={1}
         />
         <Tab
           label="Progress"
-          onActive={this.handleActiveTab}
+          // onActive={this.handleActiveTab}
           style={styleTab}
-          value="progress"
+          value={2}
         />
         <Tab
           label="Notes"
-          onActive={this.handleActiveTab}
+          // onActive={this.handleActiveTab}
           style={styleTab}
-          value="notes"
+          value={3}
         />
       </Tabs>
-
-      <ReactCSSTransitionGroup
-        transitionName="example"
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={300}
+      <SwipeableViews
+        index={this.state.slideIndex}
+        onChangeIndex={this.handleChange}
       >
-        {React.cloneElement(this.props.children, {
+        <JobInfo job={this.state.job} />
+        <ContactView
+          contacts={this.state.contacts}
+          editing={this.state.editing}
+          updateContacts={this.state.updateContacts}
+        />
+        <div>
+          slide n°3
+        </div>
+      </SwipeableViews>
+
+        {/* {React.cloneElement(this.props.children, {
           job: this.state.job,
-          contact: this.state.contact,
-          key: Math.random()
-        })}
-      </ReactCSSTransitionGroup>
+          contacts: this.state.contacts,
+          editing: this.state.editing,
+          key: Math.random(),
+          updateContacts: this.updateContacts
+        })} */}
     </div>;
   }
 });

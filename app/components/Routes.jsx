@@ -1,7 +1,7 @@
 import { browserHistory, IndexRoute, Redirect, Route, Router } from 'react-router';
 import App from 'components/App';
 import Authorize from 'components/Authorize';
-import ContactForm from 'components/ContactForm';
+import ContactView from 'components/ContactView';
 import Dashboard from 'components/Dashboard';
 import JobInfo from 'components/JobInfo';
 import JobNotes from 'components/JobNotes';
@@ -20,7 +20,7 @@ const Routes = React.createClass({
       <Route component={App} path="/">
         <Route component={JobSubNav} path="/job/:id">
           <IndexRoute component={JobInfo} />
-          <Route component={ContactForm} path="contacts" />
+          <Route component={ContactView} path="contacts" />
           <Route component={JobProgress} path="progress" />
           <Route component={JobNotes} path="notes" />
         </Route>

@@ -18,7 +18,7 @@ const Contact = React.createClass({
       padding: '20px'
     };
 
-    return <Row style={{ margin: '0 auto', maxWidth: '700px' }} >
+    return <Row style={{ margin: '20px auto', maxWidth: '700px' }} >
       <Col xs={12} sm={3}>
         <Avatar
           size={150}

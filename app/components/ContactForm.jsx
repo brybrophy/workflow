@@ -1,5 +1,4 @@
 import { Grid, Row, Col } from 'react-bootstrap';
-import Contact from 'components/Contact';
 import FlatButton from 'material-ui/FlatButton';
 import MenuItem from 'material-ui/MenuItem';
 import React from 'react';
@@ -9,15 +8,7 @@ import TextField from 'material-ui/TextField';
 const ContactForm = React.createClass({
   getInitialState() {
     return {
-      contact: {
-        firstName: 'Ryan',
-        lastName: 'Sobol',
-        email: 'contact@ryansobol.com',
-        phoneNumber: '(206) 222-222',
-        title: 'Lead Instructor',
-        company: 'Galvanize',
-        linkedInUrl:'https://www.linkedin.com/in/ryansobol'
-      }
+      contact: {}
     }
   },
 
@@ -89,141 +80,138 @@ const ContactForm = React.createClass({
       fontFamily: 'MontserratLight'
     };
 
-    return <Grid>
-      <Row style={{ margin: '20px auto', maxWidth: '500px' }}>
-        <Col xs={12} style={styleColumn}>
-          <SelectField
-            hintStyle={styleTextFieldHint}
-            hintText="SELECT EXISTING CONTACT"
-            iconStyle={styleDropDownArrow}
-            maxHeight={200}
-            menuStyle={styleMenuItem}
-            name="existingContact"
-            onChange={this.handleSelectFieldChange}
-            style={styleSelectField}
-            underlineShow={false}
-            value={this.state.contact.existingContact}
-          >
-            <MenuItem
-              key={1}
-              primaryText="Bobby Kennedy"
-              secondaryText="Test Engineer at Amazon"
-              value={1}
-            />
-            <MenuItem
-              key={2}
-              primaryText="Neil Armstrong"
-              secondaryText="UX/UI Designer at Amazon"
-              value={2}
-            />
-          </SelectField>
-        </Col>
-        <Col xs={12} style={styleColumn}>
-          <p style={{ marginTop: '20px', textAlign: 'center' }}>ADD CONTACT</p>
-        </Col>
-        <Col xs={12} sm={9} style={styleColumn}>
-          <TextField
-            hintStyle={styleTextFieldHint}
-            hintText="LinkedIn URL"
-            name="linkedInUrl"
-            onChange={this.handleChange}
-            style={styleTextField}
-            underlineShow={false}
-            value={this.state.contact.linkedInUrl}
+    return <Row style={{ margin: '20px auto', maxWidth: '500px' }}>
+      <Col xs={12} style={styleColumn}>
+        <SelectField
+          hintStyle={styleTextFieldHint}
+          hintText="SELECT EXISTING CONTACT"
+          iconStyle={styleDropDownArrow}
+          maxHeight={200}
+          menuStyle={styleMenuItem}
+          name="existingContact"
+          onChange={this.handleSelectFieldChange}
+          style={styleSelectField}
+          underlineShow={false}
+          value={this.state.contact.existingContact}
+        >
+          <MenuItem
+            key={1}
+            primaryText="Bobby Kennedy"
+            secondaryText="Test Engineer at Amazon"
+            value={1}
           />
-        </Col>
-        <Col xs={12} sm={3} style={styleColumn}>
-          <FlatButton
-            backgroundColor="#E7E4DB"
-            label="Import"
-            labelStyle={{ color: '#A6A399' }}
-            style={styleFlatButton}
+          <MenuItem
+            key={2}
+            primaryText="Neil Armstrong"
+            secondaryText="UX/UI Designer at Amazon"
+            value={2}
           />
-        </Col>
-        <Col xs={12} sm={6} style={styleColumn}>
-          <TextField
-            hintStyle={styleTextFieldHint}
-            hintText="First Name"
-            name="firstName"
-            onChange={this.handleChange}
-            style={styleTextField}
-            underlineShow={false}
-            value={this.state.contact.firstName}
-          />
-        </Col>
-        <Col xs={12} sm={6} style={styleColumn}>
-          <TextField
-            hintStyle={styleTextFieldHint}
-            hintText="Last Name"
-            name="lastName"
-            onChange={this.handleChange}
-            style={styleTextField}
-            underlineShow={false}
-            value={this.state.contact.lastName}
-          />
-        </Col>
-        <Col xs={12} sm={6} style={styleColumn}>
-          <TextField
-            hintStyle={styleTextFieldHint}
-            hintText="Email"
-            name="email"
-            onChange={this.handleChange}
-            style={styleTextField}
-            underlineShow={false}
-            value={this.state.contact.email}
-          />
-        </Col>
-        <Col xs={12} sm={6} style={styleColumn}>
-          <TextField
-            hintStyle={styleTextFieldHint}
-            hintText="Phone Number"
-            name="phoneNumber"
-            onChange={this.handleChange}
-            style={styleTextField}
-            underlineShow={false}
-            value={this.state.contact.phoneNumber}
-          />
-        </Col>
-        <Col xs={12} sm={6} style={styleColumn}>
-          <TextField
-            hintStyle={styleTextFieldHint}
-            hintText="Title"
-            name="title"
-            onChange={this.handleChange}
-            style={styleTextField}
-            underlineShow={false}
-            value={this.state.contact.title}
-          />
-        </Col>
-        <Col xs={12} sm={6} style={styleColumn}>
-          <TextField
-            hintStyle={styleTextFieldHint}
-            hintText="Company"
-            name="company"
-            onChange={this.handleChange}
-            style={styleTextField}
-            underlineShow={false}
-            value={this.state.contact.company}
-          />
-        </Col>
-        <Col xs={12} sm={6} style={styleColumn}>
-          <FlatButton
-            backgroundColor="#F5DADA"
-            label="Cancel"
-            style={styleFlatButton}
-          />
-        </Col>
-        <Col xs={12} sm={6} style={styleColumn}>
-          <FlatButton
-            backgroundColor="#E7E4DB"
-            label="Save and Next"
-            labelStyle={{ color: '#A6A399' }}
-            style={styleFlatButton}
-          />
-        </Col>
-      </Row>
-      <Contact contact={this.state.contact}/>
-    </Grid>;
+        </SelectField>
+      </Col>
+      <Col xs={12} style={styleColumn}>
+        <p style={{ marginTop: '20px', textAlign: 'center' }}>ADD CONTACT</p>
+      </Col>
+      <Col xs={12} sm={9} style={styleColumn}>
+        <TextField
+          hintStyle={styleTextFieldHint}
+          hintText="LinkedIn URL"
+          name="linkedInUrl"
+          onChange={this.handleChange}
+          style={styleTextField}
+          underlineShow={false}
+          value={this.state.contact.linkedInUrl}
+        />
+      </Col>
+      <Col xs={12} sm={3} style={styleColumn}>
+        <FlatButton
+          backgroundColor="#E7E4DB"
+          label="Import"
+          labelStyle={{ color: '#A6A399' }}
+          style={styleFlatButton}
+        />
+      </Col>
+      <Col xs={12} sm={6} style={styleColumn}>
+        <TextField
+          hintStyle={styleTextFieldHint}
+          hintText="First Name"
+          name="firstName"
+          onChange={this.handleChange}
+          style={styleTextField}
+          underlineShow={false}
+          value={this.state.contact.firstName}
+        />
+      </Col>
+      <Col xs={12} sm={6} style={styleColumn}>
+        <TextField
+          hintStyle={styleTextFieldHint}
+          hintText="Last Name"
+          name="lastName"
+          onChange={this.handleChange}
+          style={styleTextField}
+          underlineShow={false}
+          value={this.state.contact.lastName}
+        />
+      </Col>
+      <Col xs={12} sm={6} style={styleColumn}>
+        <TextField
+          hintStyle={styleTextFieldHint}
+          hintText="Email"
+          name="email"
+          onChange={this.handleChange}
+          style={styleTextField}
+          underlineShow={false}
+          value={this.state.contact.email}
+        />
+      </Col>
+      <Col xs={12} sm={6} style={styleColumn}>
+        <TextField
+          hintStyle={styleTextFieldHint}
+          hintText="Phone Number"
+          name="phoneNumber"
+          onChange={this.handleChange}
+          style={styleTextField}
+          underlineShow={false}
+          value={this.state.contact.phoneNumber}
+        />
+      </Col>
+      <Col xs={12} sm={6} style={styleColumn}>
+        <TextField
+          hintStyle={styleTextFieldHint}
+          hintText="Title"
+          name="title"
+          onChange={this.handleChange}
+          style={styleTextField}
+          underlineShow={false}
+          value={this.state.contact.title}
+        />
+      </Col>
+      <Col xs={12} sm={6} style={styleColumn}>
+        <TextField
+          hintStyle={styleTextFieldHint}
+          hintText="Company"
+          name="company"
+          onChange={this.handleChange}
+          style={styleTextField}
+          underlineShow={false}
+          value={this.state.contact.company}
+        />
+      </Col>
+      <Col xs={12} sm={6} style={styleColumn}>
+        <FlatButton
+          backgroundColor="#F5DADA"
+          label="Cancel"
+          style={styleFlatButton}
+        />
+      </Col>
+      <Col xs={12} sm={6} style={styleColumn}>
+        <FlatButton
+          backgroundColor="#E7E4DB"
+          label="Save and Next"
+          labelStyle={{ color: '#A6A399' }}
+          style={styleFlatButton}
+        />
+      </Col>
+    </Row>;
   }
 });
 
