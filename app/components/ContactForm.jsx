@@ -135,6 +135,7 @@ const ContactForm = React.createClass({
       <Col xs={12} sm={3} style={styleColumn}>
         <FlatButton
           backgroundColor="#E7E4DB"
+          hoverColor="#F0C7A2"
           label="Import"
           labelStyle={{ color: '#A6A399' }}
           style={styleFlatButton}
@@ -208,7 +209,8 @@ const ContactForm = React.createClass({
       </Col>
       <Col xs={12} sm={6} style={styleColumn}>
         <FlatButton
-          backgroundColor="#F5DADA"
+          backgroundColor="#E48C8C"
+          hoverColor="#ED4C4C"
           label="Cancel"
           onTouchTap={this.handleTouchTapCancel}
           style={styleFlatButton}
@@ -217,6 +219,7 @@ const ContactForm = React.createClass({
       <Col xs={12} sm={6} style={styleColumn}>
         <FlatButton
           backgroundColor="#E7E4DB"
+          hoverColor="#F0C7A2"
           label="Save and Next"
           labelStyle={{ color: '#A6A399' }}
           onTouchTap={this.handleTouchTapSave}

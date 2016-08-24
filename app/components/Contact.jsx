@@ -10,40 +10,45 @@ const Contact = React.createClass({
     const styleLine = {
       fontFamily: 'MontserratHairline',
       fontSize: '4rem',
-      marginTop: '60px'
+      margin: '60px 5px 0 15px',
+      position: 'relative',
+      right: '10px'
     };
 
     const stylePaper = {
+      color: '#A9A28E',
       height: '175px',
-      padding: '20px'
+      padding: '0 20px'
     };
 
-    return <Row style={{ margin: '20px auto', maxWidth: '700px' }} >
+    return <Row style={{ margin: '20px auto', maxWidth: '1000px' }} >
       <Col xs={12} sm={3}>
         <Avatar
           size={150}
           src="http://www.fillmurray.com/150/150"
-          style={{ height: '100%', width: '100%' }}
+          style={{ boxShadow: 'rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 5px 10px', height: '80%', left: '30px', position: 'relative', width: '80%' }}
         />
       </Col>
       <Col xs={12} sm={9}>
-        <Paper style={stylePaper}>
+        <Paper style={stylePaper} zDepth={2}>
           <Row>
-            <Col xs={12} sm={5}>
-              <h3>{contact.firstName} {contact.lastName}</h3>
-            </Col>
-            <Col xs={12} sm={7}>
-              <span style={styleLine}> | </span>
-              {contact.title} at {contact.company}
+            <Col xs={12}>
+              <h2
+                style={{display: 'inline-block', fontFamily: 'MontserratLight'}}
+              >
+                {contact.firstName} {contact.lastName}
+                <span style={styleLine}> | </span>
+              </h2>
+              <h4 style={{display: 'inline-block', fontFamily: 'MontserratLight'}}>{contact.title} at {contact.company}</h4>
             </Col>
           </Row>
-          <Row style={{ marginTop: '20px' }}>
-            <Col xs={12} sm={5}>
-              <p>{contact.phoneNumber}</p>
+          <Row >
+            <Col xs={4}>
+              <p style={{marginTop: '30px'}}>{contact.phone}</p>
               <p>{contact.email}</p>
             </Col>
-            <Col xs={12} sm={7} style={{float: 'right' }}>
-              {contact.linkedInUrl}
+            <Col xs={8}>
+              <p style={{float: 'right', marginTop: '60px'}}>{contact.linkedInUrl}</p>
             </Col>
           </Row>
         </Paper>
