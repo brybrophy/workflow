@@ -31,7 +31,12 @@ const ContactView = React.createClass({
       </Row>
       {this.props.contacts.map((contact, index) => {
         if (contact === this.props.editing) {
-          return <ContactForm contact={contact} key={index} />;
+          return <ContactForm
+            addNewContact={this.props.addNewContact}
+            contact={contact}
+            key={index}
+            stopEditingContact={this.props.stopEditingContact}
+          />;
         }
 
         return <Contact contact={contact} key={index} />;

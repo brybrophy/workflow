@@ -3,6 +3,8 @@ import { Link, withRouter } from 'react-router';
 import axios from 'axios';
 import ContactView from 'components/ContactView';
 import JobInfo from 'components/JobInfo';
+import JobNotes from 'components/JobNotes';
+import JobProgress from 'components/JobProgress';
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import SwipeableViews from 'react-swipeable-views';
@@ -35,16 +37,61 @@ const JobSubNav = React.createClass({
       });
   },
 
-  // handleActiveTab(event) {
-  //   this.props.router.push(`/job/${this.state.job.id}/${event.props.value}`);
-  // },
+  componentWillUnmount() {
+    const updatedJob = Object.assign({}, this.state.job);
+
+    axios.patch(`/api/jobs/${this.state.job.id}`, updatedJob)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
 
   handleChange(value) {
     this.setState({ slideIndex: value });
   },
 
+  addNewContact(contact, newContact) {
+    let nextContacts;
+
+    axios.post('/api/contacts', newContact)
+      .then((res) => {
+        nextContacts = this.state.contacts.map((element) => {
+          if (contact !== element) {
+            return element;
+          }
+          console.log(res.data);
+          return res.data;
+        });
+
+        return axios.post(`/api/jobs/${this.state.job.id}/contacts`, {
+          contactId: res.data.id
+        });
+      })
+      .then((res) => {
+        this.setState({ editing: null, contacts: nextContacts });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
+
+  stopEditingContact(contact) {
+    const nextContacts = this.state.contacts.filter((elem) => elem !== contact);
+
+    this.setState({ editing: null, contacts: nextContacts });
+  },
+
   updateContacts(nextEditing, nextContacts) {
     this.setState({ contacts: nextContacts, editing: nextEditing });
+  },
+
+  updateNotes(nextNotes) {
+    const nextJob = Object.assign({}, this.state.job, { notes: nextNotes });
+
+    this.setState({ job: nextJob });
   },
 
   render() {
@@ -68,25 +115,21 @@ const JobSubNav = React.createClass({
       >
         <Tab
           label="Job"
-          // onActive={this.handleActiveTab}
           style={styleTab}
           value={0}
         />
         <Tab
           label="Contacts"
-          // onActive={this.handleActiveTab}
           style={styleTab}
           value={1}
         />
         <Tab
           label="Progress"
-          // onActive={this.handleActiveTab}
           style={styleTab}
           value={2}
         />
         <Tab
           label="Notes"
-          // onActive={this.handleActiveTab}
           style={styleTab}
           value={3}
         />
@@ -97,22 +140,15 @@ const JobSubNav = React.createClass({
       >
         <JobInfo job={this.state.job} />
         <ContactView
+          addNewContact={this.addNewContact}
           contacts={this.state.contacts}
           editing={this.state.editing}
-          updateContacts={this.state.updateContacts}
+          updateContacts={this.updateContacts}
+          stopEditingContact={this.stopEditingContact}
         />
-        <div>
-          slide n°3
-        </div>
+        <JobProgress job={this.state.job} />
+        <JobNotes job={this.state.job} updateNotes={this.updateNotes} />
       </SwipeableViews>
-
-        {/* {React.cloneElement(this.props.children, {
-          job: this.state.job,
-          contacts: this.state.contacts,
-          editing: this.state.editing,
-          key: Math.random(),
-          updateContacts: this.updateContacts
-        })} */}
     </div>;
   }
 });

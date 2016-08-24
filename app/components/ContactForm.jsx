@@ -28,6 +28,16 @@ const ContactForm = React.createClass({
     this.setState({ contact: nextContact });
   },
 
+  handleTouchTapCancel() {
+    this.props.stopEditingContact(this.props.contact);
+  },
+
+  handleTouchTapSave() {
+    const newContact = Object.assign({}, this.state.contact);
+
+    this.props.addNewContact(this.props.contact, newContact);
+  },
+
   render() {
     const styleColumn = {
       padding: '0 3px'
@@ -200,6 +210,7 @@ const ContactForm = React.createClass({
         <FlatButton
           backgroundColor="#F5DADA"
           label="Cancel"
+          onTouchTap={this.handleTouchTapCancel}
           style={styleFlatButton}
         />
       </Col>
@@ -208,6 +219,7 @@ const ContactForm = React.createClass({
           backgroundColor="#E7E4DB"
           label="Save and Next"
           labelStyle={{ color: '#A6A399' }}
+          onTouchTap={this.handleTouchTapSave}
           style={styleFlatButton}
         />
       </Col>
