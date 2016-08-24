@@ -54,7 +54,6 @@ const WelcomeInfo = React.createClass({
         </div>
 
         <h3>CONNECT CONTACTS</h3>
-        <br />
 
         <img src="images/line.svg" style={{margin: '20px 0'}} />
 
