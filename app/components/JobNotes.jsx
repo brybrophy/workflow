@@ -4,14 +4,8 @@ import React from 'react';
 import TextField from 'material-ui/TextField';
 
 const JobNotes = React.createClass({
-  getInitialState() {
-    return {
-      notes: "I found the job on Indeed and then my friend at Amazon encouraged me to apply."
-    }
-  },
-
   handleChange(event) {
-    this.setState({ notes: event.target.value });
+    this.props.updateNotes(event.target.value);
   },
 
   render() {
@@ -35,7 +29,7 @@ const JobNotes = React.createClass({
               onChange={this.handleChange}
               style={styleTextField}
               underlineShow={false}
-              value={this.state.notes}
+              value={this.props.job.notes}
             />
           </Paper>
         </Col>

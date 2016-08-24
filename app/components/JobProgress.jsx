@@ -5,6 +5,8 @@ import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 import React from 'react';
 import TimePicker from 'material-ui/TimePicker';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
 
 const JobProgress = React.createClass({
   getInitialState() {
@@ -46,6 +48,11 @@ const JobProgress = React.createClass({
     };
 
     return <Grid style={{ margin: '20px auto', maxWidth: '650px' }}>
+      <Row style={{ margin: '10px auto', maxWidth: '60px' }}>
+        <FloatingActionButton onTouchTap={this.handleTouchTap}>
+          <ContentAdd />
+        </FloatingActionButton>
+      </Row>
       <Row>
         <Col xs={12} >
           <Paper style={stylePaper} zDepth={2}>
