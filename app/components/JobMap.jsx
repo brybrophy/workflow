@@ -1,4 +1,4 @@
-import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
+import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
 import Paper from 'material-ui/Paper'
 import React from 'react';
 
@@ -6,8 +6,8 @@ const JobMap = React.createClass({
   getInitialState() {
     return {
       latLngLocation: {
-        lat: 0,
-        lng: 0
+        lat: 47.622472,
+        lng: -122.336505
       }
     }
   },
