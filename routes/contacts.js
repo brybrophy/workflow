@@ -45,7 +45,7 @@ router.post('/contacts', ev(validations.post), (req, res, next) => {
         title,
         company,
         linkedInUrl,
-        userId
+        userId: 1
       }
       const row = decamelizeKeys(newContact);
 

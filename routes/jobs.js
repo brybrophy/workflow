@@ -91,6 +91,28 @@ router.get('/jobs/:id/contacts', (req, res, next) => {
     });
 });
 
+router.post('/jobs/:id/contacts', (req, res, next) => {
+  const jobId = Number.parseInt(req.params.id);
+  const { contactId } = req.body;
+
+  if (Number.isNaN(jobId)) {
+    return next();
+  }
+
+  const newContactsJobs = { jobId, contactId };
+
+  knex('contacts_jobs')
+    .insert(decamelizeKeys(newContactsJobs), '*')
+    .then((rows) => {
+      const contactJob = camelizeKeys(rows[0]);
+
+      res.send(contactJob);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 router.post('/jobs', ev(validations.post), (req, res, next) => {
   const { title, jobPostUrl, companyName, companyStreetAddress, companyCity, companyState, companyZip, companyPhone, interviewInformational, interviewApplied, interviewPhone, interviewTechnical, interviewOnsite, interviewTakeHome, interviewOffer, interviewRejected, notes, userId } = req.body;
 
