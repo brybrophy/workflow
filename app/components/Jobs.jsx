@@ -8,7 +8,7 @@ const Jobs = React.createClass({
     return <main>
       <Row>
         <JobsSideBar />
-        <JobsJob jobs={this.props.jobs}/>
+        <JobsJob jobs={this.props.jobs} />
       </Row>
     </main>
   }

@@ -1,11 +1,16 @@
+import { Grid, Row, Col } from 'react-bootstrap';
 import Timestamp from 'react-timestamp';
 import Toggle from 'material-ui/Toggle';
 import Paper from 'material-ui/Paper';
 import React from 'react';
 import weakKey from 'weak-key';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { withRouter } from 'react-router';
 
 const JobsJob = React.createClass({
+  handleTouchTap(event) {
+    this.props.router.push(`/job/${event.target.id}`);
+  },
+
   render() {
     let { jobs } = this.props;
 
@@ -84,58 +89,64 @@ const JobsJob = React.createClass({
           <Timestamp time={job.interviewOffer} format="full" />;
         }
 
-        return <Paper style={styleJob} key={weakKey(job)}>
-          <Row>
-            <Col md={2} style={styleColumnBorders}>
-              <h4 style={{fontFamily: 'MontserratBold', marginBottom: '30px'}}>
+        return <Paper
+          className="add-pointer"
+          style={styleJob}
+          key={weakKey(job)}
+          id={job.id}
+          onTouchTap={this.handleTouchTap}
+        >
+          <Row id={job.id}>
+            <Col id={job.id} md={2} style={styleColumnBorders}>
+              <h4 id={job.id} style={{fontFamily: 'MontserratBold', marginBottom: '30px'}}>
                 {job.companyName}
               </h4>
-              <h5>{job.title}</h5>
+              <h5 id={job.id}>{job.title}</h5>
             </Col>
 
-            <Col md={3} style={styleColumnBorders}>
-              <div style={styleSudoColumnOdd}>
-                <h5 style={styleProgress}>Applied On</h5>
-                <p style={styleDateText}>
+            <Col id={job.id} md={3} style={styleColumnBorders}>
+              <div id={job.id} style={styleSudoColumnOdd}>
+                <h5 id={job.id} style={styleProgress}>Applied On</h5>
+                <p id={job.id} style={styleDateText}>
                   <Timestamp time={job.interviewApplied.date} format="full" />
                 </p>
               </div>
 
-              <div style={styleSudoColumnEven}>
-                <h5 style={styleProgress}>Informational</h5>
-                <p style={styleDateText}>{timeInformational}</p>
+              <div id={job.id} style={styleSudoColumnEven}>
+                <h5 id={job.id} style={styleProgress}>Informational</h5>
+                <p id={job.id} style={styleDateText}>{timeInformational}</p>
               </div>
             </Col>
 
-            <Col md={3} style={styleColumnBorders}>
-              <div style={styleSudoColumnOdd}>
-                <h5 style={styleProgress}>Phone Screen</h5>
-                <p style={styleDateText}>{timePhone}</p>
+            <Col id={job.id} md={3} style={styleColumnBorders}>
+              <div id={job.id} style={styleSudoColumnOdd}>
+                <h5 id={job.id} style={styleProgress}>Phone Screen</h5>
+                <p id={job.id} style={styleDateText}>{timePhone}</p>
               </div>
 
-              <div style={styleSudoColumnEven}>
-                <h5 style={styleProgress}>On Site</h5>
-                <p style={styleDateText}>{timeOnSite}</p>
-              </div>
-            </Col>
-
-            <Col md={3} style={styleColumnBorders}>
-              <div style={styleSudoColumnOdd}>
-                <h5 style={styleProgress}>Technical</h5>
-                <p style={styleDateText}>{timeTechnical}</p>
-              </div>
-
-              <div style={styleSudoColumnEven}>
-                <h5 style={styleProgress}>Offer Date</h5>
-                <p style={styleDateText}>{timeOffer}</p>
+              <div id={job.id} style={styleSudoColumnEven}>
+                <h5 id={job.id} style={styleProgress}>On Site</h5>
+                <p id={job.id} style={styleDateText}>{timeOnSite}</p>
               </div>
             </Col>
 
-            <Col md={1} style={{textAlign: 'center'}}>
-              <p style={styleDateText}>Accepted</p>
+            <Col id={job.id} md={3} style={styleColumnBorders}>
+              <div id={job.id} style={styleSudoColumnOdd}>
+                <h5 id={job.id} style={styleProgress}>Technical</h5>
+                <p id={job.id} style={styleDateText}>{timeTechnical}</p>
+              </div>
+
+              <div id={job.id} style={styleSudoColumnEven}>
+                <h5 id={job.id} style={styleProgress}>Offer Date</h5>
+                <p id={job.id} style={styleDateText}>{timeOffer}</p>
+              </div>
+            </Col>
+
+            <Col id={job.id} md={1} style={{textAlign: 'center'}}>
+              <p id={job.id} style={styleDateText}>Accepted</p>
               <Toggle style={styleToggle}/>
 
-              <p style={styleDateText}>Rejected</p>
+              <p id={job.id} style={styleDateText}>Rejected</p>
               <Toggle style={styleToggle}/>
             </Col>
           </Row>
@@ -146,4 +157,4 @@ const JobsJob = React.createClass({
   }
 });
 
-export default JobsJob;
+export default withRouter(JobsJob);
