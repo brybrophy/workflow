@@ -23,53 +23,53 @@ router.get('/users/oauth/linkedin', function(req, res) {
     Linkedin.auth.authorize(res, scope);
 });
 
-router.get('/users/oauth/linkedin/callback', function(req, res) {
-    Linkedin.auth.getAccessToken(res, req.query.code, req.query.state, function(err, result) {
-        if ( err ) {
-          console.error(err);
-          res.redirect('/auth');
-        }
+router.get('/users/oauth/linkedin/callback', function(req, res, next) {
+  Linkedin.auth.getAccessToken(res, req.query.code, req.query.state, function(err, result) {
+      if ( err ) {
+        console.error(err);
+        res.redirect('/auth');
+      }
 
-        const token = (result.accessToken || result.access_token);
+      const token = (result.accessToken || result.access_token);
 
-        const linkedin = Linkedin.init(token);
-        linkedin.people.me(function(err, $in) {
-          console.log($in);
-        });
+      const linkedin = Linkedin.init(token);
+      linkedin.people.me(function(err, $in) {
+        const linkedinId = $in.id;
+        const email = $in.emailAddress;
+        const accessToken = token;
 
-        res.cookie('token', token);
-        return res.redirect('/jobs');
-    });
-});
+        console.log($in);
 
-router.post('/users', (req, res, next) => {
-  // const { username, email, password } = req.body;
-  //
-  // knex('users')
-  //   .select(knex.raw('1=1'))
-  //   .where('username', username)
-  //   .first()
-  //   .then((exists) => {
-  //     if (exists) {
-  //       throw boom.create(409, 'Username already exists');
-  //     }
-  //
-  //     return bcrypt.hash(password, 12);
-  //   })
-  //   .then((hashedPassword) => {
-  //     const newUser = { username, email, hashedPassword };
-  //     const row = decamelizeKeys(newUser);
-  //
-  //     return knex('users').insert(row, '*');
-  //   })
-  //   .then((newUsers) => {
-  //     delete newUsers[0].hashed_password;
-  //
-  //     res.send(newUsers[0]);
-  //   })
-  //   .catch((err) => {
-  //     next(err);
-  //   });
+        knex('users')
+          .select(knex.raw('1=1'))
+          .where('linkedin_id', linkedinId)
+          .first()
+          .then((exists) => {
+            if (exists) {
+              const updateUser = { email, accessToken };
+                const row = decamelizeKeys(updateUser);
+
+                return knex('users')
+                  .update(row, '*')
+                  .where('linkedin_id', linkedinId);
+            }
+
+            const newUser = { linkedinId, email, accessToken };
+               const row = decamelizeKeys(newUser);
+
+               return knex('users').insert(row, '*');
+          })
+          .then((users) => {
+            res.send(users[0]);
+          })
+          .catch((err) => {
+            next(err);
+          });
+      });
+
+      res.cookie('token', token);
+      return res.redirect('/jobs');
+  });
 });
 
 module.exports = router;

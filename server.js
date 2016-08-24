@@ -17,7 +17,7 @@ const app = express();
 const users = require('./routes/users');
 const jobs = require('./routes/jobs');
 const contacts = require('./routes/contacts');
-const token = require('./routes/token');
+// const token = require('./routes/token');
 
 app.disable('x-powered-by');
 
@@ -34,7 +34,7 @@ switch (app.get('env')) {
 }
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/api', token);
+// app.use('/api', token);
 app.use('/api', users);
 
 // CSRF protection

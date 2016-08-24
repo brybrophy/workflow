@@ -5,9 +5,9 @@ exports.seed = function(knex) {
     .then(() => {
       return knex('users').insert([{
         id: 1,
-        username: 'admin',
+        linkedin_id: 'admin',
         email: 'admin@workflow.com',
-        hashed_password: '$2a$12$Q3fh1jeJZ2Q19Yr12aVOxO54a/IvBhS01qWCqxNAZc0ABRxq0NnYq',
+        access_token: 'AQXrS9hwpgJ1xB6o7e3EMiYTQQwqjSDjaBlW9SwHa7WkBiAa1NEH7X979Ukp18CxW47yyeUfdrvgo_7VlYhgZ9v7OgGlS0HdmnAUY3bkflwXqs4RDmVMPNAd_Vkyg2Lvutrg4Qo0U8Y3zIyTY50Gz0f3oqKZJGt7ns5EclyoVINfaV9O1FQ',
         created_at: new Date('2016-07-23 14:26:16 UTC'),
         updated_at: new Date('2016-07-23 14:26:16 UTC')
       }]);

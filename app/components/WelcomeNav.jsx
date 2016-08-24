@@ -70,7 +70,7 @@ const WelcomeNav = React.createClass({
 
     const styleTitle = {
       cursor: 'pointer',
-      fontFamily: 'MontserratLight',
+      fontFamily: 'MontserratHairline',
       fontSize: '1.2rem',
       height: '125px',
       letterSpacing: '0.12rem',
