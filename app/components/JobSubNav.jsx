@@ -4,7 +4,7 @@ import axios from 'axios';
 import ContactView from 'components/ContactView';
 import JobInfo from 'components/JobInfo';
 import JobNotes from 'components/JobNotes';
-import JobProgress from 'components/JobProgress';
+import JobProgressView from 'components/JobProgressView';
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import SwipeableViews from 'react-swipeable-views';
@@ -146,7 +146,7 @@ const JobSubNav = React.createClass({
           updateContacts={this.updateContacts}
           stopEditingContact={this.stopEditingContact}
         />
-        <JobProgress job={this.state.job} />
+        <JobProgressView job={this.state.job} />
         <JobNotes job={this.state.job} updateNotes={this.updateNotes} />
       </SwipeableViews>
     </div>;

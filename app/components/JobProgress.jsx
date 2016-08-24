@@ -1,12 +1,10 @@
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import DatePicker from 'material-ui/DatePicker';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 import React from 'react';
 import TimePicker from 'material-ui/TimePicker';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
 
 const JobProgress = React.createClass({
   getInitialState() {
@@ -47,59 +45,52 @@ const JobProgress = React.createClass({
       float: 'right'
     };
 
-    return <Grid style={{ margin: '20px auto', maxWidth: '650px' }}>
-      <Row style={{ margin: '10px auto', maxWidth: '60px' }}>
-        <FloatingActionButton onTouchTap={this.handleTouchTap}>
-          <ContentAdd />
-        </FloatingActionButton>
-      </Row>
-      <Row>
-        <Col xs={12} >
-          <Paper style={stylePaper} zDepth={2}>
-            <Row>
-              <Col xs={12}>
-              <DropDownMenu
-                value={this.state.value}
-                onChange={this.handleChange}
-                style={styleDropdown1}
-              >
-                <MenuItem value={1} primaryText="Choose Progress Point" />
-                <MenuItem value={2} primaryText="Applied" />
-                <MenuItem value={3} primaryText="Informational" />
-                <MenuItem value={4} primaryText="Phone Screen" />
-                <MenuItem value={5} primaryText="On Site" />
-                <MenuItem value={6} primaryText="Technical" />
-              </DropDownMenu>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={12}>
-                <Row>
-                  <Col xs={6} style={{textAlign: 'center'}}>
-                  <div>
-                    <DatePicker
-                      hintText="Choose Date"
-                      textFieldStyle={{ marginTop: '10px' }}
-                    />
-                  </div>
-                  </Col>
-                  <Col xs={6}>
-                  <TimePicker
-                    format="ampm"
-                    hintText="Choose Time"
-                    value={this.state.valueTime}
-                    onChange={this.handleChangeTime}
-                    pedantic={true}
+    return <Row>
+      <Col xs={12}>
+        <Paper style={stylePaper} zDepth={2}>
+          <Row>
+            <Col xs={12}>
+            <DropDownMenu
+              value={this.state.value}
+              onChange={this.handleChange}
+              style={styleDropdown1}
+            >
+              <MenuItem value={1} primaryText="Choose Progress Point" />
+              <MenuItem value={2} primaryText="Applied" />
+              <MenuItem value={3} primaryText="Informational" />
+              <MenuItem value={4} primaryText="Phone Screen" />
+              <MenuItem value={5} primaryText="On Site" />
+              <MenuItem value={6} primaryText="Technical" />
+            </DropDownMenu>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <Row>
+                <Col xs={6} style={{textAlign: 'center'}}>
+                <div>
+                  <DatePicker
+                    hintText="Choose Date"
                     textFieldStyle={{ marginTop: '10px' }}
                   />
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </Paper>
-        </Col>
-      </Row>
-    </Grid>;
+                </div>
+                </Col>
+                <Col xs={6}>
+                <TimePicker
+                  format="ampm"
+                  hintText="Choose Time"
+                  value={this.state.valueTime}
+                  onChange={this.handleChangeTime}
+                  pedantic={true}
+                  textFieldStyle={{ marginTop: '10px' }}
+                />
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Paper>
+      </Col>
+    </Row>;
   }
 });
 
