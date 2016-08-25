@@ -67,7 +67,7 @@ const JobProgress = React.createClass({
           <Row>
             <Col xs={12}>
               <Row>
-                <Col xs={6} style={{textAlign: 'center'}}>
+                <Col xs={6} style={{ textAlign: 'center' }}>
                 <div>
                   <DatePicker
                     hintText="Choose Date"
