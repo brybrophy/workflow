@@ -139,23 +139,65 @@ const JobProgressTableEdit = React.createClass({
           </TableRowColumn>
 
           <TableRowColumn>
-            {dateInformational}<br />{timeInformational}
+            <DatePicker
+              formatDate={this.formatDate}
+              hintText={dateInformational}
+              mode="landscape"
+            />
+            <br />
+            <TimePicker hintText={timeInformational} />
           </TableRowColumn>
+
           <TableRowColumn>
-            {datePhone}<br />{timePhone}
+            <DatePicker
+              formatDate={this.formatDate}
+              hintText={datePhone}
+              mode="landscape"
+            />
+            <br />
+            <TimePicker hintText={timePhone} />
           </TableRowColumn>
+
           <TableRowColumn>
-            {dateTakeHome}<br />{timeTakeHome}
+            <DatePicker
+              formatDate={this.formatDate}
+              hintText={dateTakeHome}
+              mode="landscape"
+            />
+            <br />
+            <TimePicker hintText={timeTakeHome} />
           </TableRowColumn>
+
           <TableRowColumn>
-            {dateTechnical}<br />{timeTechnical}
+            <DatePicker
+              formatDate={this.formatDate}
+              hintText={dateTechnical}
+              mode="landscape"
+            />
+            <br />
+            <TimePicker hintText={timeTechnical} />
           </TableRowColumn>
+
           <TableRowColumn>
-            {dateOnsite}<br />{timeOnsite}
+            <DatePicker
+              formatDate={this.formatDate}
+              hintText={dateOnsite}
+              mode="landscape"
+            />
+            <br />
+            <TimePicker hintText={timeOnsite} />
           </TableRowColumn>
+
           <TableRowColumn>
-            {dateOffer}<br />{timeOffer}
+            <DatePicker
+              formatDate={this.formatDate}
+              hintText={dateOffer}
+              mode="landscape"
+            />
+            <br />
+            <TimePicker hintText={timeOffer} />
           </TableRowColumn>
+
         </TableRow>
       </TableBody>
     </Table>

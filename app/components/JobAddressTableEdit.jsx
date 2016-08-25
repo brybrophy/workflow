@@ -10,8 +10,10 @@ import {
 import Check from 'material-ui/svg-icons/navigation/check';
 import Clear from 'material-ui/svg-icons/content/clear';
 import FlatButton from 'material-ui/FlatButton';
+import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 import React from 'react';
+import SelectField from 'material-ui/SelectField';
 import TextField from 'material-ui/TextField';
 import Timestamp from 'react-timestamp';
 
@@ -45,9 +47,21 @@ const JobAddressTableEdit = React.createClass({
     this.props.handleSaveJob(this.state.job)
   },
 
+  handleSelectFieldChange(event, index, value) {
+    console.log(value);
+    const nextJob = Object.assign({}, this.state.job, {
+      companyState: value
+    });
+
+    this.setState({ job: nextJob });
+  },
+
   render() {
     const styles = this.props.styles;
     const job = this.props.job;
+
+      const states = ['', 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'];
+
     return <div>
       <h4 style={{display: 'inline-block'}}>Company</h4>
       <FlatButton
@@ -68,6 +82,8 @@ const JobAddressTableEdit = React.createClass({
       <Table style={styles.table} selectable={false}>
         <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
           <TableRow>
+            <TableHeaderColumn>NAME</TableHeaderColumn>
+            <TableHeaderColumn>TITLE</TableHeaderColumn>
             <TableHeaderColumn>ADDRESS</TableHeaderColumn>
             <TableHeaderColumn>CITY</TableHeaderColumn>
             <TableHeaderColumn>STATE</TableHeaderColumn>
@@ -77,6 +93,22 @@ const JobAddressTableEdit = React.createClass({
         </TableHeader>
         <TableBody displayRowCheckbox={false}>
           <TableRow>
+            <TableRowColumn>
+              <TextField
+                defaultValue={job.companyName}
+                hintText="Name"
+                name="companyName"
+                onChange={this.handleChange}
+              />
+            </TableRowColumn>
+            <TableRowColumn>
+              <TextField
+                defaultValue={job.title}
+                hintText="Title"
+                name="title"
+                onChange={this.handleChange}
+              />
+            </TableRowColumn>
             <TableRowColumn>
               <TextField
                 defaultValue={job.companyStreetAddress}
@@ -90,20 +122,31 @@ const JobAddressTableEdit = React.createClass({
                 defaultValue={job.companyCity}
                 hintText="City"
                 name="companyCity"
+                onChange={this.handleChange}
               />
             </TableRowColumn>
             <TableRowColumn>
-              <TextField
-                defaultValue={job.companyState}
-                hintText="State"
-                name="companyState"
-              />
+            <SelectField
+              hintText="State"
+              name="companyState"
+              onChange={this.handleSelectFieldChange}
+              value={this.state.job.companyState}
+            >
+              {states.map((state, index) => {
+                return <MenuItem
+                  key={index}
+                  primaryText={state}
+                  value={state}
+                />
+              })}
+            </SelectField>
             </TableRowColumn>
             <TableRowColumn>
               <TextField
                 defaultValue={job.companyZip}
                 hintText="Zip"
                 name="companyZip"
+                onChange={this.handleChange}
               />
             </TableRowColumn>
             <TableRowColumn>
@@ -111,6 +154,7 @@ const JobAddressTableEdit = React.createClass({
                 defaultValue={job.companyPhone}
                 hintText="Phone"
                 name="companyPhone"
+                onChange={this.handleChange}
               />
             </TableRowColumn>
           </TableRow>

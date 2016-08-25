@@ -43,9 +43,9 @@ const JobsJob = React.createClass({
 
   handleSaveJob(job) {
     const id = job.id;
+    this.props.saveJob(job);
     axios.patch(`/api/jobs/${id}`, job)
       .then((res) => {
-        
       })
       .catch((err) => {
         console.error(err);

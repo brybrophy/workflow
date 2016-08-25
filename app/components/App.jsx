@@ -21,11 +21,24 @@ const App = React.createClass({
       });
   },
 
+  saveJob(nextJob) {
+    const nextJobs = this.state.jobs.map((job) => {
+      if (job.id !== nextJob.id) {
+        return job;
+      }
+
+      return nextJob;
+    });
+
+    this.setState({ jobs: nextJobs });
+  },
+
   render() {
     return <div>
       <MainNav />
       {React.cloneElement(this.props.children, {
-        jobs: this.state.jobs
+        jobs: this.state.jobs,
+        saveJob: this.saveJob
       })}
       <Footer />
     </div>
