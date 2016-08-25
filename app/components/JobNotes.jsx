@@ -29,8 +29,20 @@ const JobNotes = React.createClass({
       fontFamily: 'MontserratLight'
     };
 
-    return <Grid>
-      <Row style={{ margin: '20px auto', maxWidth: '700px' }}>
+    return <Grid style={{ margin: '20px auto', maxWidth: '700px' }}>
+      <Row style={{ marginBottom: '20px' }}>
+        <Col xs={12} sm={6} smOffset={6} style={styleColumn}>
+          <FlatButton
+            backgroundColor="#327F9E"
+            hoverColor="#47B4E0"
+            label="Save and Finish"
+            labelStyle={{ color: 'white' }}
+            onTouchTap={this.handleSaveTouchTap}
+            style={styleFlatButton}
+          />
+        </Col>
+      </Row>
+      <Row>
         <Col>
           <Paper style={stylePaper}>
             <TextField
@@ -44,16 +56,6 @@ const JobNotes = React.createClass({
               value={this.props.job.notes}
             />
           </Paper>
-        </Col>
-        <Col xs={12} sm={6} smOffset={6} style={styleColumn}>
-          <FlatButton
-            backgroundColor="#327F9E"
-            hoverColor="#F0C7A2"
-            label="Save and Finish"
-            labelStyle={{ color: 'white' }}
-            onTouchTap={this.handleSaveTouchTap}
-            style={styleFlatButton}
-          />
         </Col>
       </Row>
     </Grid>;

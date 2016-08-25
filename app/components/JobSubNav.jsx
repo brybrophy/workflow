@@ -143,6 +143,13 @@ const JobSubNav = React.createClass({
   },
 
   render() {
+    const styleFlatButton = {
+      borderRadius: '3px',
+      fontFamily: 'MontserratHairline',
+      margin: '5px',
+      width: '100%'
+    };
+
     const styleTab = {
       color: 'black',
       fontFamily: 'MontserratLight'
@@ -200,21 +207,15 @@ const JobSubNav = React.createClass({
         onChangeIndex={this.handleChange}
       >
         <JobForm updateJob={this.updateJob} />
-        <div>
-          <FloatingActionButton onTouchTap={this.createContact}>
-            <ContentAdd />
-          </FloatingActionButton>
-          <ContactView
-            // addNewContact={this.addNewContact}
-            contacts={this.state.contacts}
-            editing={this.state.contactEditing}
-            openDeleteDialog={this.openDeleteDialog}
-            startEditingContact={this.startEditingContact}
-            stopEditingContact={this.stopEditingContact}
-            updateContact={this.updateContact}
-            // updateContacts={this.updateContacts}
-          />
-        </div>
+        <ContactView
+          contacts={this.state.contacts}
+          createContact={this.createContact}
+          editing={this.state.contactEditing}
+          openDeleteDialog={this.openDeleteDialog}
+          startEditingContact={this.startEditingContact}
+          stopEditingContact={this.stopEditingContact}
+          updateContact={this.updateContact}
+        />
         <JobProgressView job={this.state.job} />
         <JobNotes job={this.state.job} updateNotes={this.updateNotes} />
       </SwipeableViews>
