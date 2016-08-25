@@ -15,7 +15,7 @@ import Timestamp from 'react-timestamp';
 
 const JobProgressTable = React.createClass({
   handleTouchTap() {
-    this.props.handleEditing(this.props.job, this.props.id)
+    this.props.onHandleEditing(this.props.job, this.props.id)
   },
 
   render() {
@@ -44,8 +44,8 @@ const JobProgressTable = React.createClass({
     let timeOffer = '';
 
     if (job.interviewApplied.date) {
-      dateApplied = <Timestamp time={job.interviewInformational.date} format="date" />;
-      timeApplied = <Timestamp time={job.interviewInformational.date} format="time" />;
+      dateApplied = <Timestamp time={job.interviewApplied.date} format="date" />;
+      timeApplied = <Timestamp time={job.interviewApplied.date} format="time" />;
     }
 
     if (job.interviewInformational.date) {

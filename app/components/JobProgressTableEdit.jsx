@@ -24,8 +24,56 @@ const monthNames = [
 ];
 
 const JobProgressTableEdit = React.createClass({
+  getInitialState() {
+    return {
+      job: {},
+      informationalDate: '',
+      informationalTime: ''
+    }
+  },
+
+  componentWillMount() {
+    const nextJob = this.props.job;
+
+    this.setState({ job: nextJob });
+  },
+
+  handleChangeDate(_date, newDate) {
+    const day = newDate.getDate();
+    const month = newDate.getMonth();
+    const year = newDate.getFullYear();
+
+    const addDate = `${monthNames[month]} ${day} ${year}`;
+
+    this.setState({ informationalDate: addDate });
+  },
+
+  handleChangeTime(_time, newTime) {
+    const hour = newTime.getHours();
+    const min = newTime.getMinutes();
+    const sec = newTime.getSeconds();
+
+    const addTime = `${hour}:${min}:${sec}`
+
+    this.setState({ informationalTime: addTime });
+  },
+
   handleTouchTap() {
-    this.props.handleEditing(null, null)
+    this.props.onHandleEditing(null, null)
+  },
+
+  handleTouchTapSave() {
+    const date = this.state.informationalDate;
+    const time = this.state.informationalTime;
+
+    const nextDate = new Date(`${date} ${time}`);
+
+    const nextJob = Object.assign({}, this.state.job, {
+      interviewInformational: { date: nextDate }
+    });
+
+    this.props.onHandleSaveJob(nextJob);
+    this.setState({ job: nextJob });
   },
 
   formatDate(date) {
@@ -40,30 +88,30 @@ const JobProgressTableEdit = React.createClass({
     const styles = this.props.styles;
     const job = this.props.job;
 
-    let dateApplied = '';
-    let timeApplied = '';
+    let dateApplied = 'Add Date';
+    let timeApplied = 'Add Time';
 
-    let dateInformational = '';
-    let timeInformational = '';
+    let dateInformational = 'Add Date';
+    let timeInformational = 'Add Time';
 
-    let datePhone = '';
-    let timePhone = '';
+    let datePhone = 'Add Date';
+    let timePhone = 'Add Time';
 
-    let dateTakeHome = '';
-    let timeTakeHome = '';
+    let dateTakeHome = 'Add Date';
+    let timeTakeHome = 'Add Time';
 
-    let dateTechnical = '';
-    let timeTechnical = '';
+    let dateTechnical = 'Add Date';
+    let timeTechnical = 'Add Time';
 
-    let dateOnsite = '';
-    let timeOnsite = '';
+    let dateOnsite = 'Add Date';
+    let timeOnsite = 'Add Time';
 
-    let dateOffer = '';
-    let timeOffer = '';
+    let dateOffer = 'Add Date';
+    let timeOffer = 'Add Time';
 
     if (job.interviewApplied.date) {
-      dateApplied = <Timestamp time={job.interviewInformational.date} format="date" />;
-      timeApplied = <Timestamp time={job.interviewInformational.date} format="time" />;
+      dateApplied = <Timestamp time={job.interviewApplied.date} format="date" />;
+      timeApplied = <Timestamp time={job.interviewApplied.date} format="time" />;
     }
 
     if (job.interviewInformational.date) {
@@ -102,7 +150,7 @@ const JobProgressTableEdit = React.createClass({
     <FlatButton
       icon={<Check />}
       label="Save"
-      onTouchTap={this.handleTouchTap}
+      onTouchTap={this.handleTouchTapSave}
       primary={true}
       style={{float: 'right'}}
     />
@@ -143,9 +191,13 @@ const JobProgressTableEdit = React.createClass({
               formatDate={this.formatDate}
               hintText={dateInformational}
               mode="landscape"
+              onChange={this.handleChangeDate}
             />
             <br />
-            <TimePicker hintText={timeInformational} />
+            <TimePicker
+              hintText={timeInformational}
+              onChange={this.handleChangeTime}
+            />
           </TableRowColumn>
 
           <TableRowColumn>

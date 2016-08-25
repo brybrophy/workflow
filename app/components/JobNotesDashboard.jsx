@@ -17,7 +17,7 @@ const JobNotesDashboard = React.createClass({
         style={{float: 'right'}}
       />
       <Paper style={styles.section}>
-        <p style={styles.p}>{job.notes}</p>
+        <p style={styles.paragrapharagraph}>{job.notes}</p>
       </Paper>
     </div>
   }

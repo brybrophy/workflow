@@ -8,7 +8,7 @@ import SelectField from 'material-ui/SelectField';
 import TextField from 'material-ui/TextField';
 import { withRouter } from 'react-router';
 
-const JobsSideBar = React.createClass({
+const DashboardSideBar = React.createClass({
   handleTouchTap() {
     this.props.router.push('/new/job');
   },
@@ -93,4 +93,4 @@ const JobsSideBar = React.createClass({
   }
 });
 
-export default withRouter(JobsSideBar);
+export default withRouter(DashboardSideBar);

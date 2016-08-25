@@ -1,17 +1,17 @@
 import DashboardJob from 'components/DashboardJob';
 import DashboardSideBar from 'components/DashboardSideBar';
 import React from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 
-const Jobs = React.createClass({
+const Dashboard = React.createClass({
   render() {
     return <main>
       <Row>
         <DashboardSideBar />
-        <DashboardJob saveJob={this.props.saveJob} jobs={this.props.jobs} />
+        <DashboardJob jobs={this.props.jobs} saveJob={this.props.saveJob} />
       </Row>
     </main>
   }
 });
 
-export default Jobs;
+export default Dashboard;

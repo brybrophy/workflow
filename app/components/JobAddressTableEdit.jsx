@@ -39,16 +39,15 @@ const JobAddressTableEdit = React.createClass({
   },
 
   handleTouchTap() {
-    this.props.handleEditing(null, null)
+    this.props.onHandleEditing(null, null)
   },
 
   handleSaveTouchTap() {
-    this.props.handleEditing(null, null)
-    this.props.handleSaveJob(this.state.job)
+    this.props.onHandleEditing(null, null)
+    this.props.onHandleSaveJob(this.state.job)
   },
 
   handleSelectFieldChange(event, index, value) {
-    console.log(value);
     const nextJob = Object.assign({}, this.state.job, {
       companyState: value
     });
