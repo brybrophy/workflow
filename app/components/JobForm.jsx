@@ -8,21 +8,43 @@ import TextField from 'material-ui/TextField';
 import { withRouter } from 'react-router';
 
 const schema = Joi.object({
-  companyName: Joi.string().trim().max(255),
-  title: Joi.string().trim().max(255),
-  companyStreetAddress: Joi.string().trim().max(255).allow(''),
-  companyCity: Joi.string().trim().max(255).allow(''),
-  companyState: Joi.string().trim().max(255).allow(''),
-  companyZip: Joi.string().trim().max(255).allow(''),
-  companyPhone: Joi.string().trim().max(255).allow(''),
-  jobPostUrl: Joi.string().trim().max(255).uri({ scheme: /https?/ }).allow('')
+  companyName: Joi.string().label('Company Name').trim().max(255),
+  title: Joi.string().label('Title').trim().max(255),
+  companyStreetAddress: Joi.string()
+    .label('Street Address')
+    .trim().max(255)
+    .allow(''),
+  companyCity: Joi.string().label('City').trim().max(255).allow(''),
+  companyState: Joi.string().label('State').trim().max(255).allow(''),
+  companyZip: Joi.string().label('Zip Code').trim().min(5).max(10).allow(''),
+  companyPhone: Joi.string()
+    .label('Phone Number')
+    .trim()
+    .min(7)
+    .max(255)
+    .allow(''),
+  jobPostUrl: Joi.string()
+    .label('Job URL')
+    .trim()
+    .max(255)
+    .uri({ scheme: /https?/ })
+    .allow('')
 });
 
 const JobForm = React.createClass({
   getInitialState() {
     return {
       errors: {},
-      job: {}
+      job: {
+        companyName: '',
+        title: '',
+        companyStreetAddress: '',
+        companyCity: '',
+        companyState: '',
+        companyZip: '',
+        companyPhone: '',
+        jobPostUrl: ''
+      }
     }
   },
 
@@ -52,7 +74,7 @@ const JobForm = React.createClass({
     this.setState({ job: nextJob });
   },
 
-  handleCancelTouchTap() {
+  handleTouchTapCancel() {
     this.props.router.push('/dashboard');
   },
 
@@ -96,6 +118,10 @@ const JobForm = React.createClass({
         left: '95%',
         top: '6px'
       },
+      errors: {
+        color: '#E48C8C',
+        marginTop: '10px'
+      },
       flatButton: {
         borderRadius: '3px',
         fontFamily: 'MontserratHairline',
@@ -113,6 +139,9 @@ const JobForm = React.createClass({
         padding: '0 10px',
         top: '-5px',
         width: '100%'
+      },
+      row: {
+        marginBottom: '5px'
       },
       selectField: {
         border: '1px solid lightgray',
@@ -149,7 +178,7 @@ const JobForm = React.createClass({
                 backgroundColor="#E48C8C"
                 hoverColor="#ED4C4C"
                 label="Cancel"
-                onTouchTap={this.handleCancelTouchTap}
+                onTouchTap={this.handleTouchTapCancel}
                 style={styles.flatButton}
               />
             </Col>
@@ -164,9 +193,10 @@ const JobForm = React.createClass({
               />
             </Col>
           </Row>
-          <Row>
+          <Row style={styles.row}>
             <Col xs={12} md={6} style={styles.column}>
               <TextField
+                errorStyle={styles.errors}
                 errorText={errors.companyName}
                 hintStyle={styles.textFieldHint}
                 hintText="Company Name"
@@ -180,6 +210,7 @@ const JobForm = React.createClass({
             </Col>
             <Col xs={12} md={6} style={styles.column}>
               <TextField
+                errorStyle={styles.errors}
                 errorText={errors.title}
                 hintStyle={styles.textFieldHint}
                 hintText="Job Title"
@@ -191,8 +222,11 @@ const JobForm = React.createClass({
                 value={job.title}
               />
             </Col>
+          </Row>
+          <Row style={styles.row}>
             <Col xs={12} md={6} style={styles.column}>
               <TextField
+                errorStyle={styles.errors}
                 errorText={errors.companyStreetAddress}
                 hintStyle={styles.textFieldHint}
                 hintText="Street Address"
@@ -206,6 +240,7 @@ const JobForm = React.createClass({
             </Col>
             <Col xs={12} md={4} style={styles.column}>
               <TextField
+                errorStyle={styles.errors}
                 errorText={errors.companyCity}
                 hintStyle={styles.textFieldHint}
                 hintText="City"
@@ -219,6 +254,7 @@ const JobForm = React.createClass({
             </Col>
             <Col xs={12} md={2} style={styles.column}>
               <SelectField
+                errorStyle={styles.errors}
                 errorText={errors.companyState}
                 hintStyle={styles.textFieldHint}
                 hintText="State"
@@ -241,8 +277,11 @@ const JobForm = React.createClass({
                 })}
               </SelectField>
             </Col>
+          </Row>
+          <Row style={styles.row}>
             <Col xs={12} md={6} style={styles.column}>
               <TextField
+                errorStyle={styles.errors}
                 errorText={errors.companyZip}
                 hintStyle={styles.textFieldHint}
                 hintText="Zip Code"
@@ -256,6 +295,7 @@ const JobForm = React.createClass({
             </Col>
             <Col xs={12} md={6} style={styles.column}>
               <TextField
+                errorStyle={styles.errors}
                 errorText={errors.companyPhone}
                 hintStyle={styles.textFieldHint}
                 hintText="Phone Number"
@@ -267,8 +307,11 @@ const JobForm = React.createClass({
                 value={job.companyPhone}
               />
             </Col>
+          </Row>
+          <Row style={styles.row}>
             <Col xs={12} style={styles.column}>
               <TextField
+                errorStyle={styles.errors}
                 errorText={errors.jobPostUrl}
                 hintStyle={styles.textFieldHint}
                 hintText="Job URL"

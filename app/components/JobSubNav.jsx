@@ -203,6 +203,7 @@ const JobSubNav = React.createClass({
           contacts={this.state.contacts}
           createContact={this.createContact}
           editing={this.state.contactEditing}
+          job={this.state.job}
           openDeleteDialog={this.openDeleteDialog}
           startEditingContact={this.startEditingContact}
           stopEditingContact={this.stopEditingContact}

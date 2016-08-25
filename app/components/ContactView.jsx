@@ -58,7 +58,7 @@ const ContactView = React.createClass({
         <Row>
           <Col xs={12} style={styleColumn}>
             <Paper style={stylePaper} zDepth={2}>
-              Click "Add a Contact" to associate a contact with this job. <br />
+              Click "Add a Contact" to associate a contact with {this.props.job.title} at {this.props.job.companyName}. <br />
               If you don't have any contacts for this job, click "Save and Next"
             </Paper>
           </Col>
