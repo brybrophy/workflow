@@ -32,10 +32,6 @@ const JobsJob = React.createClass({
     this.setState({ editing: job, editingId: id });
   },
 
-  handleExpandChange(expanded) {
-    this.setState({expanded: expanded});
-  },
-
   handleExpand() {
     this.setState({expanded: true});
   },
@@ -86,7 +82,6 @@ const JobsJob = React.createClass({
             key={weakKey(job)}
             expanded={this.state.expanded}
             style={styles.job}
-            onExpandChange={this.handleExpandChange}
           >
           <CardHeader
             title={job.companyName}
