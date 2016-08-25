@@ -1,24 +1,16 @@
 import { Grid, Row, Col } from 'react-bootstrap';
-import axios from 'axios';
 import FlatButton from 'material-ui/FlatButton';
 import MenuItem from 'material-ui/MenuItem';
 import React from 'react';
 import SelectField from 'material-ui/SelectField';
 import TextField from 'material-ui/TextField';
+import { withRouter } from 'react-router';
 
 const JobForm = React.createClass({
   getInitialState() {
     return {
       job: {}
     }
-  },
-
-  componentWillMount() {
-    this.setState({ job: this.props.job });
-  },
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({ job: nextProps.job });
   },
 
   handleChange(event) {
@@ -29,15 +21,12 @@ const JobForm = React.createClass({
     this.setState({ job: nextJob });
   },
 
+  handleCancelTouchTap() {
+    this.props.router.push('/dashboard');
+  },
+
   handleSaveTouchTap() {
-    console.log(this.state.job);
-    axios.patch(`/api/jobs/${this.state.job.id}`, this.state.job)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    this.props.updateJob(this.state.job);
   },
 
   handleSelectFieldChange(event, index, value) {
@@ -101,126 +90,133 @@ const JobForm = React.createClass({
 
     const states = ['', 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'];
 
-    return <Row>
-      <Col xs={12} md={6} style={styleColumn}>
-        <TextField
-          hintStyle={styleTextFieldHint}
-          hintText="Company Name"
-          name="companyName"
-          onChange={this.handleChange}
-          style={styleTextField}
-          underlineShow={false}
-          value={this.state.job.companyName}
-        />
-      </Col>
-      <Col xs={12} md={6} style={styleColumn}>
-        <TextField
-          hintStyle={styleTextFieldHint}
-          hintText="Job Title"
-          name="title"
-          onChange={this.handleChange}
-          style={styleTextField}
-          underlineShow={false}
-          value={this.state.job.title}
-        />
-      </Col>
-      <Col xs={12} md={6} style={styleColumn}>
-        <TextField
-          hintStyle={styleTextFieldHint}
-          hintText="Street Address"
-          name="companyStreetAddress"
-          onChange={this.handleChange}
-          style={styleTextField}
-          underlineShow={false}
-          value={this.state.job.companyStreetAddress}
-        />
-      </Col>
-      <Col xs={12} md={4} style={styleColumn}>
-        <TextField
-          hintStyle={styleTextFieldHint}
-          hintText="City"
-          name="companyCity"
-          onChange={this.handleChange}
-          style={styleTextField}
-          underlineShow={false}
-          value={this.state.job.companyCity}
-        />
-      </Col>
-      <Col xs={12} md={2} style={styleColumn}>
-        <SelectField
-          hintStyle={styleTextFieldHint}
-          hintText="State"
-          iconStyle={styleDropDownArrow}
-          maxHeight={200}
-          menuStyle={styleMenuItem}
-          name="companyState"
-          onChange={this.handleSelectFieldChange}
-          style={styleSelectField}
-          underlineShow={false}
-          value={this.state.job.companyState}
-        >
-          {states.map((state, index) => {
-            return <MenuItem
-              key={index}
-              primaryText={state}
-              value={state}
-            />
-          })}
-        </SelectField>
-      </Col>
-      <Col xs={12} md={6} style={styleColumn}>
-        <TextField
-          hintStyle={styleTextFieldHint}
-          hintText="Zip Code"
-          name="companyZip"
-          onChange={this.handleChange}
-          style={styleTextField}
-          underlineShow={false}
-          value={this.state.job.companyZip}
-        />
-      </Col>
-      <Col xs={12} md={6} style={styleColumn}>
-        <TextField
-          hintStyle={styleTextFieldHint}
-          hintText="Phone Number"
-          name="companyPhone"
-          onChange={this.handleChange}
-          style={styleTextField}
-          underlineShow={false}
-          value={this.state.job.companyPhone}
-        />
-      </Col>
-      <Col xs={12} style={styleColumn}>
-        <TextField
-          hintStyle={styleTextFieldHint}
-          hintText="Job URL"
-          name="jobPostUrl"
-          onChange={this.handleChange}
-          style={styleTextField}
-          underlineShow={false}
-          value={this.state.job.jobPostUrl}
-        />
-      </Col>
-      <Col xs={12} style={styleColumn}>
-        <FlatButton
-          backgroundColor="#E7E4DB"
-          hoverColor="#F0C7A2"
-          label="Save and Next"
-          labelStyle={{ color: '#A6A399' }}
-          onTouchTap={this.handleSaveTouchTap}
-          style={styleFlatButton}
-        />
-      </Col>
-      <Col xs={12} style={styleColumn}>
-        <FlatButton
-          backgroundColor="#E48C8C"
-          hoverColor="#ED4C4C"
-          label="Remove Job"
-          style={styleFlatButton}
-        />
-      </Col>
-    </Row>;
+    return <Grid style={{ margin: '30px auto', maxWidth: '700px'}}>
+      <Row>
+        <Col xs={12} sm={12}>
+          <Row>
+            <Col xs={12} md={6} style={styleColumn}>
+              <TextField
+                hintStyle={styleTextFieldHint}
+                hintText="Company Name"
+                name="companyName"
+                onChange={this.handleChange}
+                style={styleTextField}
+                underlineShow={false}
+                value={this.state.job.companyName}
+              />
+            </Col>
+            <Col xs={12} md={6} style={styleColumn}>
+              <TextField
+                hintStyle={styleTextFieldHint}
+                hintText="Job Title"
+                name="title"
+                onChange={this.handleChange}
+                style={styleTextField}
+                underlineShow={false}
+                value={this.state.job.title}
+              />
+            </Col>
+            <Col xs={12} md={6} style={styleColumn}>
+              <TextField
+                hintStyle={styleTextFieldHint}
+                hintText="Street Address"
+                name="companyStreetAddress"
+                onChange={this.handleChange}
+                style={styleTextField}
+                underlineShow={false}
+                value={this.state.job.companyStreetAddress}
+              />
+            </Col>
+            <Col xs={12} md={4} style={styleColumn}>
+              <TextField
+                hintStyle={styleTextFieldHint}
+                hintText="City"
+                name="companyCity"
+                onChange={this.handleChange}
+                style={styleTextField}
+                underlineShow={false}
+                value={this.state.job.companyCity}
+              />
+            </Col>
+            <Col xs={12} md={2} style={styleColumn}>
+              <SelectField
+                hintStyle={styleTextFieldHint}
+                hintText="State"
+                iconStyle={styleDropDownArrow}
+                maxHeight={200}
+                menuStyle={styleMenuItem}
+                name="companyState"
+                onChange={this.handleSelectFieldChange}
+                style={styleSelectField}
+                underlineShow={false}
+                value={this.state.job.companyState}
+              >
+                {states.map((state, index) => {
+                  return <MenuItem
+                    key={index}
+                    primaryText={state}
+                    value={state}
+                  />
+                })}
+              </SelectField>
+            </Col>
+            <Col xs={12} md={6} style={styleColumn}>
+              <TextField
+                hintStyle={styleTextFieldHint}
+                hintText="Zip Code"
+                name="companyZip"
+                onChange={this.handleChange}
+                style={styleTextField}
+                underlineShow={false}
+                value={this.state.job.companyZip}
+              />
+            </Col>
+            <Col xs={12} md={6} style={styleColumn}>
+              <TextField
+                hintStyle={styleTextFieldHint}
+                hintText="Phone Number"
+                name="companyPhone"
+                onChange={this.handleChange}
+                style={styleTextField}
+                underlineShow={false}
+                value={this.state.job.companyPhone}
+              />
+            </Col>
+            <Col xs={12} style={styleColumn}>
+              <TextField
+                hintStyle={styleTextFieldHint}
+                hintText="Job URL"
+                name="jobPostUrl"
+                onChange={this.handleChange}
+                style={styleTextField}
+                underlineShow={false}
+                value={this.state.job.jobPostUrl}
+              />
+            </Col>
+            <Col xs={12} sm={6} style={styleColumn}>
+              <FlatButton
+                backgroundColor="#E48C8C"
+                hoverColor="#ED4C4C"
+                label="Cancel"
+                onTouchTap={this.handleCancelTouchTap}
+                style={styleFlatButton}
+              />
+            </Col>
+            <Col xs={12} sm={6} style={styleColumn}>
+              <FlatButton
+                backgroundColor="#327F9E"
+                hoverColor="#F0C7A2"
+                label="Save and Next"
+                labelStyle={{ color: 'white' }}
+                onTouchTap={this.handleSaveTouchTap}
+                style={styleFlatButton}
+              />
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+    </Grid>;
   }
 });
 
-export default JobForm;
+export default withRouter(JobForm);

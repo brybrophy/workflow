@@ -1,91 +1,139 @@
 import { Tab, Tabs } from 'material-ui/Tabs';
 import { Link, withRouter } from 'react-router';
-import axios from 'axios';
 import ContactView from 'components/ContactView';
-import JobInfo from 'components/JobInfo';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import DeleteDialog from 'components/DeleteDialog';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import JobForm from 'components/JobForm';
 import JobNotes from 'components/JobNotes';
 import JobProgressView from 'components/JobProgressView';
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import Snackbar from 'material-ui/Snackbar';
 import SwipeableViews from 'react-swipeable-views';
+import axios from 'axios';
 
 const JobSubNav = React.createClass({
   getInitialState() {
     return {
+      deleteDialog: {
+        open: false,
+        contact: null
+      },
+
       job: {},
       contacts: [],
-      editing: null,
-      slideIndex: 0
+      contactEditing: [],
+      slideIndex: 0,
+
+      snackbar: {
+        message: '',
+        open: false
+      }
     };
   },
 
-  componentWillMount() {
-    axios.get(`/api/jobs/${this.props.params.id}`)
-      .then((res) => {
-        this.setState({ job: res.data });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  // componentWillUnmount() {
+  // axios.post('/api/contacts', nextContact)
+  //   .then((res) => {
+  //
+  //   })
+  //   .catch(() => {
+  //     const nextSnackbar = {
+  //       message: 'Unable to save contact',
+  //       open: true
+  //     };
+  //
+  //     this.setState({ snackbar: nextSnackbar });
+  //   });
+  // },
 
-    axios.get(`/api/jobs/${this.props.params.id}/contacts`)
-      .then((res) => {
-        this.setState({ contacts: res.data });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  handleRequestCloseSnackbar() {
+    const nextSnackbar = { message: '', open: false };
+
+    this.setState({ snackbar: nextSnackbar });
   },
 
-  componentWillUnmount() {
-    const updatedJob = Object.assign({}, this.state.job);
+  closeDeleteDialog() {
+    const nextDeleteDialog = { open: false, post: null };
 
-    axios.patch(`/api/jobs/${this.state.job.id}`, updatedJob)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    this.setState({ deleteDialog: nextDeleteDialog });
+  },
+
+  createContact() {
+    const contact = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      title: '',
+      company: '',
+      linkedInUrl: ''
+    };
+
+    const nextEditing = this.state.contactEditing.concat(contact);
+    const nextContacts = [contact].concat(this.state.contacts);
+
+    this.setState({  contactEditing: nextEditing, contacts: nextContacts });
+  },
+
+  deleteContact(contact) {
+    const nextContacts = this.state.contacts.filter((element) => {
+      return contact !== element;
+    });
+    const nextDeleteDialog = { open: false, post: null };
+
+    this.setState({ deleteDialog: nextDeleteDialog, contacts: nextContacts });
+  },
+
+  openDeleteDialog(contact) {
+    const nextDeleteDialog = { open: true, contact };
+
+    this.setState({ deleteDialog: nextDeleteDialog });
+  },
+
+  startEditingContact(contact) {
+    const nextEditing = this.state.contactEditing.concat(contact);
+
+    this.setState({ contactEditing: nextEditing });
+  },
+
+  stopEditingContact(contact) {
+    const nextEditing = this.state.contactEditing.filter((el) => {
+      return contact !== el;
+    });
+
+    let nextContacts = this.state.contacts;
+
+    // if (!Number.isFinite(contact.votes)) {
+    //   nextcontacts = this.state.contacts.filter((el) => contact !== el);
+    // }
+
+    this.setState({ contactEditing: nextEditing, contacts: nextContacts });
+  },
+
+  updateContact(contact, nextContact) {
+    const nextEditing = this.state.contactEditing.filter((el) => {
+      return contact !== el;
+    });
+
+    const nextContacts = this.state.contacts.map((element) => {
+      if (contact !== element) {
+        return element;
+      }
+
+      return nextContact;
+    });
+
+    this.setState({ contactEditing: nextEditing, contacts: nextContacts });
   },
 
   handleChange(value) {
     this.setState({ slideIndex: value });
   },
 
-  addNewContact(contact, newContact) {
-    let nextContacts;
-
-    axios.post('/api/contacts', newContact)
-      .then((res) => {
-        nextContacts = this.state.contacts.map((element) => {
-          if (contact !== element) {
-            return element;
-          }
-          console.log(res.data);
-          return res.data;
-        });
-
-        return axios.post(`/api/jobs/${this.state.job.id}/contacts`, {
-          contactId: res.data.id
-        });
-      })
-      .then((res) => {
-        this.setState({ editing: null, contacts: nextContacts });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  },
-
-  stopEditingContact(contact) {
-    const nextContacts = this.state.contacts.filter((elem) => elem !== contact);
-
-    this.setState({ editing: null, contacts: nextContacts });
-  },
-
-  updateContacts(nextEditing, nextContacts) {
-    this.setState({ contacts: nextContacts, editing: nextEditing });
+  updateJob(nextJob) {
+    this.setState({ job: nextJob, slideIndex: 1 });
   },
 
   updateNotes(nextNotes) {
@@ -106,6 +154,19 @@ const JobSubNav = React.createClass({
     };
 
     return <div>
+      <DeleteDialog
+        closeDeleteDialog={this.closeDeleteDialog}
+        deleteDialog={this.state.deleteDialog}
+        deleteContact={this.deleteContact}
+      />
+
+      <Snackbar
+        autoHideDuration={3000}
+        message={this.state.snackbar.message}
+        onRequestClose={this.handleRequestCloseSnackbar}
+        open={this.state.snackbar.open}
+      />
+
       <Tabs
         inkBarStyle={{ backgroundColor: '#47B4E0' }}
         style={styleTabs}
@@ -138,14 +199,22 @@ const JobSubNav = React.createClass({
         index={this.state.slideIndex}
         onChangeIndex={this.handleChange}
       >
-        <JobInfo job={this.state.job} />
-        <ContactView
-          addNewContact={this.addNewContact}
-          contacts={this.state.contacts}
-          editing={this.state.editing}
-          updateContacts={this.updateContacts}
-          stopEditingContact={this.stopEditingContact}
-        />
+        <JobForm updateJob={this.updateJob} />
+        <div>
+          <FloatingActionButton onTouchTap={this.createContact}>
+            <ContentAdd />
+          </FloatingActionButton>
+          <ContactView
+            // addNewContact={this.addNewContact}
+            contacts={this.state.contacts}
+            editing={this.state.contactEditing}
+            openDeleteDialog={this.openDeleteDialog}
+            startEditingContact={this.startEditingContact}
+            stopEditingContact={this.stopEditingContact}
+            updateContact={this.updateContact}
+            // updateContacts={this.updateContacts}
+          />
+        </div>
         <JobProgressView job={this.state.job} />
         <JobNotes job={this.state.job} updateNotes={this.updateNotes} />
       </SwipeableViews>
