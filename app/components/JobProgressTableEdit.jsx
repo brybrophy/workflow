@@ -114,7 +114,7 @@ const JobProgressTableEdit = React.createClass({
       style={{float: 'right'}}
     />
     <Paper style={styles.section}>
-    <Table style={styles.table}>
+    <Table style={styles.table} selectable={false}>
       <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
         <TableRow>
           <TableHeaderColumn>APPLIED</TableHeaderColumn>

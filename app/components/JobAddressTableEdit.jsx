@@ -16,8 +16,33 @@ import TextField from 'material-ui/TextField';
 import Timestamp from 'react-timestamp';
 
 const JobAddressTableEdit = React.createClass({
+  getInitialState() {
+    return {
+      job: {}
+    }
+  },
+
+  componentWillMount() {
+    const nextJob = this.props.job;
+
+    this.setState({ job: nextJob });
+  },
+
+  handleChange(event) {
+    const nextJob = Object.assign({}, this.state.job, {
+      [event.target.name]: event.target.value
+    });
+
+    this.setState({ job: nextJob });
+  },
+
   handleTouchTap() {
     this.props.handleEditing(null, null)
+  },
+
+  handleSaveTouchTap() {
+    this.props.handleEditing(null, null)
+    this.props.handleSaveJob(this.state.job)
   },
 
   render() {
@@ -28,7 +53,7 @@ const JobAddressTableEdit = React.createClass({
       <FlatButton
         icon={<Check />}
         label="Save"
-        onTouchTap={this.handleTouchTap}
+        onTouchTap={this.handleSaveTouchTap}
         primary={true}
         style={{float: 'right'}}
       />
@@ -40,7 +65,7 @@ const JobAddressTableEdit = React.createClass({
         style={{float: 'right'}}
       />
       <Paper style={styles.section}>
-      <Table style={styles.table}>
+      <Table style={styles.table} selectable={false}>
         <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
           <TableRow>
             <TableHeaderColumn>ADDRESS</TableHeaderColumn>
@@ -54,32 +79,38 @@ const JobAddressTableEdit = React.createClass({
           <TableRow>
             <TableRowColumn>
               <TextField
-                hintText="Address"
                 defaultValue={job.companyStreetAddress}
+                hintText="Address"
+                name="companyStreetAddress"
+                onChange={this.handleChange}
               />
             </TableRowColumn>
             <TableRowColumn>
               <TextField
-                hintText="Address"
                 defaultValue={job.companyCity}
+                hintText="City"
+                name="companyCity"
               />
             </TableRowColumn>
             <TableRowColumn>
               <TextField
-                hintText="Address"
                 defaultValue={job.companyState}
+                hintText="State"
+                name="companyState"
               />
             </TableRowColumn>
             <TableRowColumn>
               <TextField
-                hintText="Address"
                 defaultValue={job.companyZip}
+                hintText="Zip"
+                name="companyZip"
               />
             </TableRowColumn>
             <TableRowColumn>
               <TextField
-                hintText="Address"
                 defaultValue={job.companyPhone}
+                hintText="Phone"
+                name="companyPhone"
               />
             </TableRowColumn>
           </TableRow>

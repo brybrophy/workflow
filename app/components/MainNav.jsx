@@ -7,7 +7,6 @@ import { withRouter } from 'react-router';
 
 const MainNav = React.createClass({
   handleTouchTap(event) {
-    console.log(event.target.textContent);
     if (event.target.textContent === 'Logout') {
       Cookie.remove('token', { path: '/' });
 
@@ -27,6 +26,7 @@ const MainNav = React.createClass({
     const styleFlatButton = {
       height: '125px',
       lineHeight: '125px',
+      margin: '0 10px',
       minWidth: '60px'
     };
 
@@ -82,12 +82,6 @@ const MainNav = React.createClass({
       >
       <FlatButton
         label="Dashboard"
-        labelStyle={styleFlatButtonLabel}
-        onTouchTap={this.handleTouchTap}
-        style={styleFlatButton}
-      />
-      <FlatButton
-        label="Jobs"
         labelStyle={styleFlatButtonLabel}
         onTouchTap={this.handleTouchTap}
         style={styleFlatButton}

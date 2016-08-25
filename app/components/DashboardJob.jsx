@@ -2,6 +2,7 @@ import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'm
 import { Grid, Row, Col } from 'react-bootstrap';
 import { withRouter } from 'react-router';
 
+import axios from 'axios';
 import Close from 'material-ui/svg-icons/navigation/close';
 import Eyeball from 'material-ui/svg-icons/image/remove-red-eye';
 import FlatButton from 'material-ui/FlatButton';
@@ -38,6 +39,17 @@ const JobsJob = React.createClass({
 
   handleReduce() {
     this.setState({expanded: false});
+  },
+
+  handleSaveJob(job) {
+    const id = job.id;
+    axios.patch(`/api/jobs/${id}`, job)
+      .then((res) => {
+        
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   },
 
   render() {
@@ -108,6 +120,7 @@ const JobsJob = React.createClass({
             ?
             <JobAddressTableEdit
               handleEditing={this.handleEditing}
+              handleSaveJob={this.handleSaveJob}
               job={job}
               styles={styles}
             />
