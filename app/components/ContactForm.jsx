@@ -1,15 +1,46 @@
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
+import Cancel from 'material-ui/svg-icons/navigation/cancel';
 import FlatButton from 'material-ui/FlatButton';
+import Joi from 'joi';
 import MenuItem from 'material-ui/MenuItem';
 import React from 'react';
 import SelectField from 'material-ui/SelectField';
 import TextField from 'material-ui/TextField';
 
+const schema = Joi.object({
+  firstName: Joi.string().trim().max(255),
+  lastName: Joi.string().trim().max(255),
+  linkedInUrl: Joi.string().trim().uri({ scheme: /https?/ }).allow(''),
+  email: Joi.string().email().trim().max(255).allow(''),
+  phone: Joi.string().trim().max(255).allow(''),
+  title: Joi.string().trim().max(255).allow(''),
+  company: Joi.string().trim().max(255).allow('')
+});
+
 const ContactForm = React.createClass({
   getInitialState() {
     return {
-      contact: {}
+      contact: this.props.contact,
+      errors: {}
+    };
+  },
+
+  handleBlur(event) {
+    const { name, value } = event.target;
+    const nextErrors = Object.assign({}, this.state.errors);
+    const result = Joi.validate({ [name]: value }, schema);
+
+    if (result.error) {
+      for (const detail of result.error.details) {
+        nextErrors[detail.path] = detail.message;
+      }
+
+      return this.setState({ errors: nextErrors });
     }
+
+    delete nextErrors[name];
+
+    this.setState({ errors: nextErrors });
   },
 
   handleChange(event) {
@@ -33,12 +64,29 @@ const ContactForm = React.createClass({
   },
 
   handleTouchTapSave() {
-    const newContact = Object.assign({}, this.state.contact);
+    const result = Joi.validate(this.state.contact, schema, {
+      abortEarly: false,
+      allowUnknown: true
+    });
 
-    this.props.addNewContact(this.props.contact, newContact);
+    if (result.error) {
+      const nextErrors = {};
+
+      for (const detail of result.error.details) {
+        nextErrors[detail.path] = detail.message;
+      }
+
+      return this.setState({ errors: nextErrors });
+    }
+
+    const nextContact = Object.assign({}, result.value);
+
+    this.props.updateContact(this.props.contact, nextContact);
   },
 
   render() {
+    const { errors, contact } = this.state;
+
     const styleColumn = {
       padding: '0 3px'
     };
@@ -90,7 +138,7 @@ const ContactForm = React.createClass({
       fontFamily: 'MontserratLight'
     };
 
-    return <Row style={{ margin: '20px auto', maxWidth: '500px' }}>
+    return <Row style={{ margin: '20px auto' }}>
       <Col xs={12} style={styleColumn}>
         <SelectField
           hintStyle={styleTextFieldHint}
@@ -102,7 +150,7 @@ const ContactForm = React.createClass({
           onChange={this.handleSelectFieldChange}
           style={styleSelectField}
           underlineShow={false}
-          value={this.state.contact.existingContact}
+          value={contact.existingContact}
         >
           <MenuItem
             key={1}
@@ -123,88 +171,102 @@ const ContactForm = React.createClass({
       </Col>
       <Col xs={12} sm={9} style={styleColumn}>
         <TextField
+          errorText={errors.url}
           hintStyle={styleTextFieldHint}
           hintText="LinkedIn URL"
           name="linkedInUrl"
+          onBlur={this.handleBlur}
           onChange={this.handleChange}
           style={styleTextField}
           underlineShow={false}
-          value={this.state.contact.linkedInUrl}
+          value={contact.linkedInUrl}
         />
       </Col>
       <Col xs={12} sm={3} style={styleColumn}>
         <FlatButton
-          backgroundColor="#E7E4DB"
+          backgroundColor="#327F9E"
           hoverColor="#F0C7A2"
           label="Import"
-          labelStyle={{ color: '#A6A399' }}
+          labelStyle={{ color: '#FFF' }}
           style={styleFlatButton}
         />
       </Col>
       <Col xs={12} sm={6} style={styleColumn}>
         <TextField
+          errorText={errors.firstName}
           hintStyle={styleTextFieldHint}
           hintText="First Name"
           name="firstName"
+          onBlur={this.handleBlur}
           onChange={this.handleChange}
           style={styleTextField}
           underlineShow={false}
-          value={this.state.contact.firstName}
+          value={contact.firstName}
         />
       </Col>
       <Col xs={12} sm={6} style={styleColumn}>
         <TextField
+          errorText={errors.lastName}
           hintStyle={styleTextFieldHint}
           hintText="Last Name"
           name="lastName"
+          onBlur={this.handleBlur}
           onChange={this.handleChange}
           style={styleTextField}
           underlineShow={false}
-          value={this.state.contact.lastName}
+          value={contact.lastName}
         />
       </Col>
       <Col xs={12} sm={6} style={styleColumn}>
         <TextField
+          errorText={errors.email}
           hintStyle={styleTextFieldHint}
           hintText="Email"
           name="email"
+          onBlur={this.handleBlur}
           onChange={this.handleChange}
           style={styleTextField}
           underlineShow={false}
-          value={this.state.contact.email}
+          value={contact.email}
         />
       </Col>
       <Col xs={12} sm={6} style={styleColumn}>
         <TextField
+          errorText={errors.phone}
           hintStyle={styleTextFieldHint}
           hintText="Phone Number"
-          name="phoneNumber"
+          name="phone"
+          onBlur={this.handleBlur}
           onChange={this.handleChange}
           style={styleTextField}
           underlineShow={false}
-          value={this.state.contact.phoneNumber}
+          value={contact.phone}
         />
       </Col>
       <Col xs={12} sm={6} style={styleColumn}>
         <TextField
+          errorText={errors.title}
           hintStyle={styleTextFieldHint}
           hintText="Title"
           name="title"
+          onBlur={this.handleBlur}
           onChange={this.handleChange}
           style={styleTextField}
           underlineShow={false}
-          value={this.state.contact.title}
+          value={contact.title}
         />
       </Col>
       <Col xs={12} sm={6} style={styleColumn}>
         <TextField
+          errorText={errors.company}
           hintStyle={styleTextFieldHint}
           hintText="Company"
           name="company"
+          onBlur={this.handleBlur}
           onChange={this.handleChange}
           style={styleTextField}
           underlineShow={false}
-          value={this.state.contact.company}
+          value={contact.company}
         />
       </Col>
       <Col xs={12} sm={6} style={styleColumn}>
@@ -218,10 +280,10 @@ const ContactForm = React.createClass({
       </Col>
       <Col xs={12} sm={6} style={styleColumn}>
         <FlatButton
-          backgroundColor="#E7E4DB"
+          backgroundColor="#327F9E"
           hoverColor="#F0C7A2"
           label="Save and Next"
-          labelStyle={{ color: '#A6A399' }}
+          labelStyle={{ color: '#FFF' }}
           onTouchTap={this.handleTouchTapSave}
           style={styleFlatButton}
         />

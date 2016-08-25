@@ -4,6 +4,14 @@ import Paper from 'material-ui/Paper';
 import React from 'react';
 
 const Contact = React.createClass({
+  handleTouchTapDelete() {
+    this.props.openDeleteDialog(this.props.contact);
+  },
+
+  handleTouchTapEdit() {
+    this.props.startEditingContact(this.props.contact);
+  },
+
   render() {
     const { contact } = this.props;
 
@@ -49,6 +57,13 @@ const Contact = React.createClass({
             </Col>
             <Col xs={8}>
               <p style={{float: 'right', marginTop: '60px'}}>{contact.linkedInUrl}</p>
+              <a onTouchTap={this.handleTouchTapEdit}>
+                edit
+              </a>
+
+              <a onTouchTap={this.handleTouchTapDelete}>
+                delete
+              </a>
             </Col>
           </Row>
         </Paper>

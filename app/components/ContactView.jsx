@@ -1,45 +1,30 @@
-import { Col, Grid, Row } from 'react-bootstrap';
+import { Grid } from 'react-bootstrap';
 import Contact from 'components/Contact';
 import ContactForm from 'components/ContactForm';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
 import React from 'react';
+import weakKey from 'weak-key';
 
 const ContactView = React.createClass({
-  handleTouchTap() {
-    const nextEditing = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      phoneNumber: '',
-      title: '',
-      company: '',
-      linkedInUrl: ''
-    };
-
-    const nextContacts = [nextEditing].concat(this.props.contacts);
-
-    this.props.updateContacts(nextEditing, nextContacts);
-  },
-
   render() {
-    return<Grid>
-      <Row style={{ margin: '10px auto', maxWidth: '60px' }}>
-        <FloatingActionButton onTouchTap={this.handleTouchTap}>
-          <ContentAdd />
-        </FloatingActionButton>
-      </Row>
-      {this.props.contacts.map((contact, index) => {
-        if (contact === this.props.editing) {
+    const { contacts } = this.props;
+
+    return <Grid style={{ maxWidth: '700px' }}>
+      {contacts.map((contact) => {
+        if (this.props.editing.indexOf(contact) !== -1) {
           return <ContactForm
-            addNewContact={this.props.addNewContact}
+            key={weakKey(contact)}
             contact={contact}
-            key={index}
             stopEditingContact={this.props.stopEditingContact}
-          />;
+            updateContact={this.props.updateContact}
+          />
         }
 
-        return <Contact contact={contact} key={index} />;
+        return <Contact
+          key={weakKey(contact)}
+          openDeleteDialog={this.props.openDeleteDialog}
+          contact={contact}
+          startEditingContact={this.props.startEditingContact}
+        />
       })}
     </Grid>;
   }
