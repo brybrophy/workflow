@@ -52,7 +52,7 @@ router.post('/contacts', ev(validations.post), (req, res, next) => {
       return knex('contacts').insert(row, '*');
     })
     .then((newContacts) => {
-      res.send(newContacts[0]);
+      res.send(camelizeKeys(newContacts[0]));
     })
     .catch((err) => {
       next(err);
