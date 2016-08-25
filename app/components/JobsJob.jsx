@@ -1,156 +1,137 @@
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import { Grid, Row, Col } from 'react-bootstrap';
-import Timestamp from 'react-timestamp';
-import Toggle from 'material-ui/Toggle';
-import Paper from 'material-ui/Paper';
-import React from 'react';
-import weakKey from 'weak-key';
 import { withRouter } from 'react-router';
 
+import Close from 'material-ui/svg-icons/navigation/close';
+import Eyeball from 'material-ui/svg-icons/image/remove-red-eye';
+import FlatButton from 'material-ui/FlatButton';
+import JobAddressTable from 'components/JobAddressTable';
+import JobAddressTableEdit from 'components/JobAddressTableEdit';
+import JobContactsList from 'components/JobContactsList';
+import JobNotesDashboard from 'components/JobNotesDashboard';
+import JobProgressTable from 'components/JobProgressTable';
+import ProgressStepper from 'components/ProgressStepper';
+import React from 'react';
+import weakKey from 'weak-key';
+
 const JobsJob = React.createClass({
-  handleTouchTap(event) {
-    this.props.router.push(`/job/${event.target.id}`);
+  getInitialState() {
+    return {
+      editing: null,
+      expanded: null
+    }
+  },
+
+  handleEditing(job){
+    this.setState({ editing: job });
+  },
+
+  handleExpandChange(expanded) {
+    this.setState({expanded: expanded});
+  },
+
+  handleExpand() {
+    this.setState({expanded: true});
+  },
+
+  handleReduce() {
+    this.setState({expanded: false});
   },
 
   render() {
     let { jobs } = this.props;
 
     jobs.sort((p1, p2) => p1.companyName > p2.companyName);
-
-    const styleColumnBorders = {
-        borderRight: '1px solid #A6A399'
-    };
-
-    const styleDateText = {
-      fontFamily: 'MontserratHairline',
-      fontSize: '1.2rem',
-    };
-
-    const styleJob = {
-      backgroundColor: '#E7E4DB',
-      borderRadius: '3px',
-      color: '#A6A399',
-      marginBottom: '10px',
-      padding: '10px 20px'
-    };
-
-    const styleProgress = {
-      marginBottom: '30px'
-    };
-
-    const styleSudoColumnEven = {
-      display: 'inline-block',
-      paddingLeft: '20px',
-      textAlign: 'center',
-      width: '50%'
-    };
-
-    const styleSudoColumnOdd = {
-      borderRight: '1px solid #A6A399',
-      display: 'inline-block',
-      paddingRight: '20px',
-      textAlign: 'center',
-      width: '50%'
-    };
-
-    const styleToggle = {
-      block: {
-        maxWidth: 150,
+    const styles = {
+      job: {
+        backgroundColor: '#F9F8F7',
+        borderRadius: '3px',
+        color: '#A6A399',
+        marginBottom: '10px',
+        padding: '10px 20px'
       },
-      toggle: {
-        marginBottom: 0,
+      p: {
+        color: 'black',
+        fontFamily: 'MontserratLight'
+      },
+      paper: {
+        padding: '10px'
+      },
+      section: {
+        backgroundColor: 'white',
+        borderRadius: '5px',
+        marginBottom: '10px',
+        padding: '10px'
+      },
+      subtitle: {
+        fontSize: '1.6rem'
+      },
+      table: {
+        marginBottom: '20px'
+      },
+      title: {
+        fontSize: '3.2rem'
       },
     };
 
     return <Col xs={12} md={9} style={{padding: '20px 40px 0 10px'}}>
       {jobs.map((job) => {
-        let timeInformational = 'Not scheduled yet';
-        let timePhone = 'Not scheduled yet';
-        let timeOnSite = 'Not scheduled yet';
-        let timeTechnical = 'Not scheduled yet';
-        let timeOffer = 'Offer not recieved';
+        return <Card
+            key={weakKey(job)}
+            expanded={this.state.expanded}
+            style={styles.job}
+            onExpandChange={this.handleExpandChange}
+          >
+          <CardHeader
+            title={job.companyName}
+            titleStyle={styles.title}
+            style={{paddingBottom: '0px'}}
+            subtitle={job.title}
+            subtitleStyle={styles.subtitle}
+          >
+          <CardActions>
+          <FlatButton
+          backgroundColor={'#327F9E'}
+          icon={<Eyeball />}
+          label="View More"
+          style={{float: 'right', position: 'relative', bottom: '60px'}}
+          onTouchTap={this.handleExpand}
+          />
+          </CardActions>
+          </CardHeader>
+          <ProgressStepper />
+          <CardTitle style={{backgroundColor: '#327F9E'}} expandable={true} />
+          <CardText expandable={true} style={{color: '#A6A399', padding: '16px 0'}}>
 
-        if (job.interviewInformational.date) {
-          <Timestamp time={job.interviewInformational.date} format="full" />;
-        }
+          {this.state.editing === job
+            ?
+            <JobAddressTableEdit
+              handleEditing={this.handleEditing}
+              job={job}
+              styles={styles}
+            />
+            :
+            <JobAddressTable
+              handleEditing={this.handleEditing}
+              job={job}
+              styles={styles}
+            />
+          }
 
-        if (job.interviewPhone) {
-          <Timestamp time={job.interviewPhone} format="full" />;
-        }
-
-        if (job.interviewOnsite) {
-          <Timestamp time={job.interviewOnsite} format="full" />;
-        }
-
-        if (job.interviewTechnical) {
-          <Timestamp time={job.interviewTechnical} format="full" />;
-        }
-
-        if (job.interviewOffer) {
-          <Timestamp time={job.interviewOffer} format="full" />;
-        }
-
-        return <Paper
-          className="add-pointer"
-          style={styleJob}
-          key={weakKey(job)}
-          id={job.id}
-          onTouchTap={this.handleTouchTap}
-        >
-          <Row id={job.id}>
-            <Col id={job.id} md={2} style={styleColumnBorders}>
-              <h4 id={job.id} style={{fontFamily: 'MontserratBold', marginBottom: '30px'}}>
-                {job.companyName}
-              </h4>
-              <h5 id={job.id}>{job.title}</h5>
-            </Col>
-
-            <Col id={job.id} md={3} style={styleColumnBorders}>
-              <div id={job.id} style={styleSudoColumnOdd}>
-                <h5 id={job.id} style={styleProgress}>Applied On</h5>
-                <p id={job.id} style={styleDateText}>
-                  <Timestamp time={job.interviewApplied.date} format="full" />
-                </p>
-              </div>
-
-              <div id={job.id} style={styleSudoColumnEven}>
-                <h5 id={job.id} style={styleProgress}>Informational</h5>
-                <p id={job.id} style={styleDateText}>{timeInformational}</p>
-              </div>
-            </Col>
-
-            <Col id={job.id} md={3} style={styleColumnBorders}>
-              <div id={job.id} style={styleSudoColumnOdd}>
-                <h5 id={job.id} style={styleProgress}>Phone Screen</h5>
-                <p id={job.id} style={styleDateText}>{timePhone}</p>
-              </div>
-
-              <div id={job.id} style={styleSudoColumnEven}>
-                <h5 id={job.id} style={styleProgress}>On Site</h5>
-                <p id={job.id} style={styleDateText}>{timeOnSite}</p>
-              </div>
-            </Col>
-
-            <Col id={job.id} md={3} style={styleColumnBorders}>
-              <div id={job.id} style={styleSudoColumnOdd}>
-                <h5 id={job.id} style={styleProgress}>Technical</h5>
-                <p id={job.id} style={styleDateText}>{timeTechnical}</p>
-              </div>
-
-              <div id={job.id} style={styleSudoColumnEven}>
-                <h5 id={job.id} style={styleProgress}>Offer Date</h5>
-                <p id={job.id} style={styleDateText}>{timeOffer}</p>
-              </div>
-            </Col>
-
-            <Col id={job.id} md={1} style={{textAlign: 'center'}}>
-              <p id={job.id} style={styleDateText}>Accepted</p>
-              <Toggle style={styleToggle}/>
-
-              <p id={job.id} style={styleDateText}>Rejected</p>
-              <Toggle style={styleToggle}/>
-            </Col>
-          </Row>
-        </Paper>
+            <JobProgressTable job={job} styles={styles}/>
+            <JobContactsList job={job} styles={styles}/>
+            <JobNotesDashboard job={job} styles={styles}/>
+          </CardText>
+          <CardActions expandable={true} style={{marginBottom: '25px'}}>
+            <FlatButton
+              icon={<Close />}
+              label="Close"
+              primary={true}
+              style={{float: 'right'}}
+              onTouchTap={this.handleReduce}
+            />
+          </CardActions>
+        </Card>
       })}
     </Col>
 
