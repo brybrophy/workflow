@@ -5,11 +5,16 @@ import { withRouter } from 'react-router';
 import Close from 'material-ui/svg-icons/navigation/close';
 import Eyeball from 'material-ui/svg-icons/image/remove-red-eye';
 import FlatButton from 'material-ui/FlatButton';
+
 import JobAddressTable from 'components/JobAddressTable';
 import JobAddressTableEdit from 'components/JobAddressTableEdit';
+
 import JobContactsList from 'components/JobContactsList';
 import JobNotesDashboard from 'components/JobNotesDashboard';
+
 import JobProgressTable from 'components/JobProgressTable';
+import JobProgressTableEdit from 'components/JobProgressTableEdit';
+
 import ProgressStepper from 'components/ProgressStepper';
 import React from 'react';
 import weakKey from 'weak-key';
@@ -118,7 +123,21 @@ const JobsJob = React.createClass({
             />
           }
 
-            <JobProgressTable job={job} styles={styles}/>
+          {this.state.editing === job
+            ?
+            <JobProgressTableEdit
+              handleEditing={this.handleEditing}
+              job={job}
+              styles={styles}
+            />
+            :
+            <JobProgressTable
+              handleEditing={this.handleEditing}
+              job={job}
+              styles={styles}
+            />
+          }
+
             <JobContactsList job={job} styles={styles}/>
             <JobNotesDashboard job={job} styles={styles}/>
           </CardText>

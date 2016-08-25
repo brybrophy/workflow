@@ -7,15 +7,33 @@ import {
   TableRow,
   TableRowColumn
 } from 'material-ui/Table';
-import EditMode from 'material-ui/svg-icons/editor/mode-edit';
+import Check from 'material-ui/svg-icons/navigation/check';
+import Clear from 'material-ui/svg-icons/content/clear';
+import DatePicker from 'material-ui/DatePicker';
 import FlatButton from 'material-ui/FlatButton';
 import Paper from 'material-ui/Paper';
 import React from 'react';
 import Timestamp from 'react-timestamp';
+import TimePicker from 'material-ui/TimePicker';
 
-const JobProgressTable = React.createClass({
+const monthNames = [
+  "Jan", "Feb", "Mar",
+  "April", "May", "June", "July",
+  "Aug", "Sept", "Oct",
+  "Nov", "Dec"
+];
+
+const JobProgressTableEdit = React.createClass({
   handleTouchTap() {
-    this.props.handleEditing(this.props.job)
+    this.props.handleEditing(null)
+  },
+
+  formatDate(date) {
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    const formatted =  `${day} ${monthNames[month]} ${year}`;
+    return formatted;
   },
 
   render() {
@@ -82,10 +100,17 @@ const JobProgressTable = React.createClass({
     return <div>
     <h4 style={{display: 'inline-block'}}>Progress</h4>
     <FlatButton
-      icon={<EditMode />}
-      label="Edit"
+      icon={<Check />}
+      label="Save"
       onTouchTap={this.handleTouchTap}
       primary={true}
+      style={{float: 'right'}}
+    />
+    <FlatButton
+      icon={<Clear />}
+      label="Cancel"
+      onTouchTap={this.handleTouchTap}
+      secondary={true}
       style={{float: 'right'}}
     />
     <Paper style={styles.section}>
@@ -101,11 +126,18 @@ const JobProgressTable = React.createClass({
           <TableHeaderColumn>OFFER RECIEVED</TableHeaderColumn>
         </TableRow>
       </TableHeader>
-      <TableBody displayRowCheckbox={false} showRowHover={true}>
+      <TableBody displayRowCheckbox={false}>
         <TableRow>
           <TableRowColumn>
-            {dateApplied}<br />{timeApplied}
+            <DatePicker
+              formatDate={this.formatDate}
+              hintText={dateApplied}
+              mode="landscape"
+            />
+            <br />
+            <TimePicker hintText={timeApplied} />
           </TableRowColumn>
+
           <TableRowColumn>
             {dateInformational}<br />{timeInformational}
           </TableRowColumn>
@@ -132,4 +164,4 @@ const JobProgressTable = React.createClass({
   }
 });
 
-export default JobProgressTable;
+export default JobProgressTableEdit;
