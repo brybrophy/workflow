@@ -23,12 +23,13 @@ const JobsJob = React.createClass({
   getInitialState() {
     return {
       editing: null,
+      editingId: null,
       expanded: null
     }
   },
 
-  handleEditing(job){
-    this.setState({ editing: job });
+  handleEditing(job, id){
+    this.setState({ editing: job, editingId: id });
   },
 
   handleExpandChange(expanded) {
@@ -108,7 +109,7 @@ const JobsJob = React.createClass({
           <CardTitle style={{backgroundColor: '#327F9E'}} expandable={true} />
           <CardText expandable={true} style={{color: '#A6A399', padding: '16px 0'}}>
 
-          {this.state.editing === job
+          {(this.state.editing === job && this.state.editingId === 1)
             ?
             <JobAddressTableEdit
               handleEditing={this.handleEditing}
@@ -118,12 +119,13 @@ const JobsJob = React.createClass({
             :
             <JobAddressTable
               handleEditing={this.handleEditing}
+              id={1}
               job={job}
               styles={styles}
             />
           }
 
-          {this.state.editing === job
+          {(this.state.editing === job && this.state.editingId === 2)
             ?
             <JobProgressTableEdit
               handleEditing={this.handleEditing}
@@ -133,6 +135,7 @@ const JobsJob = React.createClass({
             :
             <JobProgressTable
               handleEditing={this.handleEditing}
+              id={2}
               job={job}
               styles={styles}
             />

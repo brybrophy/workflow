@@ -17,7 +17,7 @@ import Timestamp from 'react-timestamp';
 
 const JobAddressTableEdit = React.createClass({
   handleTouchTap() {
-    this.props.handleEditing(null)
+    this.props.handleEditing(null, null)
   },
 
   render() {
