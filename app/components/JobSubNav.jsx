@@ -1,14 +1,11 @@
-import { Tab, Tabs } from 'material-ui/Tabs';
 import { Link, withRouter } from 'react-router';
+import { Tab, Tabs } from 'material-ui/Tabs';
 import ContactView from 'components/ContactView';
-import ContentAdd from 'material-ui/svg-icons/content/add';
 import DeleteDialog from 'components/DeleteDialog';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
 import JobForm from 'components/JobForm';
 import JobNotes from 'components/JobNotes';
 import JobProgressView from 'components/JobProgressView';
 import React from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Snackbar from 'material-ui/Snackbar';
 import SwipeableViews from 'react-swipeable-views';
 import axios from 'axios';
@@ -16,14 +13,15 @@ import axios from 'axios';
 const JobSubNav = React.createClass({
   getInitialState() {
     return {
+      contactEditing: [],
+      contacts: [],
+
       deleteDialog: {
         open: false,
         contact: null
       },
 
       job: {},
-      contacts: [],
-      contactEditing: [],
       slideIndex: 0,
 
       snackbar: {
@@ -143,28 +141,22 @@ const JobSubNav = React.createClass({
   },
 
   render() {
-    const styleFlatButton = {
-      borderRadius: '3px',
-      fontFamily: 'MontserratHairline',
-      margin: '5px',
-      width: '100%'
-    };
-
-    const styleTab = {
-      color: 'black',
-      fontFamily: 'MontserratLight'
-    }
-
-    const styleTabs = {
-      margin: '20px auto',
-      width: '50%'
+    const styles = {
+      tab: {
+        color: 'black',
+        fontFamily: 'MontserratLight'
+      },
+      tabs: {
+        margin: '20px auto',
+        width: '50%'
+      }
     };
 
     return <div>
       <DeleteDialog
         closeDeleteDialog={this.closeDeleteDialog}
-        deleteDialog={this.state.deleteDialog}
         deleteContact={this.deleteContact}
+        deleteDialog={this.state.deleteDialog}
       />
 
       <Snackbar
@@ -176,29 +168,29 @@ const JobSubNav = React.createClass({
 
       <Tabs
         inkBarStyle={{ backgroundColor: '#47B4E0' }}
-        style={styleTabs}
+        style={styles.tabs}
         tabItemContainerStyle={{ backgroundColor: 'none' }}
         onChange={this.handleChange}
         value={this.state.slideIndex}
       >
         <Tab
           label="Job"
-          style={styleTab}
+          style={styles.tab}
           value={0}
         />
         <Tab
           label="Contacts"
-          style={styleTab}
+          style={styles.tab}
           value={1}
         />
         <Tab
           label="Progress"
-          style={styleTab}
+          style={styles.tab}
           value={2}
         />
         <Tab
           label="Notes"
-          style={styleTab}
+          style={styles.tab}
           value={3}
         />
       </Tabs>

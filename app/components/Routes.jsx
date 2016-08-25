@@ -13,7 +13,7 @@ const Routes = React.createClass({
       <Redirect from="/" to="/home" />
       <Route component={Authorize} path="/auth" />
       <Route component={App} path="/">
-        <Route component={JobSubNav} path="/job/:id" />
+        <Route component={JobSubNav} path="/new/job" />
         <Route component={Dashboard} path="/dashboard" />
         {/* <Route component={Contacts} path="contacts" /> */}
         {/* <Route component={NotFound} path="*" /> */}
