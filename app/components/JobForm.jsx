@@ -1,16 +1,47 @@
 import { Grid, Row, Col } from 'react-bootstrap';
 import FlatButton from 'material-ui/FlatButton';
+import Joi from 'joi';
 import MenuItem from 'material-ui/MenuItem';
 import React from 'react';
 import SelectField from 'material-ui/SelectField';
 import TextField from 'material-ui/TextField';
 import { withRouter } from 'react-router';
 
+const schema = Joi.object({
+  companyName: Joi.string().trim().max(255),
+  title: Joi.string().trim().max(255),
+  companyStreetAddress: Joi.string().trim().max(255).allow(''),
+  companyCity: Joi.string().trim().max(255).allow(''),
+  companyState: Joi.string().trim().max(255).allow(''),
+  companyZip: Joi.string().trim().max(255).allow(''),
+  companyPhone: Joi.string().trim().max(255).allow(''),
+  jobPostUrl: Joi.string().trim().max(255).uri({ scheme: /https?/ }).allow('')
+});
+
 const JobForm = React.createClass({
   getInitialState() {
     return {
+      errors: {},
       job: {}
     }
+  },
+
+  handleBlur(event) {
+    const { name, value } = event.target;
+    const nextErrors = Object.assign({}, this.state.errors);
+    const result = Joi.validate({ [name]: value }, schema);
+
+    if (result.error) {
+      for (const detail of result.error.details) {
+        nextErrors[detail.path] = detail.message;
+      }
+
+      return this.setState({ errors: nextErrors });
+    }
+
+    delete nextErrors[name];
+
+    this.setState({ errors: nextErrors });
   },
 
   handleChange(event) {
@@ -25,8 +56,25 @@ const JobForm = React.createClass({
     this.props.router.push('/dashboard');
   },
 
-  handleSaveTouchTap() {
-    this.props.updateJob(this.state.job);
+  handleTouchTapSave() {
+    const result = Joi.validate(this.state.job, schema, {
+      abortEarly: false,
+      allowUnknown: true
+    });
+
+    if (result.error) {
+      const nextErrors = {};
+
+      for (const detail of result.error.details) {
+        nextErrors[detail.path] = detail.message;
+      }
+
+      return this.setState({ errors: nextErrors });
+    }
+
+    const nextJob = Object.assign({}, result.value);
+
+    this.props.updateJob(nextJob);
   },
 
   handleSelectFieldChange(event, index, value) {
@@ -38,6 +86,8 @@ const JobForm = React.createClass({
   },
 
   render() {
+    const { errors, job } = this.state;
+
     const styles = {
       column: {
         padding: '0 3px'
@@ -109,7 +159,7 @@ const JobForm = React.createClass({
                 hoverColor="#47B4E0"
                 label="Save and Next"
                 labelStyle={{ color: 'white' }}
-                onTouchTap={this.handleSaveTouchTap}
+                onTouchTap={this.handleTouchTapSave}
                 style={styles.flatButton}
               />
             </Col>
@@ -117,60 +167,70 @@ const JobForm = React.createClass({
           <Row>
             <Col xs={12} md={6} style={styles.column}>
               <TextField
+                errorText={errors.companyName}
                 hintStyle={styles.textFieldHint}
                 hintText="Company Name"
                 name="companyName"
+                onBlur={this.handleBlur}
                 onChange={this.handleChange}
                 style={styles.textField}
                 underlineShow={false}
-                value={this.state.job.companyName}
+                value={job.companyName}
               />
             </Col>
             <Col xs={12} md={6} style={styles.column}>
               <TextField
+                errorText={errors.title}
                 hintStyle={styles.textFieldHint}
                 hintText="Job Title"
                 name="title"
+                onBlur={this.handleBlur}
                 onChange={this.handleChange}
                 style={styles.textField}
                 underlineShow={false}
-                value={this.state.job.title}
+                value={job.title}
               />
             </Col>
             <Col xs={12} md={6} style={styles.column}>
               <TextField
+                errorText={errors.companyStreetAddress}
                 hintStyle={styles.textFieldHint}
                 hintText="Street Address"
                 name="companyStreetAddress"
+                onBlur={this.handleBlur}
                 onChange={this.handleChange}
                 style={styles.textField}
                 underlineShow={false}
-                value={this.state.job.companyStreetAddress}
+                value={job.companyStreetAddress}
               />
             </Col>
             <Col xs={12} md={4} style={styles.column}>
               <TextField
+                errorText={errors.companyCity}
                 hintStyle={styles.textFieldHint}
                 hintText="City"
                 name="companyCity"
+                onBlur={this.handleBlur}
                 onChange={this.handleChange}
                 style={styles.textField}
                 underlineShow={false}
-                value={this.state.job.companyCity}
+                value={job.companyCity}
               />
             </Col>
             <Col xs={12} md={2} style={styles.column}>
               <SelectField
+                errorText={errors.companyState}
                 hintStyle={styles.textFieldHint}
                 hintText="State"
                 iconStyle={styles.dropDownArrow}
                 maxHeight={200}
                 menuStyle={styles.menuItem}
                 name="companyState"
+                onBlur={this.handleBlur}
                 onChange={this.handleSelectFieldChange}
                 style={styles.selectField}
                 underlineShow={false}
-                value={this.state.job.companyState}
+                value={job.companyState}
               >
                 {states.map((state, index) => {
                   return <MenuItem
@@ -183,35 +243,41 @@ const JobForm = React.createClass({
             </Col>
             <Col xs={12} md={6} style={styles.column}>
               <TextField
+                errorText={errors.companyZip}
                 hintStyle={styles.textFieldHint}
                 hintText="Zip Code"
                 name="companyZip"
+                onBlur={this.handleBlur}
                 onChange={this.handleChange}
                 style={styles.textField}
                 underlineShow={false}
-                value={this.state.job.companyZip}
+                value={job.companyZip}
               />
             </Col>
             <Col xs={12} md={6} style={styles.column}>
               <TextField
+                errorText={errors.companyPhone}
                 hintStyle={styles.textFieldHint}
                 hintText="Phone Number"
                 name="companyPhone"
+                onBlur={this.handleBlur}
                 onChange={this.handleChange}
                 style={styles.textField}
                 underlineShow={false}
-                value={this.state.job.companyPhone}
+                value={job.companyPhone}
               />
             </Col>
             <Col xs={12} style={styles.column}>
               <TextField
+                errorText={errors.jobPostUrl}
                 hintStyle={styles.textFieldHint}
                 hintText="Job URL"
                 name="jobPostUrl"
+                onBlur={this.handleBlur}
                 onChange={this.handleChange}
                 style={styles.textField}
                 underlineShow={false}
-                value={this.state.job.jobPostUrl}
+                value={job.jobPostUrl}
               />
             </Col>
           </Row>

@@ -171,7 +171,7 @@ const ContactForm = React.createClass({
       </Col>
       <Col xs={12} sm={9} style={styleColumn}>
         <TextField
-          errorText={errors.url}
+          errorText={errors.linkedInUrl}
           hintStyle={styleTextFieldHint}
           hintText="LinkedIn URL"
           name="linkedInUrl"
