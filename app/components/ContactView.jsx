@@ -11,6 +11,10 @@ const ContactView = React.createClass({
     this.props.createContact();
   },
 
+  handleTouchTapSave() {
+    this.props.saveContacts(this.props.contacts);
+  },
+
   render() {
     const { contacts } = this.props;
 
@@ -35,6 +39,7 @@ const ContactView = React.createClass({
         <Col xs={12} sm={6} style={styleColumn}>
           <FlatButton
             backgroundColor="#327F9E"
+            disabled={this.props.editing.length !== 0}
             hoverColor="#47B4E0"
             label="Add a Contact"
             labelStyle={{ color: '#FFF' }}

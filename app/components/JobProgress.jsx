@@ -15,6 +15,7 @@ const JobProgress = React.createClass({
   },
 
   handleChange(event, index, value) {
+    console.log(event.target.name);
     this.setState({ value });
   },
 
@@ -56,7 +57,11 @@ const JobProgress = React.createClass({
               style={styleDropdown1}
             >
               <MenuItem value={1} primaryText="Choose Progress Point" />
-              <MenuItem value={2} primaryText="Applied" />
+              <MenuItem
+                value={2}
+                name="interviewApplied"
+                primaryText="Applied"
+              />
               <MenuItem value={3} primaryText="Informational" />
               <MenuItem value={4} primaryText="Phone Screen" />
               <MenuItem value={5} primaryText="On Site" />

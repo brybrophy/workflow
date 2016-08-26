@@ -31,21 +31,6 @@ const JobSubNav = React.createClass({
     };
   },
 
-  // componentWillUnmount() {
-  // axios.post('/api/contacts', nextContact)
-  //   .then((res) => {
-  //
-  //   })
-  //   .catch(() => {
-  //     const nextSnackbar = {
-  //       message: 'Unable to save contact',
-  //       open: true
-  //     };
-  //
-  //     this.setState({ snackbar: nextSnackbar });
-  //   });
-  // },
-
   handleRequestCloseSnackbar() {
     const nextSnackbar = { message: '', open: false };
 
@@ -103,9 +88,9 @@ const JobSubNav = React.createClass({
 
     let nextContacts = this.state.contacts;
 
-    // if (!Number.isFinite(contact.votes)) {
-    //   nextcontacts = this.state.contacts.filter((el) => contact !== el);
-    // }
+    if (!contact.firstName) {
+      nextContacts = this.state.contacts.filter((el) => contact !== el);
+    }
 
     this.setState({ contactEditing: nextEditing, contacts: nextContacts });
   },
@@ -126,12 +111,86 @@ const JobSubNav = React.createClass({
     this.setState({ contactEditing: nextEditing, contacts: nextContacts });
   },
 
+  saveContacts(nextContacts) {
+    if (nextContacts.length === 0) {
+      return this.setState({ slideIndex: 2 });
+    }
+
+    const axiosCalls = [];
+
+    for (const contact of nextContacts) {
+      axiosCalls.push(axios.post('/api/contacts', contact).then((res) => {
+        return axios.post(`/api/jobs/${this.state.job.id}/contacts`, {
+           contactId: res.data.id
+        });
+      }));
+    }
+
+    axios.all(axiosCalls)
+      .then((res) => {
+        const additionalContactInfo = res.map((element) => {
+          return element.data;
+        });
+
+        const newContacts = Object.assign({}, nextContacts, additionalContactInfo);
+
+        this.setState({ contacts: nextContacts, slideIndex: 2 });
+      })
+      .catch(() => {
+        const nextSnackbar = {
+          message: 'Unable to save contacts',
+          open: true
+        };
+
+        this.setState({ snackbar: nextSnackbar });
+      });
+  },
+
   handleChange(value) {
-    this.setState({ slideIndex: value });
+    if (this.state.job.companyName && this.state.job.title) {
+      return this.setState({ slideIndex: value });
+    }
+    const nextSnackbar = {
+      message: 'You must first add a job',
+      open: true
+    };
+
+    this.setState({ slideIndex: 0, snackbar: nextSnackbar });
   },
 
   updateJob(nextJob) {
-    this.setState({ job: nextJob, slideIndex: 1 });
+    if (!this.state.job.id) {
+      axios.post('/api/jobs', nextJob)
+        .then((res) => {
+          const nextJob = Object.assign({}, res.data);
+
+          this.setState({ job: nextJob, slideIndex: 1 });
+        })
+        .catch((err) => {
+          const nextSnackbar = {
+            message: 'Unable to save job',
+            open: true
+          };
+
+          this.setState({ snackbar: nextSnackbar });
+        });
+    }
+    else {
+      axios.patch(`/api/jobs/${this.state.job.id}`, nextJob)
+        .then((res) => {
+          const nextJob = Object.assign({}, res.data);
+
+          this.setState({ job: nextJob, slideIndex: 1 });
+        })
+        .catch((err) => {
+          const nextSnackbar = {
+            message: 'Unable to save job',
+            open: true
+          };
+
+          this.setState({ snackbar: nextSnackbar });
+        });
+    }
   },
 
   updateNotes(nextNotes) {
@@ -205,6 +264,7 @@ const JobSubNav = React.createClass({
           editing={this.state.contactEditing}
           job={this.state.job}
           openDeleteDialog={this.openDeleteDialog}
+          saveContacts={this.saveContacts}
           startEditingContact={this.startEditingContact}
           stopEditingContact={this.stopEditingContact}
           updateContact={this.updateContact}
