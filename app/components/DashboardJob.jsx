@@ -101,7 +101,7 @@ const DashboardJob = React.createClass({
       },
       section: {
         backgroundColor: 'white',
-        borderRadius: '10px 10px 0 0',
+        borderRadius: '5px',
         marginBottom: '10px',
         padding: '10px'
       },
@@ -199,15 +199,22 @@ const DashboardJob = React.createClass({
               job={job}
               styles={styles}
             />
-            <JobNotesDashboard
-            job={job}
-            styles={styles}
-            />
-            <JobNotesDashboardEdit
+
+            {(this.state.editing === job && this.state.editingId === 4)
+              ?
+              <JobNotesDashboardEdit
+                job={job}
+                styles={styles}
+                onHandleSaveJob={this.handleSaveJob}
+              />
+              :
+              <JobNotesDashboard
+              id={4}
               job={job}
+              onHandleEditing={this.handleEditing}
               styles={styles}
-              onHandleSaveJob={this.handleSaveJob}
-            />
+              />
+            }
           </CardText>
           <CardActions expandable={true} style={{ marginBottom: '25px' }}>
             <FlatButton

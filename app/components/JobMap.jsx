@@ -33,9 +33,9 @@ const JobMap = React.createClass({
 
   render() {
     const styleMapContainer = {
-      borderRadius: '0 0 10px 10px',
+      borderRadius: '5px',
       height: "100%",
-      margin: '-10px 0 10px 0'
+      marginBottom: '10px'
     };
 
     return <Paper style={styleMapContainer}>

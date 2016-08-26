@@ -4,6 +4,10 @@ import Paper from 'material-ui/Paper';
 import React from 'react';
 
 const JobNotesDashboard = React.createClass({
+  handleTouchTap() {
+    this.props.onHandleEditing(this.props.job, this.props.id)
+  },
+  
   render() {
     const job = this.props.job;
     const styles = this.props.styles;
@@ -13,6 +17,7 @@ const JobNotesDashboard = React.createClass({
       <FlatButton
         icon={<EditMode />}
         label="Edit"
+        onTouchTap={this.handleTouchTap}
         primary={true}
         style={{float: 'right'}}
       />
