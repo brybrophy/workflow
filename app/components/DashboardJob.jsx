@@ -12,6 +12,7 @@ import FlatButton from 'material-ui/FlatButton';
 import JobAddressTable from 'components/JobAddressTable';
 import JobAddressTableEdit from 'components/JobAddressTableEdit';
 import JobContactsList from 'components/JobContactsList';
+import JobMap from 'components/JobMap';
 import JobNotesDashboard from 'components/JobNotesDashboard';
 import JobProgressTable from 'components/JobProgressTable';
 import JobProgressTableEdit from 'components/JobProgressTableEdit';
@@ -99,7 +100,7 @@ const DashboardJob = React.createClass({
       },
       section: {
         backgroundColor: 'white',
-        borderRadius: '5px',
+        borderRadius: '10px 10px 0 0',
         marginBottom: '10px',
         padding: '10px'
       },
@@ -169,6 +170,10 @@ const DashboardJob = React.createClass({
               styles={styles}
             />
           }
+
+          <JobMap
+            address={`${job.companyStreetAddress} ${job.companyCity} ${job.companyState} ${job.companyZip}`}
+          />
 
           {(this.state.editing === job && this.state.editingId === 2)
             ?

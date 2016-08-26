@@ -25,13 +25,28 @@ const JobMap = React.createClass({
     });
   },
 
+  createMapOptions() {
+    return {
+      scrollwheel: false
+    }
+  },
+
   render() {
-    return <Paper style={{height: "100%"}} zDepth={2}>
+    const styleMapContainer = {
+      borderRadius: '0 0 10px 10px',
+      height: "100%",
+      margin: '-10px 0 10px 0'
+    };
+
+    return <Paper style={styleMapContainer}>
       <GoogleMapLoader
-        containerElement={<div style={{ height: "270px" }} />}
+        containerElement={<div style={{ height: "165px" }} />}
         googleMapElement={<GoogleMap
           defaultZoom={16}
           center={this.state.latLngLocation}
+          options={{
+            scrollwheel: false,
+          }}
         >
           <Marker position={this.state.latLngLocation}/>
         </GoogleMap>}
