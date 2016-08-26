@@ -216,6 +216,7 @@ const JobSubNav = React.createClass({
     axios.patch(`/api/jobs/${this.state.job.id}`, this.state.job)
       .then((res) => {
         this.props.router.push('/dashboard');
+        this.props.addNewJob(this.state.job);
       })
       .catch(() => {
         const nextSnackbar = {

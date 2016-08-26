@@ -21,6 +21,12 @@ const App = React.createClass({
       });
   },
 
+  addNewJob(newJob) {
+    const nextJobs = this.state.jobs.concat(newJob);
+
+    this.setState({ jobs: nextJobs });
+  },
+
   saveJob(nextJob) {
     const nextJobs = this.state.jobs.map((element) => {
       if (element.id !== nextJob.id) {
@@ -37,6 +43,7 @@ const App = React.createClass({
     return <div>
       <MainNav />
       {React.cloneElement(this.props.children, {
+        addNewjob: this.addNewJob,
         jobs: this.state.jobs,
         saveJob: this.saveJob
       })}
