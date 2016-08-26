@@ -33,6 +33,7 @@
     "boom": "^3.2.2",
     "brunch": "^2.8.2",
     "chai-http": "^3.0.0",
+    "clean-css-brunch": "^2.0.0",
     "cookie-parser": "^1.4.3",
     "cookie-session": "^2.0.0-alpha.1",
     "dotenv": "^2.0.0",
@@ -64,7 +65,6 @@
     "weak-key": "^1.0.0"
   },
   "devDependencies": {
-    "clean-css-brunch": "^2.0.0",
     "chai": "^3.5.0",
     "eslint": "^3.2.2",
     "eslint-config-ryansobol": "^8.0.0",
