@@ -43,7 +43,16 @@ const JobForm = React.createClass({
         companyState: '',
         companyZip: '',
         companyPhone: '',
-        jobPostUrl: ''
+        jobPostUrl: '',
+        notes: '',
+        interviewApplied: { date: '' },
+        interviewInformational: { date: '' },
+        interviewPhone: { date: '' },
+        interviewTakeHome: { date: '' },
+        interviewTechnical: { date: '' },
+        interviewOnsite: { date: '' },
+        interviewOffer: { date: '' },
+        interviewRejected: { date: '' }
       }
     }
   },

@@ -21,7 +21,26 @@ const JobSubNav = React.createClass({
         contact: null
       },
 
-      job: {},
+      job: {
+        companyName: '',
+        title: '',
+        companyStreetAddress: '',
+        companyCity: '',
+        companyState: '',
+        companyZip: '',
+        companyPhone: '',
+        jobPostUrl: '',
+        notes: '',
+        interviewApplied: { date: '' },
+        interviewInformational: { date: '' },
+        interviewPhone: { date: '' },
+        interviewTakeHome: { date: '' },
+        interviewTechnical: { date: '' },
+        interviewOnsite: { date: '' },
+        interviewOffer: { date: '' },
+        interviewRejected: { date: '' }
+      },
+
       slideIndex: 0,
 
       snackbar: {
@@ -111,6 +130,53 @@ const JobSubNav = React.createClass({
     this.setState({ contactEditing: nextEditing, contacts: nextContacts });
   },
 
+  updateInterviewStep(data, type, name) {
+    const nextJob = Object.assign({}, this.state.job);
+
+    nextJob[name][type] = data;
+
+    this.setState({ job: nextJob });
+  },
+
+  updateInterviewSteps() {
+    const interviewSteps = [
+      'interviewApplied',
+      'interviewInformational',
+      'interviewPhone',
+      'interviewTakeHome',
+      'interviewTechnical',
+      'interviewOnsite',
+      'interviewOffer'
+    ];
+
+    const nextJob = Object.assign({}, this.state.job);
+
+    for (const step of interviewSteps) {
+      if (nextJob[step]['date'] && nextJob[step]['time']) {
+        const date = nextJob[step]['date'];
+        const time = nextJob[step]['time'];
+
+        const nextInterview = new Date(`${date} ${time}`);
+
+        nextJob[step]['date'] = nextInterview;
+        nextJob[step]['time'] = '';
+      }
+    }
+
+    axios.patch(`/api/jobs/${this.state.job.id}`, nextJob)
+      .then((res) => {
+        this.setState({ job: nextJob, slideIndex: 3 });
+      })
+      .catch(() => {
+        const nextSnackbar = {
+          message: 'Unable to save interview progress',
+          open: true
+        };
+
+        this.setState({ snackbar: nextSnackbar });
+      });
+  },
+
   saveContacts(nextContacts) {
     if (nextContacts.length === 0) {
       return this.setState({ slideIndex: 2 });
@@ -139,6 +205,21 @@ const JobSubNav = React.createClass({
       .catch(() => {
         const nextSnackbar = {
           message: 'Unable to save contacts',
+          open: true
+        };
+
+        this.setState({ snackbar: nextSnackbar });
+      });
+  },
+
+  saveNotes() {
+    axios.patch(`/api/jobs/${this.state.job.id}`, this.state.job)
+      .then((res) => {
+        this.props.router.push('/dashboard');
+      })
+      .catch(() => {
+        const nextSnackbar = {
+          message: 'Unable to save notes',
           open: true
         };
 
@@ -269,8 +350,16 @@ const JobSubNav = React.createClass({
           stopEditingContact={this.stopEditingContact}
           updateContact={this.updateContact}
         />
-        <JobProgressView job={this.state.job} />
-        <JobNotes job={this.state.job} updateNotes={this.updateNotes} />
+        <JobProgressView
+          job={this.state.job}
+          updateInterviewStep={this.updateInterviewStep}
+          updateInterviewSteps={this.updateInterviewSteps}
+        />
+        <JobNotes
+          job={this.state.job}
+          saveNotes={this.saveNotes}
+          updateNotes={this.updateNotes}
+        />
       </SwipeableViews>
     </div>;
   }

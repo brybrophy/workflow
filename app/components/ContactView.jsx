@@ -34,6 +34,12 @@ const ContactView = React.createClass({
       marginLeft: '6px'
     };
 
+    const styleParagraph = {
+      fontSize: '16px',
+      fontWeight: 'bold',
+      lineHeight: '200%'
+    };
+
     return <Grid style={{ margin: '30px auto', maxWidth: '700px' }}>
       <Row style={{ marginBottom: '20px' }}>
         <Col xs={12} sm={6} style={styleColumn}>
@@ -63,8 +69,8 @@ const ContactView = React.createClass({
         <Row>
           <Col xs={12} style={styleColumn}>
             <Paper style={stylePaper} zDepth={2}>
-              Click "Add a Contact" to associate a contact with {this.props.job.title} at {this.props.job.companyName}. <br />
-              If you don't have any contacts for this job, click "Save and Next"
+              <p style={styleParagraph}>Click "Add a Contact" to associate a contact with {this.props.job.title} at {this.props.job.companyName}. <br />
+              If you don't have any contacts for this job, click "Save and Next"</p>
             </Paper>
           </Col>
         </Row>

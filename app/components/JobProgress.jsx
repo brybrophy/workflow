@@ -1,101 +1,114 @@
-import { Row, Col } from 'react-bootstrap';
+import {
+  Table,
+  TableBody,
+  TableFooter,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn
+} from 'material-ui/Table';
 import DatePicker from 'material-ui/DatePicker';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
+import FlatButton from 'material-ui/FlatButton';
+import InterviewColumn from 'components/InterviewColumn';
 import Paper from 'material-ui/Paper';
 import React from 'react';
+import Timestamp from 'react-timestamp';
 import TimePicker from 'material-ui/TimePicker';
+
+const interviewSteps = [
+  'interviewApplied',
+  'interviewInformational',
+  'interviewPhone',
+  'interviewTakeHome',
+  'interviewTechnical',
+  'interviewOnsite',
+  'interviewOffer'
+];
+
+const interviewHeaders = [
+  'APPLIED',
+  'INFOMATIONAL',
+  'PHONE SCREEN',
+  'TAKE HOME',
+  'TECHNICAL',
+  'ON SITE',
+  'OFFER RECIEVED'
+];
 
 const JobProgress = React.createClass({
   getInitialState() {
     return {
-      value: 1,
-      valueTime: null
+      job: this.props.job
     }
   },
 
-  handleChange(event, index, value) {
-    console.log(event.target.name);
-    this.setState({ value });
+  handleTouchTapSave() {
+    const nextJob = Object.assign({}, this.state.job);
+
+    for (const step of interviewSteps) {
+      if (nextJob[step]['date'] && nextJob[step]['time']) {
+        const date = nextJob[step]['date'];
+        const time = nextJob[step]['time'];
+
+        const nextInterview = new Date(`${date} ${time}`);
+
+        nextJob[step]['date'] = nextInterview;
+        nextJob[step]['time'] = '';
+      }
+    }
+
+    this.props.onHandleSaveJob(nextJob);
+    this.setState({ job: nextJob });
   },
 
-  handleChangeTime(event, date) {
-    this.setState({ valueTime: date });
+  formatDate(date) {
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    const formatted =  `${day} ${monthNames[month]} ${year}`;
+    return formatted;
   },
 
   render() {
-    const styleDropdown1 = {
-      fontSize: '2rem',
-      textAlign: 'left',
-      width: '350px'
-    }
-
-    const styleDropdown2 = {
-      width: '150px'
-    }
-
-    const stylePaper = {
-      padding: '20px 0 30px 0'
+    const styles = {
+      section: {
+        backgroundColor: 'white',
+        borderRadius: '5px',
+        marginBottom: '10px',
+        padding: '10px'
+      },
+      table: {
+        marginBottom: '20px'
+      }
     };
+    const job = this.props.job;
 
-    const styleParagraph = {
-      borderBottom: '1px solid black'
-    };
-
-    const styleSpan = {
-      float: 'right'
-    };
-
-    return <Row>
-      <Col xs={12}>
-        <Paper style={stylePaper} zDepth={2}>
-          <Row>
-            <Col xs={12}>
-            <DropDownMenu
-              value={this.state.value}
-              onChange={this.handleChange}
-              style={styleDropdown1}
-            >
-              <MenuItem value={1} primaryText="Choose Progress Point" />
-              <MenuItem
-                value={2}
-                name="interviewApplied"
-                primaryText="Applied"
-              />
-              <MenuItem value={3} primaryText="Informational" />
-              <MenuItem value={4} primaryText="Phone Screen" />
-              <MenuItem value={5} primaryText="On Site" />
-              <MenuItem value={6} primaryText="Technical" />
-            </DropDownMenu>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <Row>
-                <Col xs={6} style={{ textAlign: 'center' }}>
-                <div>
-                  <DatePicker
-                    hintText="Choose Date"
-                    textFieldStyle={{ marginTop: '10px' }}
-                  />
-                </div>
-                </Col>
-                <Col xs={6}>
-                <TimePicker
-                  format="ampm"
-                  hintText="Choose Time"
-                  value={this.state.valueTime}
-                  onChange={this.handleChangeTime}
-                  pedantic={true}
-                  textFieldStyle={{ marginTop: '10px' }}
-                />
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Paper>
-      </Col>
-    </Row>;
+    return <div>
+    <h4 style={{fontSize: '30px', margin: '30px', textAlign: 'center' }}>Add Interview Progress Points</h4>
+    <Paper style={styles.section}>
+    <Table style={styles.table} selectable={false}>
+      <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+        <TableRow>
+          {interviewHeaders.map((header, index) => {
+            return <TableHeaderColumn key={index}>{header}</TableHeaderColumn>
+          })}
+        </TableRow>
+      </TableHeader>
+      <TableBody displayRowCheckbox={false}>
+        <TableRow>
+        {interviewSteps.map((step, index) => {
+          return <InterviewColumn
+            job={this.props.job}
+            key={index}
+            name={step}
+            updateInterviewStep={this.props.updateInterviewStep}
+          />;
+        })}
+        </TableRow>
+      </TableBody>
+    </Table>
+    </Paper>
+    </div>
   }
 });
 

@@ -1,5 +1,4 @@
 import { Row, Col } from 'react-bootstrap';
-import Avatar from 'material-ui/Avatar';
 import Paper from 'material-ui/Paper';
 import React from 'react';
 
@@ -30,14 +29,7 @@ const Contact = React.createClass({
     };
 
     return <Row style={{ margin: '20px auto', maxWidth: '1000px' }} >
-      <Col xs={12} sm={3}>
-        <Avatar
-          size={150}
-          src="http://www.fillmurray.com/150/150"
-          style={{ boxShadow: 'rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 5px 10px', height: '80%', left: '30px', position: 'relative', width: '80%' }}
-        />
-      </Col>
-      <Col xs={12} sm={9}>
+      <Col xs={12}>
         <Paper style={stylePaper} zDepth={2}>
           <Row>
             <Col xs={12}>
@@ -48,6 +40,13 @@ const Contact = React.createClass({
                 <span style={styleLine}> | </span>
               </h2>
               <h4 style={{display: 'inline-block', fontFamily: 'MontserratLight'}}>{contact.title} at {contact.company}</h4>
+              <p style={{ float: 'right' }}><a style={{ cursor: 'pointer', display: 'inline-block', margin: '10px' }} onTouchTap={this.handleTouchTapEdit}>
+                edit
+              </a></p>
+
+              <p style={{ float: 'right' }}><a style={{ cursor: 'pointer', display: 'inline-block', margin: '10px' }} onTouchTap={this.handleTouchTapDelete}>
+                delete
+              </a></p>
             </Col>
           </Row>
           <Row >
@@ -57,13 +56,6 @@ const Contact = React.createClass({
             </Col>
             <Col xs={8}>
               <p style={{float: 'right', marginTop: '60px'}}>{contact.linkedInUrl}</p>
-              <a onTouchTap={this.handleTouchTapEdit}>
-                edit
-              </a>
-
-              <a onTouchTap={this.handleTouchTapDelete}>
-                delete
-              </a>
             </Col>
           </Row>
         </Paper>

@@ -9,6 +9,10 @@ const JobNotes = React.createClass({
     this.props.updateNotes(event.target.value);
   },
 
+  handleSaveTouchTap() {
+    this.props.saveNotes();
+  },
+
   render() {
     const styleColumn = {
       padding: '10px 3px'
