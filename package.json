@@ -14,7 +14,7 @@
   ],
   "author": "bryanbrophy <brybrophy@gmail.com>",
   "scripts": {
-    "heroku-postbuild": "knex migrate:latest",
+    "heroku-postbuild": "brunch build --production",
     "knex": "knex",
     "lint": "eslint --ext .js,.jsx --ignore-pattern public",
     "nf": "nf start",
