@@ -7,13 +7,13 @@ import { withRouter } from 'react-router';
 
 const MainNav = React.createClass({
   handleTouchTap(event) {
-    if (event.target.textContent === 'Logout') {
+    if (event.currentTarget.textContent === 'Logout') {
       Cookie.remove('token', { path: '/' });
 
       return this.props.router.push('/');
     }
 
-    const path = '/' + event.target.textContent.toLowerCase();
+    const path = '/' + event.currentTarget.textContent.toLowerCase();
     this.props.router.push(path);
   },
 
