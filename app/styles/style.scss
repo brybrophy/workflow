@@ -21,19 +21,13 @@
 }
 
 body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+  height: 100%;
   font-family: 'Montserrat';
 }
 
 h3 {
   font-family: 'MontserratLight';
   font-size: 1.7rem;
-}
-
-main {
-  flex: 1;
 }
 
 p {
@@ -46,11 +40,6 @@ p {
 
 .hairline-font {
   font-family: 'MontserratHairline';
-}
-
-.sticky-footer {
-  height: calc(100vh - 245px);
-  overflow: scroll;
 }
 
 @media (max-width: 900px) {

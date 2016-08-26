@@ -13,6 +13,10 @@ const MainNav = React.createClass({
       return this.props.router.push('/');
     }
 
+    if (event.currentTarget.textContent.includes('workflow')) {
+      return this.props.router.push('/dashboard');
+    }
+
     const path = '/' + event.currentTarget.textContent.toLowerCase();
     this.props.router.push(path);
   },
@@ -74,6 +78,7 @@ const MainNav = React.createClass({
     return <div><AppBar
       iconElementLeft={<NavLogo />}
       iconStyleLeft={styleIconLeft}
+      onTitleTouchTap={this.handleTouchTap}
       style={styleAppBar}
       title={<h1>workflow |
         <span style={styleSubTitle}>Job Search Management</span>

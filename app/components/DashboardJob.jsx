@@ -14,6 +14,7 @@ import JobAddressTableEdit from 'components/JobAddressTableEdit';
 import JobContactsList from 'components/JobContactsList';
 import JobMap from 'components/JobMap';
 import JobNotesDashboard from 'components/JobNotesDashboard';
+import JobNotesDashboardEdit from 'components/JobNotesDashboardEdit';
 import JobProgressTable from 'components/JobProgressTable';
 import JobProgressTableEdit from 'components/JobProgressTableEdit';
 import ProgressStepper from 'components/ProgressStepper';
@@ -198,7 +199,15 @@ const DashboardJob = React.createClass({
               job={job}
               styles={styles}
             />
-            <JobNotesDashboard job={job} styles={styles} />
+            <JobNotesDashboard
+            job={job}
+            styles={styles}
+            />
+            <JobNotesDashboardEdit
+              job={job}
+              styles={styles}
+              onHandleSaveJob={this.handleSaveJob}
+            />
           </CardText>
           <CardActions expandable={true} style={{ marginBottom: '25px' }}>
             <FlatButton

@@ -8,10 +8,8 @@ const Footer = React.createClass({
   render() {
     const styleFooter = {
       backgroundColor: 'black',
-      bottom: '0',
       display: 'flex',
       height: '120px',
-      position: 'absolute',
       width: '100vw'
     };
 

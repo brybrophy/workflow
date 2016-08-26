@@ -36,12 +36,10 @@ const App = React.createClass({
   render() {
     return <div>
       <MainNav />
-      <main className="sticky-footer">
-        {React.cloneElement(this.props.children, {
-          jobs: this.state.jobs,
-          saveJob: this.saveJob
-        })}
-      </main>
+      {React.cloneElement(this.props.children, {
+        jobs: this.state.jobs,
+        saveJob: this.saveJob
+      })}
       <Footer />
     </div>
   }
