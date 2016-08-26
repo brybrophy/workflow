@@ -11,51 +11,17 @@ import Check from 'material-ui/svg-icons/navigation/check';
 import Clear from 'material-ui/svg-icons/content/clear';
 import DatePicker from 'material-ui/DatePicker';
 import FlatButton from 'material-ui/FlatButton';
+import InterviewColumn from 'components/InterviewColumn';
 import Paper from 'material-ui/Paper';
 import React from 'react';
 import Timestamp from 'react-timestamp';
 import TimePicker from 'material-ui/TimePicker';
 
-const monthNames = [
-  "Jan", "Feb", "Mar",
-  "April", "May", "June", "July",
-  "Aug", "Sept", "Oct",
-  "Nov", "Dec"
-];
-
 const JobProgressTableEdit = React.createClass({
   getInitialState() {
     return {
-      job: {},
-      informationalDate: '',
-      informationalTime: ''
+      job: this.props.job
     }
-  },
-
-  componentWillMount() {
-    const nextJob = this.props.job;
-
-    this.setState({ job: nextJob });
-  },
-
-  handleChangeDate(_date, newDate) {
-    const day = newDate.getDate();
-    const month = newDate.getMonth();
-    const year = newDate.getFullYear();
-
-    const addDate = `${monthNames[month]} ${day} ${year}`;
-
-    this.setState({ informationalDate: addDate });
-  },
-
-  handleChangeTime(_time, newTime) {
-    const hour = newTime.getHours();
-    const min = newTime.getMinutes();
-    const sec = newTime.getSeconds();
-
-    const addTime = `${hour}:${min}:${sec}`
-
-    this.setState({ informationalTime: addTime });
   },
 
   handleTouchTap() {
@@ -63,13 +29,10 @@ const JobProgressTableEdit = React.createClass({
   },
 
   handleTouchTapSave() {
-    const date = this.state.informationalDate;
-    const time = this.state.informationalTime;
-
     const nextDate = new Date(`${date} ${time}`);
 
     const nextJob = Object.assign({}, this.state.job, {
-      interviewInformational: { date: nextDate }
+      [name]: { date: nextDate }
     });
 
     this.props.onHandleSaveJob(nextJob);
@@ -84,66 +47,37 @@ const JobProgressTableEdit = React.createClass({
     return formatted;
   },
 
+  updateInterviewStep(data, type, name) {
+    const nextJob = Object.assign({}, this.state.job);
+
+    nextJob[name][type] = data;
+
+    this.setState({ job: nextJob });
+  },
+
   render() {
     const styles = this.props.styles;
     const job = this.props.job;
 
-    let dateApplied = 'Add Date';
-    let timeApplied = 'Add Time';
+    const interviewHeaders = [
+      'APPLIED',
+      'INFOMATIONAL',
+      'PHONE SCREEN',
+      'TAKE HOME',
+      'TECHNICAL',
+      'ON SITE',
+      'OFFER RECIEVED'
+    ];
 
-    let dateInformational = 'Add Date';
-    let timeInformational = 'Add Time';
-
-    let datePhone = 'Add Date';
-    let timePhone = 'Add Time';
-
-    let dateTakeHome = 'Add Date';
-    let timeTakeHome = 'Add Time';
-
-    let dateTechnical = 'Add Date';
-    let timeTechnical = 'Add Time';
-
-    let dateOnsite = 'Add Date';
-    let timeOnsite = 'Add Time';
-
-    let dateOffer = 'Add Date';
-    let timeOffer = 'Add Time';
-
-    if (job.interviewApplied.date) {
-      dateApplied = <Timestamp time={job.interviewApplied.date} format="date" />;
-      timeApplied = <Timestamp time={job.interviewApplied.date} format="time" />;
-    }
-
-    if (job.interviewInformational.date) {
-      dateInformational = <Timestamp time={job.interviewInformational.date} format="date" />;
-      timeInformational = <Timestamp time={job.interviewInformational.date} format="time" />;
-    }
-
-    if (job.interviewPhone.date) {
-      datePhone = <Timestamp time={job.interviewPhone.date} format="date" />;
-      timePhone = <Timestamp time={job.interviewPhone.date} format="time" />;
-    }
-
-    if (job.interviewTakeHome.date) {
-      dateTakeHome = <Timestamp time={job.interviewTakeHome.date} format="date" />;
-      timeTakeHome = <Timestamp time={job.interviewTakeHome.date} format="time" />;
-    }
-
-
-    if (job.interviewTechnical.date) {
-      dateTechnical = <Timestamp time={job.interviewTechnical.date} format="date" />;
-      timeTechnical = <Timestamp time={job.interviewTechnical.date} format="time" />;
-    }
-
-    if (job.interviewOnsite.date) {
-      dateOnsite = <Timestamp time={job.interviewOnsite.date} format="date" />;
-      timeOnsite = <Timestamp time={job.interviewOnsite.date} format="time" />;
-    }
-
-    if (job.interviewOffer.date) {
-      dateOffer = <Timestamp time={job.interviewOffer.date} format="date" />;
-      timeOffer = <Timestamp time={job.interviewOffer.date} format="time" />;
-    }
+    const interviewSteps = [
+      'interviewApplied',
+      'interviewInformational',
+      'interviewPhone',
+      'interviewTakeHome',
+      'interviewTechnical',
+      'interviewOnsite',
+      'interviewOffer'
+    ];
 
     return <div>
     <h4 style={{display: 'inline-block'}}>Progress</h4>
@@ -165,91 +99,21 @@ const JobProgressTableEdit = React.createClass({
     <Table style={styles.table} selectable={false}>
       <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
         <TableRow>
-          <TableHeaderColumn>APPLIED</TableHeaderColumn>
-          <TableHeaderColumn>INFOMATIONAL</TableHeaderColumn>
-          <TableHeaderColumn>PHONE SCREEN</TableHeaderColumn>
-          <TableHeaderColumn>TAKE HOME</TableHeaderColumn>
-          <TableHeaderColumn>TECHNICAL</TableHeaderColumn>
-          <TableHeaderColumn>ON SITE</TableHeaderColumn>
-          <TableHeaderColumn>OFFER RECIEVED</TableHeaderColumn>
+          {interviewHeaders.map((header) => {
+            return <TableHeaderColumn>{header}</TableHeaderColumn>
+          })}
         </TableRow>
       </TableHeader>
       <TableBody displayRowCheckbox={false}>
         <TableRow>
-          <TableRowColumn>
-            <DatePicker
-              formatDate={this.formatDate}
-              hintText={dateApplied}
-              mode="landscape"
-            />
-            <br />
-            <TimePicker hintText={timeApplied} />
-          </TableRowColumn>
-
-          <TableRowColumn>
-            <DatePicker
-              formatDate={this.formatDate}
-              hintText={dateInformational}
-              mode="landscape"
-              onChange={this.handleChangeDate}
-            />
-            <br />
-            <TimePicker
-              hintText={timeInformational}
-              onChange={this.handleChangeTime}
-            />
-          </TableRowColumn>
-
-          <TableRowColumn>
-            <DatePicker
-              formatDate={this.formatDate}
-              hintText={datePhone}
-              mode="landscape"
-            />
-            <br />
-            <TimePicker hintText={timePhone} />
-          </TableRowColumn>
-
-          <TableRowColumn>
-            <DatePicker
-              formatDate={this.formatDate}
-              hintText={dateTakeHome}
-              mode="landscape"
-            />
-            <br />
-            <TimePicker hintText={timeTakeHome} />
-          </TableRowColumn>
-
-          <TableRowColumn>
-            <DatePicker
-              formatDate={this.formatDate}
-              hintText={dateTechnical}
-              mode="landscape"
-            />
-            <br />
-            <TimePicker hintText={timeTechnical} />
-          </TableRowColumn>
-
-          <TableRowColumn>
-            <DatePicker
-              formatDate={this.formatDate}
-              hintText={dateOnsite}
-              mode="landscape"
-            />
-            <br />
-            <TimePicker hintText={timeOnsite} />
-          </TableRowColumn>
-
-          <TableRowColumn>
-            <DatePicker
-              formatDate={this.formatDate}
-              hintText={dateOffer}
-              mode="landscape"
-            />
-            <br />
-            <TimePicker hintText={timeOffer} />
-          </TableRowColumn>
-
+        {interviewSteps.map((step, index) => {
+          return <InterviewColumn
+            job={this.props.job}
+            key={index}
+            name={step}
+            updateInterviewStep={this.updateInterviewStep}
+          />;
+        })}
         </TableRow>
       </TableBody>
     </Table>

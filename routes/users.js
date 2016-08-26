@@ -68,7 +68,7 @@ router.get('/users/oauth/linkedin/callback', function(req, res, next) {
       });
 
       res.cookie('token', token);
-      return res.redirect('/jobs');
+      return res.redirect('/dashboard');
   });
 });
 

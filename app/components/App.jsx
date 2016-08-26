@@ -22,9 +22,9 @@ const App = React.createClass({
   },
 
   saveJob(nextJob) {
-    const nextJobs = this.state.jobs.map((job) => {
-      if (job.id !== nextJob.id) {
-        return job;
+    const nextJobs = this.state.jobs.map((element) => {
+      if (element.id !== nextJob.id) {
+        return element;
       }
 
       return nextJob;

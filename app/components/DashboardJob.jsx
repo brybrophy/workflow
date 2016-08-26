@@ -44,13 +44,13 @@ const DashboardJob = React.createClass({
     this.setState({ expanded: false });
   },
 
-  handleSaveJob(job) {
-    const id = job.id;
+  handleSaveJob(nextJob) {
+    const id = nextJob.id;
 
-    this.props.saveJob(job);
-    axios.patch(`/api/jobs/${id}`, job)
+    this.props.saveJob(nextJob);
+    axios.patch(`/api/jobs/${id}`, nextJob)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
       })
       .catch((err) => {
         console.error(err);
@@ -159,7 +159,12 @@ const DashboardJob = React.createClass({
             />
           }
 
-            <JobContactsList job={job} styles={styles} />
+            <JobContactsList
+              editing={this.state.editing}
+              editingId={this.state.editingId}
+              job={job}
+              styles={styles}
+            />
             <JobNotesDashboard job={job} styles={styles} />
           </CardText>
           <CardActions expandable={true} style={{ marginBottom: '25px' }}>
