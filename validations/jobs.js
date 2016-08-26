@@ -13,34 +13,41 @@ module.exports.post = {
       .min(7)
       .label('Job Post URL')
       .trim()
-      .uri(),
+      .uri()
+      .allow(''),
     companyName: Joi.string()
       .min(2)
       .label('Company Name')
       .trim()
-      .required(),
+      .required()
+      .allow(''),
     companyStreetAddress: Joi.string()
-      .min(3)
       .label('Company Street Address')
+      .allow('')
+      .min(3)
       .trim(),
     companyCity: Joi.string()
       .min(3)
       .label('Company City')
-      .trim(),
+      .trim()
+      .allow(''),
     companyState: Joi.string()
       .min(2)
       .max(2)
       .label('Company State')
       .uppercase()
-      .trim(),
+      .trim()
+      .allow(''),
     companyZip: Joi.string()
       .min(5)
       .label('Company Zip')
-      .trim(),
+      .trim()
+      .allow(''),
     companyPhone: Joi.string()
       .min(7)
       .label('Company Phone Number')
-      .trim(),
+      .trim()
+      .allow(''),
     interviewInformational: Joi.object()
       .label('Informational Interview'),
     interviewApplied: Joi.object()
@@ -60,6 +67,7 @@ module.exports.post = {
     notes: Joi.string()
       .label('Notes')
       .trim()
+      .allow('')
   }
 };
 
@@ -73,7 +81,8 @@ module.exports.patch = {
       .min(7)
       .label('Job Post URL')
       .trim()
-      .uri(),
+      .uri()
+      .allow(''),
     companyName: Joi.string()
       .min(2)
       .label('Company Name')
@@ -81,25 +90,30 @@ module.exports.patch = {
     companyStreetAddress: Joi.string()
       .min(3)
       .label('Company Street Address')
-      .trim(),
+      .trim()
+      .allow(''),
     companyCity: Joi.string()
       .min(3)
       .label('Company City')
-      .trim(),
+      .trim()
+      .allow(''),
     companyState: Joi.string()
       .min(2)
       .max(2)
       .label('Company State')
       .uppercase()
-      .trim(),
+      .trim()
+      .allow(''),
     companyZip: Joi.string()
       .min(5)
       .label('Company Zip')
-      .trim(),
+      .trim()
+      .allow(''),
     companyPhone: Joi.string()
       .min(7)
       .label('Company Phone Number')
-      .trim(),
+      .trim()
+      .allow(''),
     interviewInformational: Joi.object()
       .label('Informational Interview'),
     interviewApplied: Joi.object()
@@ -119,5 +133,6 @@ module.exports.patch = {
     notes: Joi.string()
       .label('Notes')
       .trim()
+      .allow('')
   }
 };

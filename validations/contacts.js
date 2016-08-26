@@ -21,26 +21,28 @@ module.exports.post = {
       .max(13)
       .label('Phone Number')
       .trim()
-      .required(),
+      .allow(''),
     email: Joi.string()
       .email()
       .max(63)
       .label('Email')
       .trim()
-      .required(),
+      .allow(''),
     title: Joi.string()
       .min(3)
       .label('Title')
-      .trim(),
+      .trim()
+      .allow(''),
     company: Joi.string()
       .min(2)
       .label('Company')
-      .trim(),
+      .trim()
+      .allow(''),
     linkedInUrl: Joi.string()
       .max(63)
       .label('LinkedIn URL')
       .trim()
-      .required()
+      .allow('')
   }
 };
 
@@ -60,23 +62,28 @@ module.exports.patch = {
       .min(10)
       .max(13)
       .label('Phone Number')
-      .trim(),
+      .trim()
+      .allow(''),
     email: Joi.string()
       .email()
       .max(63)
       .label('Email')
-      .trim(),
+      .trim()
+      .allow(''),
     title: Joi.string()
       .min(3)
       .label('Title')
-      .trim(),
+      .trim()
+      .allow(''),
     company: Joi.string()
       .min(2)
       .label('Company')
-      .trim(),
+      .trim()
+      .allow(''),
     linkedInUrl: Joi.string()
       .max(63)
       .label('LinkedIn URL')
       .trim()
+      .allow('')
   }
 };
