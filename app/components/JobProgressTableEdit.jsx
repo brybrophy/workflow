@@ -17,6 +17,26 @@ import React from 'react';
 import Timestamp from 'react-timestamp';
 import TimePicker from 'material-ui/TimePicker';
 
+const interviewSteps = [
+  'interviewApplied',
+  'interviewInformational',
+  'interviewPhone',
+  'interviewTakeHome',
+  'interviewTechnical',
+  'interviewOnsite',
+  'interviewOffer'
+];
+
+const interviewHeaders = [
+  'APPLIED',
+  'INFOMATIONAL',
+  'PHONE SCREEN',
+  'TAKE HOME',
+  'TECHNICAL',
+  'ON SITE',
+  'OFFER RECIEVED'
+];
+
 const JobProgressTableEdit = React.createClass({
   getInitialState() {
     return {
@@ -29,11 +49,19 @@ const JobProgressTableEdit = React.createClass({
   },
 
   handleTouchTapSave() {
-    const nextDate = new Date(`${date} ${time}`);
+    const nextJob = Object.assign({}, this.state.job);
 
-    const nextJob = Object.assign({}, this.state.job, {
-      [name]: { date: nextDate }
-    });
+    for (const step of interviewSteps) {
+      if (nextJob[step]['date'] && nextJob[step]['time']) {
+        const date = nextJob[step]['date'];
+        const time = nextJob[step]['time'];
+
+        const nextInterview = new Date(`${date} ${time}`);
+
+        nextJob[step]['date'] = nextInterview;
+        nextJob[step]['time'] = '';
+      }
+    }
 
     this.props.onHandleSaveJob(nextJob);
     this.setState({ job: nextJob });
@@ -59,26 +87,6 @@ const JobProgressTableEdit = React.createClass({
     const styles = this.props.styles;
     const job = this.props.job;
 
-    const interviewHeaders = [
-      'APPLIED',
-      'INFOMATIONAL',
-      'PHONE SCREEN',
-      'TAKE HOME',
-      'TECHNICAL',
-      'ON SITE',
-      'OFFER RECIEVED'
-    ];
-
-    const interviewSteps = [
-      'interviewApplied',
-      'interviewInformational',
-      'interviewPhone',
-      'interviewTakeHome',
-      'interviewTechnical',
-      'interviewOnsite',
-      'interviewOffer'
-    ];
-
     return <div>
     <h4 style={{display: 'inline-block'}}>Progress</h4>
     <FlatButton
@@ -99,8 +107,8 @@ const JobProgressTableEdit = React.createClass({
     <Table style={styles.table} selectable={false}>
       <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
         <TableRow>
-          {interviewHeaders.map((header) => {
-            return <TableHeaderColumn>{header}</TableHeaderColumn>
+          {interviewHeaders.map((header, index) => {
+            return <TableHeaderColumn key={index}>{header}</TableHeaderColumn>
           })}
         </TableRow>
       </TableHeader>

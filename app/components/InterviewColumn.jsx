@@ -35,7 +35,6 @@ const InterviewColumn  = React.createClass({
   render() {
     const job = this.props.job;
     const name = this.props.name;
-    console.log(name);
     let dateInformational = 'Add Date';
     let timeInformational = 'Add Time';
     if (job[this.props.name]['date']) {

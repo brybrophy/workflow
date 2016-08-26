@@ -48,6 +48,11 @@ p {
   font-family: 'MontserratHairline';
 }
 
+.sticky-footer {
+  height: calc(100vh - 245px);
+  overflow: scroll;
+}
+
 @media (max-width: 900px) {
     .hide-on-small {
       display: none;
