@@ -338,7 +338,7 @@ const JobSubNav = React.createClass({
       <SwipeableViews
         index={this.state.slideIndex}
         onChangeIndex={this.handleChange}
-        style={{marginBottom: '120px'}}
+        style={{marginBottom: '90px'}}
       >
         <JobForm updateJob={this.updateJob} />
         <ContactView
