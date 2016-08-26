@@ -19,12 +19,13 @@ router.post('/contacts', ev(validations.post), (req, res, next) => {
     firstName,
     lastName,
     email,
-    phone,
     title,
     company,
     linkedInUrl,
     userId
   } = req.body;
+
+  let { phone } = req.body;
 
   if (phone) {
     phone = phone.replace(/[^\d]/g, '');
