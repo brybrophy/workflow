@@ -10,6 +10,7 @@ import {
 import Check from 'material-ui/svg-icons/navigation/check';
 import Clear from 'material-ui/svg-icons/content/clear';
 import FlatButton from 'material-ui/FlatButton';
+import Joi from 'joi';
 import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 import React from 'react';

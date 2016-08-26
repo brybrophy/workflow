@@ -11,7 +11,7 @@ import Check from 'material-ui/svg-icons/navigation/check';
 import Clear from 'material-ui/svg-icons/content/clear';
 import DatePicker from 'material-ui/DatePicker';
 import FlatButton from 'material-ui/FlatButton';
-import InterviewColumn from 'components/InterviewColumn';
+import InterviewColumnEdit from 'components/InterviewColumnEdit';
 import Paper from 'material-ui/Paper';
 import React from 'react';
 import Timestamp from 'react-timestamp';
@@ -115,7 +115,7 @@ const JobProgressTableEdit = React.createClass({
       <TableBody displayRowCheckbox={false}>
         <TableRow>
         {interviewSteps.map((step, index) => {
-          return <InterviewColumn
+          return <InterviewColumnEdit
             job={this.props.job}
             key={index}
             name={step}
