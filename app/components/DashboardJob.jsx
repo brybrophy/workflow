@@ -205,6 +205,7 @@ const DashboardJob = React.createClass({
               <JobNotesDashboardEdit
                 job={job}
                 styles={styles}
+                onHandleEditing={this.handleEditing}
                 onHandleSaveJob={this.handleSaveJob}
               />
               :

@@ -16,6 +16,15 @@ const JobNotesDashboardEdit = React.createClass({
     this.updateNotes(event.target.value);
   },
 
+  handleTouchTap() {
+    this.props.onHandleEditing(null, null)
+  },
+
+  handleSaveTouchTap() {
+    this.props.onHandleEditing(null, null)
+    this.props.onHandleSaveJob(this.state.job)
+  },
+
   updateNotes(nextNotes) {
     const nextJob = Object.assign({}, this.props.job, { notes: nextNotes });
     console.log(nextJob);
