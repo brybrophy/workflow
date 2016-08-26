@@ -114,7 +114,9 @@ router.post('/jobs/:id/contacts', (req, res, next) => {
 });
 
 router.post('/jobs', ev(validations.post), (req, res, next) => {
-  const { title, jobPostUrl, companyName, companyStreetAddress, companyCity, companyState, companyZip, companyPhone, interviewInformational, interviewApplied, interviewPhone, interviewTechnical, interviewOnsite, interviewTakeHome, interviewOffer, interviewRejected, notes, userId } = req.body;
+  const { title, jobPostUrl, companyName, companyStreetAddress, companyCity, companyState, companyZip, companyPhone, interviewInformational, interviewApplied, interviewPhone, interviewTechnical, interviewOnsite, interviewTakeHome, interviewOffer, interviewRejected, notes } = req.body;
+
+  const userId = 1;
 
   const interviewStatus = JSON.stringify({
     informational: interviewInformational,
