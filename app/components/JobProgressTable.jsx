@@ -43,7 +43,7 @@ const JobProgressTable = React.createClass({
     const styles = this.props.styles;
 
     return <div>
-    <h4 style={{display: 'inline-block'}}>Progress</h4>
+    <h4 style={{display: 'inline-block'}}>Interview Progress</h4>
     <FlatButton
       icon={<EditMode />}
       label="Edit"

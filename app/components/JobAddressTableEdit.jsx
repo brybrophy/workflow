@@ -63,7 +63,7 @@ const JobAddressTableEdit = React.createClass({
       const states = ['', 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'];
 
     return <div>
-      <h4 style={{display: 'inline-block'}}>Company</h4>
+      <h4 style={{display: 'inline-block'}}>Company Info</h4>
       <FlatButton
         icon={<Check />}
         label="Save"

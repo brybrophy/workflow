@@ -22,7 +22,7 @@ const JobAddressTable = React.createClass({
     const styles = this.props.styles;
     const job = this.props.job;
     return <div>
-      <h4 style={{display: 'inline-block'}}>Company</h4>
+      <h4 style={{display: 'inline-block'}}>Company Info</h4>
       <FlatButton
         icon={<EditMode />}
         label="Edit"
