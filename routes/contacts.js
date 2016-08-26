@@ -19,38 +19,55 @@ router.post('/contacts', ev(validations.post), (req, res, next) => {
     firstName,
     lastName,
     email,
-    phoneNumber,
+    phone,
     title,
     company,
     linkedInUrl,
     userId
   } = req.body;
 
-  const phone = phoneNumber.replace(/[^\d]/g, '');
+  if (phone) {
+    phone = phone.replace(/[^\d]/g, '');
+  }
 
-  knex('contacts')
-    .select(knex.raw('1=1'))
-    .where('email', email)
-    .first()
-    .then((exists) => {
-      if (exists) {
-        throw boom.create(409, 'Contact already exists.')
-      }
+  // knex('contacts')
+  //   .select(knex.raw('1=1'))
+  //   .where('email', email)
+  //   .first()
+  //   .then((exists) => {
+  //     if (exists) {
+  //       throw boom.create(409, 'Contact already exists.')
+  //     }
+  //
+  //     const newContact = {
+  //       firstName,
+  //       lastName,
+  //       email,
+  //       phone,
+  //       title,
+  //       company,
+  //       linkedInUrl,
+  //       userId: 1
+  //     }
+  //     const row = decamelizeKeys(newContact);
+  //
+  //     return knex('contacts').insert(row, '*');
+  //   })
 
-      const newContact = {
-        firstName,
-        lastName,
-        email,
-        phone,
-        title,
-        company,
-        linkedInUrl,
-        userId: 1
-      }
-      const row = decamelizeKeys(newContact);
+  const newContact = {
+    firstName,
+    lastName,
+    email,
+    phone,
+    title,
+    company,
+    linkedInUrl,
+    userId: 1
+  };
 
-      return knex('contacts').insert(row, '*');
-    })
+  const row = decamelizeKeys(newContact);
+
+  knex('contacts').insert(row, '*')
     .then((newContacts) => {
       res.send(camelizeKeys(newContacts[0]));
     })
