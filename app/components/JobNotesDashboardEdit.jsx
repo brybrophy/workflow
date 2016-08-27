@@ -9,25 +9,24 @@ const JobNotesDashboardEdit = React.createClass({
   getInitialState() {
     return {
       job: this.props.job
-    }
+    };
   },
 
   handleChange(event) {
     this.updateNotes(event.target.value);
   },
 
-  handleTouchTap() {
-    this.props.onHandleEditing(null, null)
+  handleSaveTouchTap() {
+    this.props.onHandleEditing(null, null);
+    this.props.onHandleSaveJob(this.state.job);
   },
 
-  handleSaveTouchTap() {
-    this.props.onHandleEditing(null, null)
-    this.props.onHandleSaveJob(this.state.job)
+  handleTouchTap() {
+    this.props.onHandleEditing(null, null);
   },
 
   updateNotes(nextNotes) {
     const nextJob = Object.assign({}, this.props.job, { notes: nextNotes });
-    console.log(nextJob);
 
     this.setState({ job: nextJob });
   },
@@ -37,34 +36,34 @@ const JobNotesDashboardEdit = React.createClass({
     const styles = this.props.styles;
 
     return <div>
-      <h4 style={{display: 'inline-block'}}>Notes</h4>
+      <h4 style={{ display: 'inline-block' }}>Notes</h4>
       <FlatButton
         icon={<Check />}
         label="Save"
         onTouchTap={this.handleSaveTouchTap}
         primary={true}
-        style={{float: 'right'}}
+        style={{ float: 'right' }}
       />
       <FlatButton
         icon={<Clear />}
         label="Cancel"
         onTouchTap={this.handleTouchTap}
         secondary={true}
-        style={{float: 'right'}}
+        style={{ float: 'right' }}
       />
       <Paper style={styles.section}>
-      <TextField
-        fullWidth={true}
-        hintText="Type job notes here"
-        multiLine={true}
-        name="notes"
-        onChange={this.handleChange}
-        style={{ fontFamily: 'MontserratLight' }}
-        underlineShow={false}
-        value={this.props.job.notes}
-      />
+        <TextField
+          fullWidth={true}
+          hintText="Type job notes here"
+          multiLine={true}
+          name="notes"
+          onChange={this.handleChange}
+          style={{ fontFamily: 'MontserratLight' }}
+          underlineShow={false}
+          value={job.notes}
+        />
       </Paper>
-    </div>
+    </div>;
   }
 });
 
