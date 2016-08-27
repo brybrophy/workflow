@@ -142,7 +142,7 @@ const ContactForm = React.createClass({
     };
 
     return <Row style={{ margin: '20px auto' }}>
-      <Col xs={12} style={styles.column}>
+      <Col style={styles.column} xs={12}>
         <SelectField
           hintStyle={styles.textFieldHint}
           hintText="SELECT EXISTING CONTACT"
@@ -169,10 +169,10 @@ const ContactForm = React.createClass({
           />
         </SelectField>
       </Col>
-      <Col xs={12} style={styles.column}>
+      <Col style={styles.column} xs={12}>
         <p style={{ marginTop: '20px', textAlign: 'center' }}>ADD CONTACT</p>
       </Col>
-      <Col xs={12} sm={9} style={styles.column}>
+      <Col sm={9} style={styles.column} xs={12}>
         <TextField
           errorStyle={styles.errors}
           errorText={errors.linkedInUrl}
@@ -186,7 +186,7 @@ const ContactForm = React.createClass({
           value={contact.linkedInUrl}
         />
       </Col>
-      <Col xs={12} sm={3} style={styles.column}>
+      <Col sm={3} style={styles.column} xs={12}>
         <FlatButton
           backgroundColor="#327F9E"
           hoverColor="#47B4E0"
@@ -195,7 +195,7 @@ const ContactForm = React.createClass({
           style={styles.flatButton}
         />
       </Col>
-      <Col xs={12} sm={6} style={styles.column}>
+      <Col sm={6} style={styles.column} xs={12}>
         <TextField
           errorStyle={styles.errors}
           errorText={errors.firstName}
@@ -209,7 +209,7 @@ const ContactForm = React.createClass({
           value={contact.firstName}
         />
       </Col>
-      <Col xs={12} sm={6} style={styles.column}>
+      <Col sm={6} style={styles.column} xs={12}>
         <TextField
           errorStyle={styles.errors}
           errorText={errors.lastName}
@@ -223,7 +223,7 @@ const ContactForm = React.createClass({
           value={contact.lastName}
         />
       </Col>
-      <Col xs={12} sm={6} style={styles.column}>
+      <Col sm={6} style={styles.column} xs={12}>
         <TextField
           errorStyle={styles.errors}
           errorText={errors.email}
@@ -237,7 +237,7 @@ const ContactForm = React.createClass({
           value={contact.email}
         />
       </Col>
-      <Col xs={12} sm={6} style={styles.column}>
+      <Col sm={6} style={styles.column} xs={12}>
         <TextField
           errorStyle={styles.errors}
           errorText={errors.phone}
@@ -251,7 +251,7 @@ const ContactForm = React.createClass({
           value={contact.phone}
         />
       </Col>
-      <Col xs={12} sm={6} style={styles.column}>
+      <Col sm={6} style={styles.column} xs={12}>
         <TextField
           errorStyle={styles.errors}
           errorText={errors.title}
@@ -265,7 +265,7 @@ const ContactForm = React.createClass({
           value={contact.title}
         />
       </Col>
-      <Col xs={12} sm={6} style={styles.column}>
+      <Col sm={6} style={styles.column} xs={12}>
         <TextField
           errorStyle={styles.errors}
           errorText={errors.company}
@@ -279,7 +279,7 @@ const ContactForm = React.createClass({
           value={contact.company}
         />
       </Col>
-      <Col xs={12} sm={6} style={styles.column}>
+      <Col sm={6} style={styles.column} xs={12}>
         <FlatButton
           backgroundColor="#E48C8C"
           hoverColor="#ED4C4C"
@@ -288,7 +288,7 @@ const ContactForm = React.createClass({
           style={styles.flatButton}
         />
       </Col>
-      <Col xs={12} sm={6} style={styles.column}>
+      <Col sm={6} style={styles.column} xs={12}>
         <FlatButton
           backgroundColor="#327F9E"
           hoverColor="#47B4E0"
