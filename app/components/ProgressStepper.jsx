@@ -1,66 +1,76 @@
+import { Step, StepButton, Stepper } from 'material-ui/Stepper';
 import React from 'react';
-import {
-  Step,
-  Stepper,
-  StepButton,
-} from 'material-ui/Stepper';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
 
 const ProgressStepper = React.createClass({
   getInitialState() {
     return {
       finished: false,
-      stepIndex: 0,
-    }
+      stepIndex: 0
+    };
+  },
+
+  handleClick(event) {
+    const stepIndex = Number.parseInt(event.currentTarget.value);
+
+    this.setState({ stepIndex });
   },
 
   handleNext() {
-    const {stepIndex} = this.state;
-    this.setState({
-      stepIndex: stepIndex + 1,
-      finished: stepIndex >= 2,
-    });
+    const { stepIndex } = this.state;
+
+    this.setState({ finished: stepIndex >= 2, stepIndex: stepIndex + 1 });
   },
 
   handlePrev() {
-    const {stepIndex} = this.state;
+    const { stepIndex } = this.state;
+
     if (stepIndex > 0) {
-      this.setState({stepIndex: stepIndex - 1});
+      this.setState({ stepIndex: stepIndex - 1 });
     }
   },
 
   render() {
-    const {finished, stepIndex} = this.state;
-    const contentStyle = {margin: '0 16px'};
+    const { stepIndex } = this.state;
 
-    return (
-      <div>
-        <Stepper linear={false} activeStep={stepIndex}>
-          <Step>
-            <StepButton onClick={() => this.setState({stepIndex: 0})}>Applied</StepButton>
-          </Step>
-          <Step>
-            <StepButton onClick={() => this.setState({stepIndex: 1})}>Informational</StepButton>
-          </Step>
-          <Step>
-            <StepButton onClick={() => this.setState({stepIndex: 2})}>Phone Screen</StepButton>
-          </Step>
-          <Step>
-            <StepButton onClick={() => this.setState({stepIndex: 3})}>Take Home</StepButton>
-          </Step>
-          <Step>
-            <StepButton onClick={() => this.setState({stepIndex: 4})}>Technical</StepButton>
-          </Step>
-          <Step>
-            <StepButton onClick={() => this.setState({stepIndex: 5})}>On Site</StepButton>
-          </Step>
-          <Step>
-            <StepButton onClick={() => this.setState({stepIndex: 6})}>Offer Recieved</StepButton>
-          </Step>
-        </Stepper>
-      </div>
-    );
+    return <div>
+      <Stepper activeStep={stepIndex} linear={false}>
+        <Step>
+          <StepButton onClick={this.handleClick} value={0}>
+            Applied
+          </StepButton>
+        </Step>
+        <Step>
+          <StepButton onClick={this.handleClick} value={1}>
+            Informational
+          </StepButton>
+        </Step>
+        <Step>
+          <StepButton onClick={this.handleClick} value={2}>
+            Phone Screen
+          </StepButton>
+        </Step>
+        <Step>
+          <StepButton onClick={this.handleClick} value={3}>
+            Take Home
+          </StepButton>
+        </Step>
+        <Step>
+          <StepButton onClick={this.handleClick} value={4}>
+            Technical
+          </StepButton>
+        </Step>
+        <Step>
+          <StepButton onClick={this.handleClick} value={5}>
+            On Site
+          </StepButton>
+        </Step>
+        <Step>
+          <StepButton onClick={this.handleClick} value={6}>
+            Offer Recieved
+          </StepButton>
+        </Step>
+      </Stepper>
+    </div>;
   }
 });
 
