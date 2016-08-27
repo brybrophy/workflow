@@ -73,7 +73,9 @@ const DashboardJob = React.createClass({
   render() {
     const { jobs } = this.props;
 
-    jobs.sort((p1, p2) => p1.companyName > p2.companyName);
+    if (jobs.length > 1) {
+      jobs.sort((p1, p2) => p1.companyName > p2.companyName);
+    }
 
     const styles = {
       cardHeader: {

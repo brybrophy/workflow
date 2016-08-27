@@ -37,7 +37,8 @@ const JobSubNav = React.createClass({
         interviewTechnical: { date: '' },
         interviewOnsite: { date: '' },
         interviewOffer: { date: '' },
-        interviewRejected: { date: '' }
+        interviewRejected: { date: '' },
+        userId: window.COOKIES.userId
       },
 
       slideIndex: 0
@@ -319,7 +320,10 @@ const JobSubNav = React.createClass({
         onChangeIndex={this.handleChange}
         style={styles.swipeableViews}
       >
-        <JobForm updateJob={this.updateJob} />
+        <JobForm
+          cookies={this.props.cookies}
+          updateJob={this.updateJob}
+        />
         <ContactView
           contacts={this.state.contacts}
           createContact={this.createContact}

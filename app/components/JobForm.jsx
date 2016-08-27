@@ -54,7 +54,8 @@ const JobForm = React.createClass({
         interviewTechnical: { date: '' },
         interviewOnsite: { date: '' },
         interviewOffer: { date: '' },
-        interviewRejected: { date: '' }
+        interviewRejected: { date: '' },
+        userId: this.props.cookies.userId
       }
     };
   },

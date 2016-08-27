@@ -7,8 +7,8 @@ import axios from 'axios';
 const App = React.createClass({
   getInitialState() {
     return {
+      cookies: {},
       jobs: [],
-
       snackbar: {
         message: '',
         open: false
@@ -17,9 +17,11 @@ const App = React.createClass({
   },
 
   componentWillMount() {
-    axios.get('/api/jobs')
+    this.setCookies()
+
+    axios.get(`/api/jobs/${window.COOKIES.userId}/users`)
       .then((res) => {
-        this.setState({ jobs: res.data });
+        this.setState({ cookies: window.COOKIES, jobs: res.data });
       })
       .catch(() => {
         const nextSnackbar = {
@@ -55,11 +57,24 @@ const App = React.createClass({
     this.setState({ jobs: nextJobs });
   },
 
+<<<<<<< d8f61d69134da1634d67fb8ad9f995579a8aed69
   showSnackbar(nextSnackbar) {
     this.setState({ snackbar: nextSnackbar });
+=======
+  setCookies() {
+    window.COOKIES = {};
+    document.cookie.split('; ').forEach(function(prop) {
+      var propKey = prop.split('=')[0];
+      var propValue = prop.split('=')[1];
+
+      window.COOKIES[propKey] = propValue;
+
+    });
+>>>>>>> Fill jobs array with current user's jobs
   },
 
   render() {
+    console.log(this.state.jobs);
     return <div>
       <Snackbar
         autoHideDuration={3000}
@@ -70,6 +85,7 @@ const App = React.createClass({
       <MainNav />
       {React.cloneElement(this.props.children, {
         addNewjob: this.addNewJob,
+        cookies: this.state.cookies,
         jobs: this.state.jobs,
         saveJob: this.saveJob,
         showSnackbar: this.showSnackbar

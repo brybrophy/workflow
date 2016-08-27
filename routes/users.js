@@ -54,7 +54,8 @@ router.get('/users/oauth/linkedin/callback', function(req, res, next) {
                return knex('users').insert(row, '*');
           })
           .then((users) => {
-            res.cookie('userrId', users[0]['id']);
+            res.cookie('userId', users[0]['id']);
+            res.cookie('loggedIn', 'true');
             res.cookie('token', token);
             return res.redirect('/dashboard');
           })

@@ -36,6 +36,37 @@ router.get('/jobs', (req, res, next) => {
     });
 });
 
+router.get('/jobs/:userId/users', (req, res, next) => {
+  const userId = Number.parseInt(req.params.userId);
+
+  if (Number.isNaN(userId)) {
+    return next();
+  }
+
+  knex('jobs')
+    .where('user_id', userId)
+    .then((rows) => {
+      const jobs = camelizeKeys(rows);
+
+      for (const job of jobs) {
+        job.interviewApplied = job.interviewStatus.applied;
+        job.interviewInformational = job.interviewStatus.informational;
+        job.interviewPhone = job.interviewStatus.phone;
+        job.interviewTakeHome = job.interviewStatus.takeHome;
+        job.interviewTechnical = job.interviewStatus.technical;
+        job.interviewOnsite = job.interviewStatus.onsite;
+        job.interviewOffer = job.interviewStatus.offer;
+        job.interviewRejected = job.interviewStatus.rejected;
+        delete job.interviewStatus;
+      }
+
+      res.send(jobs);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 router.get('/jobs/:id', (req, res, next) => {
   const id = Number.parseInt(req.params.id);
 
@@ -114,9 +145,7 @@ router.post('/jobs/:id/contacts', (req, res, next) => {
 });
 
 router.post('/jobs', ev(validations.post), (req, res, next) => {
-  const { title, jobPostUrl, companyName, companyStreetAddress, companyCity, companyState, companyZip, companyPhone, interviewInformational, interviewApplied, interviewPhone, interviewTechnical, interviewOnsite, interviewTakeHome, interviewOffer, interviewRejected, notes } = req.body;
-
-  const userId = 1;
+  const { title, jobPostUrl, companyName, companyStreetAddress, companyCity, companyState, companyZip, companyPhone, interviewInformational, interviewApplied, interviewPhone, interviewTechnical, interviewOnsite, interviewTakeHome, interviewOffer, interviewRejected, notes, userId } = req.body;
 
   const interviewStatus = JSON.stringify({
     informational: interviewInformational,
