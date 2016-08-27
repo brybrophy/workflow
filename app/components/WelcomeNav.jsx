@@ -10,106 +10,100 @@ const WelcomeNav = React.createClass({
   },
 
   render() {
-    const styleAppBar = {
-      boxShadow: 'none',
-      height: '125px',
-      paddingRight: '70px'
+    const styles = {
+      appBar: {
+        boxShadow: 'none',
+        height: '125px',
+        paddingRight: '70px'
+      },
+      flatButton: {
+        height: '125px',
+        lineHeight: '125px',
+        minWidth: '60px'
+      },
+      flatButtonAlt: {
+        height: '125px',
+        lineHeight: '125px',
+        minWidth: '60px'
+      },
+      flatButtonLabel: {
+        fontFamily: 'MontserratLight',
+        fontSize: '1.2rem',
+        letterSpacing: '0.12rem',
+        padding: '0'
+      },
+      flatButtonLabelAlt: {
+        border: '3px solid white',
+        fontFamily: 'MontserratLight',
+        fontSize: '1.4rem',
+        letterSpacing: '0.12rem',
+        margin: '0 10px',
+        padding: '8px'
+      },
+      iconLeft: {
+        height: '125px',
+        lineHeight: '125px',
+        marginLeft: '5%',
+        marginTop: '20px'
+      },
+      navbarLine: {
+        color: 'white',
+        fontFamily: 'MontserratHairline',
+        fontSize: '2rem',
+        marginLeft: '18px',
+        marginRight: '15px',
+        paddingTop: '30px'
+      },
+      subTitle: {
+        fontFamily: 'MontserratHairline',
+        fontSize: '1.7rem',
+        marginLeft: '10px',
+        position: 'relative',
+        top: '-2px'
+      },
+      title: {
+        cursor: 'pointer',
+        fontFamily: 'MontserratHairline',
+        fontSize: '1.2rem',
+        height: '125px',
+        letterSpacing: '0.12rem',
+        lineHeight: '71px',
+        marginTop: '20px'
+      }
     };
 
-    const styleFlatButton = {
-      height: '125px',
-      lineHeight: '125px',
-      minWidth: '60px'
-    };
-
-    const styleFlatButtonAlt = {
-      height: '125px',
-      lineHeight: '125px',
-      minWidth: '60px'
-    };
-
-    const styleFlatButtonLabel = {
-      fontFamily: 'MontserratLight',
-      fontSize: '1.2rem',
-      letterSpacing: '0.12rem',
-      padding: '0'
-    };
-
-    const styleFlatButtonLabelAlt = {
-      border: '3px solid white',
-      fontFamily: 'MontserratLight',
-      fontSize: '1.4rem',
-      letterSpacing: '0.12rem',
-      margin: '0 10px',
-      padding: '8px'
-    };
-
-    const styleIconLeft = {
-      height: '125px',
-      lineHeight: '125px',
-      marginLeft: '5%',
-      marginTop: '20px'
-    };
-
-    const styleNavbarLine = {
-      color: 'white',
-      fontFamily: 'MontserratHairline',
-      fontSize: '2rem',
-      marginLeft: '18px',
-      marginRight: '15px',
-      paddingTop: '30px'
-    };
-
-    const styleSubTitle = {
-      fontFamily: 'MontserratHairline',
-      fontSize: '1.7rem',
-      marginLeft: '10px',
-      position: 'relative',
-      top: '-2px'
-    };
-
-    const styleTitle = {
-      cursor: 'pointer',
-      fontFamily: 'MontserratHairline',
-      fontSize: '1.2rem',
-      height: '125px',
-      letterSpacing: '0.12rem',
-      lineHeight: '71px',
-      marginTop: '20px'
-    };
-
-    return <div><AppBar
-      iconElementLeft={<NavLogo />}
-      iconStyleLeft={styleIconLeft}
-      style={styleAppBar}
-      title={<h1>workflow <span className="hairline-font">|</span>
-        <span style={styleSubTitle}>Job Search Management</span>
-      </h1>}
-        titleStyle={styleTitle}
+    return <div>
+      <AppBar
+        iconElementLeft={<NavLogo />}
+        iconStyleLeft={styles.iconLeft}
+        style={styles.appBar}
+        title={
+          <h1>workflow <span className="hairline-font">|</span>
+            <span style={styles.subTitle}>Job Search Management</span>
+          </h1>
+        }
+        titleStyle={styles.title}
       >
-
-      <h1 className="hide-on-small" style={styleNavbarLine}> | </h1>
-
-      <span className="hide-on-small">
-        <FlatButton
-          label="Login"
-          labelStyle={styleFlatButtonLabel}
-          onTouchTap={this.handleTouchTap}
-          style={styleFlatButton}
-        />
-      </span>
-
-      <span className="hide-on-small">
-        <FlatButton
-          className="hide-on-small"
-          label="Sign Up"
-          onTouchTap={this.handleTouchTap}
-          style={styleFlatButtonAlt}
-          labelStyle={styleFlatButtonLabelAlt}
-        />
-      </span>
-    </AppBar>
-    {this.props.children}
+        <h1 className="hide-on-small" style={styles.navbarLine}> | </h1>
+        <span className="hide-on-small">
+          <FlatButton
+            label="Login"
+            labelStyle={styles.flatButtonLabel}
+            onTouchTap={this.handleTouchTap}
+            style={styles.flatButton}
+          />
+        </span>
+        <span className="hide-on-small">
+          <FlatButton
+            className="hide-on-small"
+            label="Sign Up"
+            labelStyle={styles.flatButtonLabelAlt}
+            onTouchTap={this.handleTouchTap}
+            style={styles.flatButtonAlt}
+          />
+        </span>
+      </AppBar>
+      {this.props.children}
     </div>;
   }
 });
