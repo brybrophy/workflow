@@ -1,4 +1,3 @@
-import { Link, withRouter } from 'react-router';
 import { Tab, Tabs } from 'material-ui/Tabs';
 import ContactView from 'components/ContactView';
 import DeleteDialog from 'components/DeleteDialog';
@@ -8,6 +7,7 @@ import JobProgressView from 'components/JobProgressView';
 import React from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import axios from 'axios';
+import { withRouter } from 'react-router';
 
 const JobSubNav = React.createClass({
   getInitialState() {
@@ -64,7 +64,7 @@ const JobSubNav = React.createClass({
     const nextEditing = this.state.contactEditing.concat(contact);
     const nextContacts = [contact].concat(this.state.contacts);
 
-    this.setState({  contactEditing: nextEditing, contacts: nextContacts });
+    this.setState({ contactEditing: nextEditing, contacts: nextContacts });
   },
 
   deleteContact(contact) {
@@ -140,20 +140,20 @@ const JobSubNav = React.createClass({
     const nextJob = Object.assign({}, this.state.job);
 
     for (const step of interviewSteps) {
-      if (nextJob[step]['date'] && nextJob[step]['time']) {
-        const date = nextJob[step]['date'];
-        const time = nextJob[step]['time'];
+      if (nextJob[step].date && nextJob[step].time) {
+        const date = nextJob[step].date;
+        const time = nextJob[step].time;
 
         const nextInterview = new Date(`${date} ${time}`);
 
-        nextJob[step]['date'] = nextInterview;
-        nextJob[step]['time'] = '';
+        nextJob[step].date = nextInterview;
+        nextJob[step].time = '';
       }
     }
 
     axios.patch(`/api/jobs/${this.state.job.id}`, nextJob)
       .then((res) => {
-        this.setState({ job: nextJob, slideIndex: 3 });
+        this.setState({ job: res.data, slideIndex: 3 });
       })
       .catch(() => {
         const nextSnackbar = {
@@ -175,19 +175,13 @@ const JobSubNav = React.createClass({
     for (const contact of nextContacts) {
       axiosCalls.push(axios.post('/api/contacts', contact).then((res) => {
         return axios.post(`/api/jobs/${this.state.job.id}/contacts`, {
-           contactId: res.data.id
+          contactId: res.data.id
         });
       }));
     }
 
     axios.all(axiosCalls)
-      .then((res) => {
-        const additionalContactInfo = res.map((element) => {
-          return element.data;
-        });
-
-        const newContacts = Object.assign({}, nextContacts, additionalContactInfo);
-
+      .then(() => {
         this.setState({ contacts: nextContacts, slideIndex: 2 });
       })
       .catch(() => {
@@ -202,7 +196,7 @@ const JobSubNav = React.createClass({
 
   saveNotes() {
     axios.patch(`/api/jobs/${this.state.job.id}`, this.state.job)
-      .then((res) => {
+      .then(() => {
         this.props.router.push('/dashboard');
         this.props.addNewJob(this.state.job);
       })
@@ -230,14 +224,14 @@ const JobSubNav = React.createClass({
   },
 
   updateJob(nextJob) {
-    if (!this.state.job.id) {
-      axios.post('/api/jobs', nextJob)
+    if (this.state.job.id) {
+      axios.patch(`/api/jobs/${this.state.job.id}`, nextJob)
         .then((res) => {
-          const nextJob = Object.assign({}, res.data);
+          const updatedJob = Object.assign({}, res.data);
 
-          this.setState({ job: nextJob, slideIndex: 1 });
+          this.setState({ job: updatedJob, slideIndex: 1 });
         })
-        .catch((err) => {
+        .catch(() => {
           const nextSnackbar = {
             message: 'Unable to save job',
             open: true
@@ -247,13 +241,13 @@ const JobSubNav = React.createClass({
         });
     }
     else {
-      axios.patch(`/api/jobs/${this.state.job.id}`, nextJob)
+      axios.post('/api/jobs', nextJob)
         .then((res) => {
-          const nextJob = Object.assign({}, res.data);
+          const newJob = Object.assign({}, res.data);
 
-          this.setState({ job: nextJob, slideIndex: 1 });
+          this.setState({ job: newJob, slideIndex: 1 });
         })
-        .catch((err) => {
+        .catch(() => {
           const nextSnackbar = {
             message: 'Unable to save job',
             open: true
@@ -272,6 +266,9 @@ const JobSubNav = React.createClass({
 
   render() {
     const styles = {
+      swipeableViews: {
+        marginBottom: '90px'
+      },
       tab: {
         color: 'black',
         fontFamily: 'MontserratLight'
@@ -291,9 +288,9 @@ const JobSubNav = React.createClass({
 
       <Tabs
         inkBarStyle={{ backgroundColor: '#47B4E0' }}
+        onChange={this.handleChange}
         style={styles.tabs}
         tabItemContainerStyle={{ backgroundColor: 'none' }}
-        onChange={this.handleChange}
         value={this.state.slideIndex}
       >
         <Tab
@@ -320,7 +317,7 @@ const JobSubNav = React.createClass({
       <SwipeableViews
         index={this.state.slideIndex}
         onChangeIndex={this.handleChange}
-        style={{marginBottom: '90px'}}
+        style={styles.swipeableViews}
       >
         <JobForm updateJob={this.updateJob} />
         <ContactView
