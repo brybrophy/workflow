@@ -1,12 +1,12 @@
 import Login from 'components/Login';
-import SignUp from 'components/SignUp';
 import React from 'react';
+import SignUp from 'components/SignUp';
 
 const Authorize = React.createClass({
   getInitialState() {
     return {
       login: true
-    }
+    };
   },
 
   toggleLoginState() {
@@ -18,43 +18,43 @@ const Authorize = React.createClass({
   },
 
   render() {
-    const stylePipesLeft = {
-      height: '500px',
-      position: 'relative',
-      top: '200px',
-      width: 'auto'
+    const styles = {
+      page: {
+        alignContent: 'stretch',
+        alignItems: 'center',
+        backgroundColor: '#F9F8F7',
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        height: '100vh',
+        justifyContent: 'flex-start'
+      },
+      pipesLeft: {
+        height: '500px',
+        position: 'relative',
+        top: '200px',
+        width: 'auto'
+      },
+      pipesRight: {
+        bottom: '400px',
+        height: '385px',
+        left: '59vw',
+        position: 'relative',
+        width: 'auto'
+      }
     };
 
-    const stylePipesRight = {
-      bottom: '400px',
-      height: '385px',
-      left: '59vw',
-      position: 'relative',
-      width: 'auto'
-    };
-
-    const stylePage = {
-      alignContent: 'stretch',
-      alignItems: 'center',
-      backgroundColor: '#F9F8F7',
-      display: 'flex',
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      justifyContent: 'flex-start',
-      height: '100vh'
-    };
-
-    return <main style={stylePage}>
-      <img style={stylePipesLeft} src="images/pipes_left.svg" />
+    return <main style={styles.page}>
+      <img src="images/pipes_left.svg" style={styles.pipesLeft} />
       {
         this.state.login
-        ?
-        <Login toggleLoginState={this.toggleLoginState}/>
-        :
-        <SignUp toggleLoginState={this.toggleLoginState}/>
+        ? // eslint-disable-line operator-linebreak
+          <Login toggleLoginState={this.toggleLoginState} />
+        : // eslint-disable-line operator-linebreak
+          <SignUp toggleLoginState={this.toggleLoginState} />
       }
-      <img style={stylePipesRight} src="images/pipes_right.svg" />
-    </main>
+      <img src="images/pipes_right.svg" style={styles.pipesRight} />
+    </main>;
   }
 });
 
