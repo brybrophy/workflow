@@ -72,7 +72,7 @@ const Login = React.createClass({
       smallText: {
         color: '#A6A399',
         fontFamily: 'MontserratLight',
-        fontSize: '1.1rem',
+        fontSize: '1.3rem',
         textAlign: 'center'
       }
     };
@@ -103,7 +103,7 @@ const Login = React.createClass({
 
       <div style={styles.smallText}>
         <small>
-          You must have a linked in account to use this application.<br />
+          You must have a LinkedIn account to use this application.<br />
           If you do not, click the link above or go
           {' '}
           <a href="http://www.linkedin.com">

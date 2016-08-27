@@ -79,20 +79,20 @@ const SignUp = React.createClass({
     const styleSmallText = {
       color: '#A6A399',
       fontFamily: 'MontserratLight',
-      fontSize: '1.1rem',
+      fontSize: '1.3rem',
       textAlign: 'center'
     };
 
     return <div style={styleBox}>
       <FlatButton
-        label="login"
+        label="Login"
         labelStyle={styleFlatButtonLabel}
         onTouchTap={this.handleTouchTap}
         style={styleFlatButton1}
       />
 
       <FlatButton
-        label="sign up"
+        label="Sign Up"
         labelStyle={styleFlatButtonLabel}
         style={styleFlatButton2}
       />
@@ -100,7 +100,7 @@ const SignUp = React.createClass({
       <h4 style={styleButtonHeader}>SIGN UP WITH</h4>
 
       <FlatButton
-        label="linkedIn"
+        label="LinkedIn"
         labelStyle={styleFlatButtonLabelAlt}
         onTouchTap={this.handleSignUp}
         icon={<LinkedInLogo />}
@@ -109,7 +109,7 @@ const SignUp = React.createClass({
 
       <div style={styleSmallText}>
         <small>
-          You must have a linked in account to use this application.<br />
+          You must have a LinkedIn account to use this application.<br />
           If you do not, click the link above or go
           {' '}
           <a href="http://www.linkedin.com">
