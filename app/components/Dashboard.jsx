@@ -14,7 +14,7 @@ const Dashboard = React.createClass({
           showSnackbar={this.props.showSnackbar}
         />
       </Row>
-    </main>
+    </main>;
   }
 });
 
