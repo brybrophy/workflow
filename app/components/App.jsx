@@ -57,10 +57,6 @@ const App = React.createClass({
     this.setState({ jobs: nextJobs });
   },
 
-<<<<<<< d8f61d69134da1634d67fb8ad9f995579a8aed69
-  showSnackbar(nextSnackbar) {
-    this.setState({ snackbar: nextSnackbar });
-=======
   setCookies() {
     window.COOKIES = {};
     document.cookie.split('; ').forEach(function(prop) {
@@ -70,7 +66,10 @@ const App = React.createClass({
       window.COOKIES[propKey] = propValue;
 
     });
->>>>>>> Fill jobs array with current user's jobs
+  },
+
+  showSnackbar(nextSnackbar) {
+    this.setState({ snackbar: nextSnackbar });
   },
 
   render() {
