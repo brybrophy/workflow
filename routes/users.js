@@ -11,7 +11,7 @@ const { camelizeKeys, decamelizeKeys } = require('humps');
 const appId = process.env.APP_ID;
 const appSecret = process.env.APP_SECRET;
 
-const Linkedin = require('node-linkedin')(appId, appSecret, 'http://workflow-react.herokuapp.com/api/users/oauth/linkedin/callback');
+const Linkedin = require('node-linkedin')(appId, appSecret, 'https://workflow-react.herokuapp.com/api/users/oauth/linkedin/callback');
 
 const scope = ['r_basicprofile', 'r_emailaddress'];
 
