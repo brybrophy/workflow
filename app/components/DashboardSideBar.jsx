@@ -4,7 +4,6 @@ import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import React from 'react';
-import SelectField from 'material-ui/SelectField';
 import TextField from 'material-ui/TextField';
 import { withRouter } from 'react-router';
 
@@ -58,7 +57,7 @@ const DashboardSideBar = React.createClass({
       }
     };
 
-    return <Col xs={12} md={3}>
+    return <Col md={3} xs={12}>
       <Paper style={styles.searchMenu}>
         <TextField
           hintStyle={styles.textFieldHint}
@@ -89,7 +88,7 @@ const DashboardSideBar = React.createClass({
           <MenuItem primaryText="Least Progress" style={styles.filter} />
         </Menu>
       </Paper>
-  </Col>
+    </Col>;
   }
 });
 
