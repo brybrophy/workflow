@@ -1,14 +1,19 @@
-import axios from 'axios';
 import Footer from 'components/Footer';
 import MainNav from 'components/MainNav';
 import React from 'react';
-
+import Snackbar from 'material-ui/Snackbar';
+import axios from 'axios';
 
 const App = React.createClass({
   getInitialState() {
     return {
-      jobs: []
-    }
+      jobs: [],
+
+      snackbar: {
+        message: '',
+        open: false
+      }
+    };
   },
 
   componentWillMount() {
@@ -16,9 +21,20 @@ const App = React.createClass({
       .then((res) => {
         this.setState({ jobs: res.data });
       })
-      .catch((err) => {
-        console.error(err);
+      .catch(() => {
+        const nextSnackbar = {
+          message: 'Unable to load jobs information',
+          open: true
+        };
+
+        this.setState({ snackbar: nextSnackbar });
       });
+  },
+
+  handleRequestCloseSnackbar() {
+    const nextSnackbar = { message: '', open: false };
+
+    this.setState({ snackbar: nextSnackbar });
   },
 
   addNewJob(newJob) {
@@ -41,6 +57,12 @@ const App = React.createClass({
 
   render() {
     return <div>
+      <Snackbar
+        autoHideDuration={3000}
+        message={this.state.snackbar.message}
+        onRequestClose={this.handleRequestCloseSnackbar}
+        open={this.state.snackbar.open}
+      />
       <MainNav />
       {React.cloneElement(this.props.children, {
         addNewjob: this.addNewJob,
@@ -48,7 +70,7 @@ const App = React.createClass({
         saveJob: this.saveJob
       })}
       <Footer />
-    </div>
+    </div>;
   }
 });
 
