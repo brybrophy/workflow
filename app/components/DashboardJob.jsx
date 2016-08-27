@@ -39,6 +39,7 @@ const DashboardJob = React.createClass({
 
   handleExpand(event) {
     const id = Number.parseInt(event.currentTarget.id);
+
     this.setState({ expanded: id });
   },
 
@@ -59,7 +60,7 @@ const DashboardJob = React.createClass({
 
         this.props.showSnackbar(nextSnackbar);
       })
-      .catch((err) => {
+      .catch(() => {
         const nextSnackbar = {
           message: 'Update unsuccessful. Try again.',
           open: true
@@ -71,9 +72,23 @@ const DashboardJob = React.createClass({
 
   render() {
     const { jobs } = this.props;
+
     jobs.sort((p1, p2) => p1.companyName > p2.companyName);
 
     const styles = {
+      cardHeader: {
+        paddingBottom: '0px'
+      },
+      cardText: {
+        color: '#A6A399',
+        padding: '16px 0'
+      },
+      cardTitle: {
+        backgroundColor: '#327F9E'
+      },
+      column: {
+        padding: '20px 40px 0 10px'
+      },
       job: {
         backgroundColor: '#F9F8F7',
         borderRadius: '3px',
@@ -102,10 +117,15 @@ const DashboardJob = React.createClass({
       },
       title: {
         fontSize: '3.2rem'
+      },
+      viewMoreButton: {
+        bottom: '60px',
+        float: 'right',
+        position: 'relative'
       }
     };
 
-    return <Col md={9} style={{ padding: '20px 40px 0 10px' }} xs={12}>
+    return <Col md={9} style={styles.column} xs={12}>
       {jobs.map((job) => {
         return <Card
           expanded={this.state.expanded === job.id}
@@ -113,7 +133,7 @@ const DashboardJob = React.createClass({
           style={styles.job}
         >
           <CardHeader
-            style={{ paddingBottom: '0px' }}
+            style={styles.cardHeader}
             subtitle={job.title}
             subtitleStyle={styles.subtitle}
             title={job.companyName}
@@ -121,31 +141,28 @@ const DashboardJob = React.createClass({
           >
             <CardActions>
               <FlatButton
-                backgroundColor={'#327F9E'}
+                backgroundColor="#327F9E"
                 icon={<Eyeball />}
                 id={job.id}
                 label="View More"
                 onTouchTap={this.handleExpand}
-                style={{ float: 'right', position: 'relative', bottom: '60px' }}
+                style={styles.viewMoreButton}
               />
             </CardActions>
           </CardHeader>
           <ProgressStepper />
-          <CardTitle expandable={true} style={{ backgroundColor: '#327F9E' }} />
-          <CardText
-            expandable={true}
-            style={{ color: '#A6A399', padding: '16px 0' }}
-          >
+          <CardTitle expandable={true} style={styles.CardTitle} />
+          <CardText expandable={true} style={styles.cardText}>
 
           {(this.state.editing === job && this.state.editingId === 1)
-            ?
+            ? // eslint-disable-line operator-linebreak
             <JobAddressTableEdit
               job={job}
               onHandleEditing={this.handleEditing}
               onHandleSaveJob={this.handleSaveJob}
               styles={styles}
             />
-            :
+            : // eslint-disable-line operator-linebreak
             <JobAddressTable
               id={1}
               job={job}
@@ -154,19 +171,21 @@ const DashboardJob = React.createClass({
             />
           }
 
-          <JobMap
-            address={`${job.companyStreetAddress} ${job.companyCity} ${job.companyState} ${job.companyZip}`}
-          />
+            <JobMap
+
+              // eslint-disable-next-line max-len
+              address={`${job.companyStreetAddress} ${job.companyCity} ${job.companyState} ${job.companyZip}`}
+            />
 
           {(this.state.editing === job && this.state.editingId === 2)
-            ?
+            ? // eslint-disable-line operator-linebreak
             <JobProgressTableEdit
               job={job}
               onHandleEditing={this.handleEditing}
               onHandleSaveJob={this.handleSaveJob}
               styles={styles}
             />
-            :
+            : // eslint-disable-line operator-linebreak
             <JobProgressTable
               id={2}
               job={job}
@@ -183,19 +202,19 @@ const DashboardJob = React.createClass({
             />
 
             {(this.state.editing === job && this.state.editingId === 4)
-              ?
+              ? // eslint-disable-line operator-linebreak
               <JobNotesDashboardEdit
                 job={job}
-                styles={styles}
                 onHandleEditing={this.handleEditing}
                 onHandleSaveJob={this.handleSaveJob}
+                styles={styles}
               />
-              :
+              : // eslint-disable-line operator-linebreak
               <JobNotesDashboard
-              id={4}
-              job={job}
-              onHandleEditing={this.handleEditing}
-              styles={styles}
+                id={4}
+                job={job}
+                onHandleEditing={this.handleEditing}
+                styles={styles}
               />
             }
           </CardText>
