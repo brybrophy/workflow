@@ -8,7 +8,11 @@ const Dashboard = React.createClass({
     return <main>
       <Row>
         <DashboardSideBar />
-        <DashboardJob jobs={this.props.jobs} saveJob={this.props.saveJob} />
+        <DashboardJob
+          jobs={this.props.jobs}
+          saveJob={this.props.saveJob}
+          showSnackbar={this.props.showSnackbar}
+        />
       </Row>
     </main>
   }

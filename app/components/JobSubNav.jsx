@@ -6,7 +6,6 @@ import JobForm from 'components/JobForm';
 import JobNotes from 'components/JobNotes';
 import JobProgressView from 'components/JobProgressView';
 import React from 'react';
-import Snackbar from 'material-ui/Snackbar';
 import SwipeableViews from 'react-swipeable-views';
 import axios from 'axios';
 
@@ -41,19 +40,8 @@ const JobSubNav = React.createClass({
         interviewRejected: { date: '' }
       },
 
-      slideIndex: 0,
-
-      snackbar: {
-        message: '',
-        open: false
-      }
+      slideIndex: 0
     };
-  },
-
-  handleRequestCloseSnackbar() {
-    const nextSnackbar = { message: '', open: false };
-
-    this.setState({ snackbar: nextSnackbar });
   },
 
   closeDeleteDialog() {
@@ -173,7 +161,7 @@ const JobSubNav = React.createClass({
           open: true
         };
 
-        this.setState({ snackbar: nextSnackbar });
+        this.props.showSnackbar(nextSnackbar);
       });
   },
 
@@ -208,7 +196,7 @@ const JobSubNav = React.createClass({
           open: true
         };
 
-        this.setState({ snackbar: nextSnackbar });
+        this.props.showSnackbar(nextSnackbar);
       });
   },
 
@@ -224,7 +212,7 @@ const JobSubNav = React.createClass({
           open: true
         };
 
-        this.setState({ snackbar: nextSnackbar });
+        this.props.showSnackbar(nextSnackbar);
       });
   },
 
@@ -237,7 +225,8 @@ const JobSubNav = React.createClass({
       open: true
     };
 
-    this.setState({ slideIndex: 0, snackbar: nextSnackbar });
+    this.props.showSnackbar(nextSnackbar);
+    this.setState({ slideIndex: 0 });
   },
 
   updateJob(nextJob) {
@@ -254,7 +243,7 @@ const JobSubNav = React.createClass({
             open: true
           };
 
-          this.setState({ snackbar: nextSnackbar });
+          this.props.showSnackbar(nextSnackbar);
         });
     }
     else {
@@ -270,7 +259,7 @@ const JobSubNav = React.createClass({
             open: true
           };
 
-          this.setState({ snackbar: nextSnackbar });
+          this.props.showSnackbar(nextSnackbar);
         });
     }
   },
@@ -298,13 +287,6 @@ const JobSubNav = React.createClass({
         closeDeleteDialog={this.closeDeleteDialog}
         deleteContact={this.deleteContact}
         deleteDialog={this.state.deleteDialog}
-      />
-
-      <Snackbar
-        autoHideDuration={3000}
-        message={this.state.snackbar.message}
-        onRequestClose={this.handleRequestCloseSnackbar}
-        open={this.state.snackbar.open}
       />
 
       <Tabs

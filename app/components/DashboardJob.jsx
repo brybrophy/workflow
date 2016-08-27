@@ -19,7 +19,6 @@ import JobProgressTable from 'components/JobProgressTable';
 import JobProgressTableEdit from 'components/JobProgressTableEdit';
 import ProgressStepper from 'components/ProgressStepper';
 import React from 'react';
-import Snackbar from 'material-ui/Snackbar';
 
 import axios from 'axios';
 import weakKey from 'weak-key';
@@ -30,11 +29,7 @@ const DashboardJob = React.createClass({
     return {
       editing: null,
       editingId: null,
-      expanded: null,
-      snackbar: {
-        message: '',
-        open: false
-      }
+      expanded: null
     };
   },
 
@@ -51,12 +46,6 @@ const DashboardJob = React.createClass({
     this.setState({ expanded: false });
   },
 
-  handleRequestCloseSnackbar() {
-    const nextSnackbar = { message: '', open: false };
-
-    this.setState({ snackbar: nextSnackbar });
-  },
-
   handleSaveJob(nextJob) {
     const id = nextJob.id;
 
@@ -68,7 +57,7 @@ const DashboardJob = React.createClass({
           open: true
         };
 
-        this.setState({ snackbar: nextSnackbar });
+        this.props.showSnackbar(nextSnackbar);
       })
       .catch((err) => {
         const nextSnackbar = {
@@ -76,7 +65,7 @@ const DashboardJob = React.createClass({
           open: true
         };
 
-        this.setState({ snackbar: nextSnackbar });
+        this.props.showSnackbar(nextSnackbar);
       });
   },
 
@@ -117,13 +106,6 @@ const DashboardJob = React.createClass({
     };
 
     return <Col md={9} style={{ padding: '20px 40px 0 10px' }} xs={12}>
-      <Snackbar
-        autoHideDuration={3000}
-        message={this.state.snackbar.message}
-        onRequestClose={this.handleRequestCloseSnackbar}
-        open={this.state.snackbar.open}
-      />
-
       {jobs.map((job) => {
         return <Card
           expanded={this.state.expanded === job.id}

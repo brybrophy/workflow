@@ -27,7 +27,7 @@ const App = React.createClass({
           open: true
         };
 
-        this.setState({ snackbar: nextSnackbar });
+        this.showSnackbar(nextSnackbar);
       });
   },
 
@@ -55,6 +55,10 @@ const App = React.createClass({
     this.setState({ jobs: nextJobs });
   },
 
+  showSnackbar(nextSnackbar) {
+    this.setState({ snackbar: nextSnackbar });
+  },
+
   render() {
     return <div>
       <Snackbar
@@ -67,7 +71,8 @@ const App = React.createClass({
       {React.cloneElement(this.props.children, {
         addNewjob: this.addNewJob,
         jobs: this.state.jobs,
-        saveJob: this.saveJob
+        saveJob: this.saveJob,
+        showSnackbar: this.showSnackbar
       })}
       <Footer />
     </div>;
