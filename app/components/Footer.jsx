@@ -6,66 +6,57 @@ import TwitterLogo from 'components/TwitterLogo';
 
 const Footer = React.createClass({
   render() {
-    const styleFooter = {
-      backgroundColor: 'black',
-      display: 'flex',
-      height: '120px',
-      width: '100vw'
+    const styles = {
+      flatButtonBottom: {
+        height: '120px',
+        lineHeight: '120px',
+        padding: '20px 0 0'
+      },
+      footer: {
+        backgroundColor: 'black',
+        display: 'flex',
+        height: '120px',
+        width: '100vw'
+      },
+      footerLogo: {
+        marginLeft: '50px',
+        marginTop: '25px'
+      },
+      pullRight: {
+        position: 'absolute',
+        right: '50px'
+      },
+      textBottom: {
+        color: 'white',
+        cursor: 'pointer',
+        fontFamily: 'MontserratHairline',
+        fontSize: '1.1rem',
+        letterSpacing: '0.12rem',
+        marginLeft: '10px',
+        marginTop: '70px'
+      }
     };
 
-    const styleFlatButtonBottom = {
-      height: '120px',
-      lineHeight: '120px',
-      padding: '20px 0 0'
-    };
-
-    const styleFlatButtonLabel = {
-      fontFamily: 'MontserratHairline',
-      fontSize: '1.2rem',
-      padding: '0'
-    };
-
-    const styleFooterLogo = {
-      marginLeft: '50px',
-      marginTop: '25px'
-    };
-
-    const stylePullRight = {
-      position: 'absolute',
-      right: '50px'
-    };
-
-    const styleTextBottom = {
-      color: 'white',
-      cursor: 'pointer',
-      fontFamily: 'MontserratHairline',
-      fontSize: '1.1rem',
-      letterSpacing: '0.12rem',
-      marginLeft: '10px',
-      marginTop: '70px'
-    };
-
-    return <footer style={styleFooter}>
-
-      <div style={styleFooterLogo}>
+    return <footer style={styles.footer}>
+      <div style={styles.footerLogo}>
         <FooterLogo />
       </div>
 
-      <p className="hairline-font space-letters" style={styleTextBottom}>
+      <p className="hairline-font space-letters" style={styles.textBottom}>
         workflow © 2016-2017
       </p>
 
-      <div style={stylePullRight}>
+      <div style={styles.pullRight}>
         <FlatButton
           label={<GithubLogo />}
-          style={styleFlatButtonBottom}
+          style={styles.flatButtonBottom}
         />
         <FlatButton
           label={<TwitterLogo />}
-          style={styleFlatButtonBottom}
+          style={styles.flatButtonBottom}
         />
       </div>
-    </footer>
+    </footer>;
   }
 });
 
