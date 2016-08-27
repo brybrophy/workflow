@@ -1,4 +1,6 @@
-import { Grid, Row, Col } from 'react-bootstrap';
+/* eslint-disable max-lines */
+
+import { Col, Grid, Row } from 'react-bootstrap';
 import FlatButton from 'material-ui/FlatButton';
 import Joi from 'joi';
 import MenuItem from 'material-ui/MenuItem';
@@ -54,7 +56,7 @@ const JobForm = React.createClass({
         interviewOffer: { date: '' },
         interviewRejected: { date: '' }
       }
-    }
+    };
   },
 
   handleBlur(event) {
@@ -78,6 +80,14 @@ const JobForm = React.createClass({
   handleChange(event) {
     const nextJob = Object.assign({}, this.state.job, {
       [event.target.name]: event.target.value
+    });
+
+    this.setState({ job: nextJob });
+  },
+
+  handleSelectFieldChange(event, index, value) {
+    const nextJob = Object.assign({}, this.state.job, {
+      companyState: value
     });
 
     this.setState({ job: nextJob });
@@ -108,17 +118,8 @@ const JobForm = React.createClass({
     this.props.updateJob(nextJob);
   },
 
-  handleSelectFieldChange(event, index, value) {
-    const nextJob = Object.assign({}, this.state.job, {
-      companyState: value
-    });
-
-    this.setState({ job: nextJob });
-  },
-
   render() {
     const { errors, job } = this.state;
-
     const styles = {
       column: {
         padding: '0 3px'
@@ -176,13 +177,19 @@ const JobForm = React.createClass({
       }
     };
 
-    const states = ['', 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'];
+    const states = [
+      'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI',
+      'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN',
+      'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH',
+      'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA',
+      'WV', 'WI', 'WY'
+    ];
 
     return <Grid style={styles.grid}>
       <Row>
-        <Col xs={12} sm={12}>
+        <Col sm={12} xs={12}>
           <Row style={{ marginBottom: '20px' }}>
-            <Col xs={12} sm={6} style={styles.column}>
+            <Col sm={6} style={styles.column} xs={12}>
               <FlatButton
                 backgroundColor="#E48C8C"
                 hoverColor="#ED4C4C"
@@ -191,7 +198,7 @@ const JobForm = React.createClass({
                 style={styles.flatButton}
               />
             </Col>
-            <Col xs={12} sm={6} style={styles.column}>
+            <Col sm={6} style={styles.column} xs={12}>
               <FlatButton
                 backgroundColor="#327F9E"
                 hoverColor="#47B4E0"
@@ -203,7 +210,7 @@ const JobForm = React.createClass({
             </Col>
           </Row>
           <Row style={styles.row}>
-            <Col xs={12} md={6} style={styles.column}>
+            <Col sm={6} style={styles.column} xs={12}>
               <TextField
                 errorStyle={styles.errors}
                 errorText={errors.companyName}
@@ -217,7 +224,7 @@ const JobForm = React.createClass({
                 value={job.companyName}
               />
             </Col>
-            <Col xs={12} md={6} style={styles.column}>
+            <Col sm={6} style={styles.column} xs={12}>
               <TextField
                 errorStyle={styles.errors}
                 errorText={errors.title}
@@ -233,7 +240,7 @@ const JobForm = React.createClass({
             </Col>
           </Row>
           <Row style={styles.row}>
-            <Col xs={12} md={6} style={styles.column}>
+            <Col sm={6} style={styles.column} xs={12}>
               <TextField
                 errorStyle={styles.errors}
                 errorText={errors.companyStreetAddress}
@@ -247,7 +254,7 @@ const JobForm = React.createClass({
                 value={job.companyStreetAddress}
               />
             </Col>
-            <Col xs={12} md={4} style={styles.column}>
+            <Col sm={4} style={styles.column} xs={12}>
               <TextField
                 errorStyle={styles.errors}
                 errorText={errors.companyCity}
@@ -261,7 +268,7 @@ const JobForm = React.createClass({
                 value={job.companyCity}
               />
             </Col>
-            <Col xs={12} md={2} style={styles.column}>
+            <Col sm={2} style={styles.column} xs={12}>
               <SelectField
                 errorStyle={styles.errors}
                 errorText={errors.companyState}
@@ -282,13 +289,13 @@ const JobForm = React.createClass({
                     key={index}
                     primaryText={state}
                     value={state}
-                  />
+                  />;
                 })}
               </SelectField>
             </Col>
           </Row>
           <Row style={styles.row}>
-            <Col xs={12} md={6} style={styles.column}>
+            <Col sm={6} style={styles.column} xs={12}>
               <TextField
                 errorStyle={styles.errors}
                 errorText={errors.companyZip}
@@ -302,7 +309,7 @@ const JobForm = React.createClass({
                 value={job.companyZip}
               />
             </Col>
-            <Col xs={12} md={6} style={styles.column}>
+            <Col sm={6} style={styles.column} xs={12}>
               <TextField
                 errorStyle={styles.errors}
                 errorText={errors.companyPhone}
@@ -318,7 +325,7 @@ const JobForm = React.createClass({
             </Col>
           </Row>
           <Row style={styles.row}>
-            <Col xs={12} style={styles.column}>
+            <Col style={styles.column} xs={12}>
               <TextField
                 errorStyle={styles.errors}
                 errorText={errors.jobPostUrl}
