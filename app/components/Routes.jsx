@@ -1,4 +1,5 @@
-import { browserHistory, IndexRoute, Redirect, Route, Router } from 'react-router';
+import { Redirect, Route, Router, browserHistory }
+  from 'react-router';
 import App from 'components/App';
 import Authorize from 'components/Authorize';
 import Dashboard from 'components/Dashboard';
