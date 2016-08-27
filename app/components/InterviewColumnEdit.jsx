@@ -5,10 +5,8 @@ import TimePicker from 'material-ui/TimePicker';
 import Timestamp from 'react-timestamp';
 
 const monthNames = [
-  'Jan', 'Feb', 'Mar',
-  'April', 'May', 'June', 'July',
-  'Aug', 'Sept', 'Oct',
-  'Nov', 'Dec'
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
 ];
 
 const InterviewColumnEdit = React.createClass({
