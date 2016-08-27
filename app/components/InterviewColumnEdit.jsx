@@ -5,13 +5,13 @@ import TimePicker from 'material-ui/TimePicker';
 import Timestamp from 'react-timestamp';
 
 const monthNames = [
-  "Jan", "Feb", "Mar",
-  "April", "May", "June", "July",
-  "Aug", "Sept", "Oct",
-  "Nov", "Dec"
+  'Jan', 'Feb', 'Mar',
+  'April', 'May', 'June', 'July',
+  'Aug', 'Sept', 'Oct',
+  'Nov', 'Dec'
 ];
 
-const InterviewColumnEdit  = React.createClass({
+const InterviewColumnEdit = React.createClass({
   handleChangeDate(_date, newDate) {
     const day = newDate.getDate();
     const month = newDate.getMonth();
@@ -27,7 +27,7 @@ const InterviewColumnEdit  = React.createClass({
     const min = newTime.getMinutes();
     const sec = newTime.getSeconds();
 
-    const addTime = `${hour}:${min}:${sec}`
+    const addTime = `${hour}:${min}:${sec}`;
 
     this.props.updateInterviewStep(addTime, 'time', this.props.name);
   },
@@ -37,9 +37,10 @@ const InterviewColumnEdit  = React.createClass({
     const name = this.props.name;
     let interviewDate = 'Add Date';
     let interviewTime = 'Add Time';
-    if (job[this.props.name]['date']) {
-      interviewDate = <Timestamp time={job[name]['date']} format="date" />;
-      interviewTime = <Timestamp time={job[name]['date']} format="time" />;
+
+    if (job[this.props.name].date) {
+      interviewDate = <Timestamp format="date" time={job[name].date} />;
+      interviewTime = <Timestamp format="time" time={job[name].date} />;
     }
 
     return <TableRowColumn>
@@ -54,7 +55,7 @@ const InterviewColumnEdit  = React.createClass({
         hintText={interviewTime}
         onChange={this.handleChangeTime}
       />
-    </TableRowColumn>
+    </TableRowColumn>;
   }
 });
 
