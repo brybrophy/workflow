@@ -1,5 +1,5 @@
 import FlatButton from 'material-ui/FlatButton';
-import LinkedInIcon from 'components/LinkedIn';
+import LinkedInLogo from 'components/LinkedInLogo';
 import React from 'react';
 
 const Login = React.createClass({
@@ -101,7 +101,7 @@ const Login = React.createClass({
       <FlatButton
         label="linkedIn"
         labelStyle={styleFlatButtonLabelAlt}
-        icon={<LinkedInIcon />}
+        icon={<LinkedInLogo />}
         onTouchTap={this.handleLogin}
         style={styleFlatButtonAlt}
       />

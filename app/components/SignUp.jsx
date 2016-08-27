@@ -1,6 +1,6 @@
 import axios from 'axios';
 import FlatButton from 'material-ui/FlatButton';
-import LinkedInIcon from 'components/LinkedIn';
+import LinkedInLogo from 'components/LinkedInLogo';
 import React from 'react';
 
 const SignUp = React.createClass({
@@ -103,7 +103,7 @@ const SignUp = React.createClass({
         label="linkedIn"
         labelStyle={styleFlatButtonLabelAlt}
         onTouchTap={this.handleSignUp}
-        icon={<LinkedInIcon />}
+        icon={<LinkedInLogo />}
         style={styleFlatButtonAlt}
       />
 
