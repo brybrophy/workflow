@@ -174,6 +174,8 @@ const JobSubNav = React.createClass({
     const axiosCalls = [];
 
     for (const contact of nextContacts) {
+      contact.userId = this.props.cookies.userId;
+
       axiosCalls.push(axios.post('/api/contacts', contact).then((res) => {
         return axios.post(`/api/jobs/${this.state.job.id}/contacts`, {
           contactId: res.data.id

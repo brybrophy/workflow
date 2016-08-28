@@ -102,7 +102,7 @@ const DashboardJob = React.createClass({
   },
 
   render() {
-    const { jobs } = this.props;
+    const { contacts, jobs } = this.props;
 
     if (jobs.length > 1) {
       jobs.sort((p1, p2) => p1.companyName > p2.companyName);
@@ -253,6 +253,7 @@ const DashboardJob = React.createClass({
           }
 
             <JobContactsList
+              contacts={contacts}
               editing={this.state.editing}
               editingId={this.state.editingId}
               job={job}

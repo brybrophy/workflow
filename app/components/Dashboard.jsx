@@ -9,6 +9,7 @@ const Dashboard = React.createClass({
       <Row>
         <DashboardSideBar />
         <DashboardJob
+          contacts={this.props.contacts}
           jobs={this.props.jobs}
           saveJob={this.props.saveJob}
           showSnackbar={this.props.showSnackbar}

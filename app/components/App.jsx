@@ -7,6 +7,7 @@ import axios from 'axios';
 const App = React.createClass({
   getInitialState() {
     return {
+      contacts: [],
       cookies: {},
       jobs: [],
       snackbar: {
@@ -31,6 +32,17 @@ const App = React.createClass({
 
         this.showSnackbar(nextSnackbar);
       });
+
+    axios.get(`api/contacts/${window.COOKIES.userId}`)
+      .then((res) => {
+        this.setState({ contacts: res.data });
+    })
+    .catch((err) => {
+      const nextSnackbar = {
+        message: 'Unable to load contacts information',
+        open: true
+      }
+    });
   },
 
   handleRequestCloseSnackbar() {
@@ -83,6 +95,7 @@ const App = React.createClass({
       <MainNav />
       {React.cloneElement(this.props.children, {
         addNewjob: this.addNewJob,
+        contacts: this.state.contacts,
         cookies: this.state.cookies,
         jobs: this.state.jobs,
         saveJob: this.saveJob,

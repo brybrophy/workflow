@@ -6,12 +6,15 @@ import IconButton from 'material-ui/IconButton';
 import Paper from 'material-ui/Paper';
 import React from 'react';
 
+import weakKey from 'weak-key';
+
 const JobContactsList = React.createClass({
   handleTouchTap() {
     this.props.onHandleEditing(this.props.job, this.props.id);
   },
 
   render() {
+    const contacts = this.props.contacts;
     const styles = this.props.styles;
 
     const deleteButton = () => {
@@ -35,17 +38,14 @@ const JobContactsList = React.createClass({
         style={{ float: 'right' }}
       />
       <Paper style={styles.section}>
-        <List>
-          <ListItem
-            leftAvatar={<Avatar src="http://www.fillmurray.com/100/100" />}
-            primaryText="Bobby Kennedy"
-            rightIcon={deleteButton()}
-          />
-          <ListItem
-            leftAvatar={<Avatar src="http://www.fillmurray.com/200/200" />}
-            primaryText="Neil Armstrong"
-          />
-        </List>
+        {contacts.map((contact) => {
+          return <List key={weakKey(contact)}>
+            <ListItem
+              leftAvatar={<Avatar src="http://www.fillmurray.com/100/100" />}
+              primaryText={contact.firstName + contact.lastName}
+            />
+          </List>;
+        })}
       </Paper>
     </div>;
   }

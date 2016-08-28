@@ -31,7 +31,7 @@ suite('Routes contacts', () => {
       });
   });
 
-  test('GET /api/contacts', (done) => {
+  test('GET /api/contacts/1', (done) => {
     request(server)
       .get('/api/contacts')
       .set('Accept', 'application/json')

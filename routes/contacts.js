@@ -37,7 +37,7 @@ router.post('/contacts', ev(validations.post), (req, res, next) => {
     title,
     company,
     linkedInUrl,
-    userId: 1
+    userId
   };
 
   const row = decamelizeKeys(newContact);
@@ -51,15 +51,14 @@ router.post('/contacts', ev(validations.post), (req, res, next) => {
     });
 });
 
-router.get('/contacts', (req, res, next) => {
+router.get('/contacts/:userId', (req, res, next) => {
+  const userId = req.params.userId;
+
   knex('contacts')
     .where('user_id', userId)
     .orderBy('first_name')
     .then((contacts) => {
-      if (contacts.length <= 0) {
-        throw boom.create(404, 'You don\'t have any contacts yet. :(');
-      }
-
+      console.log(contacts);
       res.send(camelizeKeys(contacts));
     })
     .catch((err) => {
