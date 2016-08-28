@@ -7,6 +7,9 @@ import {
 
 import Close from 'material-ui/svg-icons/navigation/close';
 import { Col } from 'react-bootstrap';
+import DashboardJobHeader from 'components/DashboardJobHeader';
+import DashboardJobHeaderEdit from 'components/DashboardJobHeaderEdit';
+import DeleteButton from 'components/DeleteButton';
 import EditMode from 'material-ui/svg-icons/editor/mode-edit';
 import Eyeball from 'material-ui/svg-icons/image/remove-red-eye';
 import FlatButton from 'material-ui/FlatButton';
@@ -32,6 +35,29 @@ const DashboardJob = React.createClass({
       editingId: null,
       expanded: null
     };
+  },
+
+  handleDeleteJob(deleteJob) {
+    const id = deleteJob.id;
+
+    this.props.saveJob(deleteJob);
+    axios.delete(`/api/jobs/${id}`)
+      .then((_res) => {
+        const nextSnackbar = {
+          message: 'Job Deleted',
+          open: true
+        };
+
+        this.props.showSnackbar(nextSnackbar);
+      })
+      .catch(() => {
+        const nextSnackbar = {
+          message: 'Could not delete job. Try again.',
+          open: true
+        };
+
+        this.props.showSnackbar(nextSnackbar);
+      });
   },
 
   handleEditing(job, id) {
@@ -71,6 +97,10 @@ const DashboardJob = React.createClass({
       });
   },
 
+  handleTouchTap() {
+    this.handleEditing(this.props.job, this.props.id);
+  },
+
   render() {
     const { jobs } = this.props;
 
@@ -91,6 +121,11 @@ const DashboardJob = React.createClass({
       },
       column: {
         padding: '20px 40px 0 10px'
+      },
+      deleteButton: {
+        bottom: '105px',
+        float: 'right',
+        position: 'relative'
       },
       job: {
         backgroundColor: '#F9F8F7',
@@ -122,7 +157,7 @@ const DashboardJob = React.createClass({
         fontSize: '3.2rem'
       },
       viewMoreButton: {
-        bottom: '60px',
+        bottom: '75px',
         float: 'right',
         position: 'relative'
       }
@@ -135,37 +170,42 @@ const DashboardJob = React.createClass({
           key={weakKey(job)}
           style={styles.job}
         >
-          <CardHeader
-            style={styles.cardHeader}
-            subtitle={job.title}
-            subtitleStyle={styles.subtitle}
-            title={job.companyName}
-            titleStyle={styles.title}
-          >
-          <a
-            href={job.jobPostUrl}
-            style={{ left: '15px', position: 'absolute', top: '90px' }}
-          >
-            {job.jobPostUrl}
-          </a>
-          </CardHeader>
-          <CardActions>
-          <FlatButton
-          backgroundColor="#327F9E"
-          icon={<Eyeball />}
-          id={job.id}
-          label="View More"
-          onTouchTap={this.handleExpand}
-          style={styles.viewMoreButton}
-          />
-          <FlatButton
-          icon={<EditMode />}
-          label="Edit"
-          onTouchTap={this.handleTouchTap}
-          primary={true}
-          style={styles.viewMoreButton}
-          />
-          </CardActions>
+
+        {(this.state.editing === job && this.state.editingId === 0)
+          ? // eslint-disable-line operator-linebreak
+          <div>
+            <DashboardJobHeaderEdit
+              job={job}
+              onHandleEditing={this.handleEditing}
+              onHandleSaveJob={this.handleSaveJob}
+              styles={styles}
+            />
+            <DeleteButton
+              job={job}
+              onHandleDeleteJob={this.handleDeleteJob}
+              styles={styles}
+            />
+          </div>
+          : // eslint-disable-line operator-linebreak
+          <div>
+            <DashboardJobHeader
+              id={0}
+              job={job}
+              onHandleEditing={this.handleEditing}
+              styles={styles}
+            />
+            <CardActions>
+            <FlatButton
+              backgroundColor="#327F9E"
+              icon={<Eyeball />}
+              id={job.id}
+              label="View More"
+              onTouchTap={this.handleExpand}
+              style={styles.viewMoreButton}
+            />
+            </CardActions>
+          </div>
+        }
           <ProgressStepper />
           <CardTitle expandable={true} style={styles.CardTitle} />
           <CardText expandable={true} style={styles.cardText}>

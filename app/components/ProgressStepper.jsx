@@ -32,8 +32,15 @@ const ProgressStepper = React.createClass({
   render() {
     const { stepIndex } = this.state;
 
+    const styles = {
+      stepper: {
+        marginTop: '35px',
+        width: '80%'
+      }
+    }
+
     return <div>
-      <Stepper activeStep={stepIndex} linear={false} style={{ width: '80%' }}>
+      <Stepper activeStep={stepIndex} linear={false} style={styles.stepper}>
         <Step>
           <StepButton onClick={this.handleClick} value={0}>
             Applied

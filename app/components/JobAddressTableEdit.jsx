@@ -18,14 +18,8 @@ import TextField from 'material-ui/TextField';
 const JobAddressTableEdit = React.createClass({
   getInitialState() {
     return {
-      job: {}
+      job: this.props.job
     };
-  },
-
-  componentWillMount() {
-    const nextJob = this.props.job;
-
-    this.setState({ job: nextJob });
   },
 
   handleChange(event) {
