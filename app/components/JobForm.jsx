@@ -55,7 +55,7 @@ const JobForm = React.createClass({
         interviewOnsite: { date: '' },
         interviewOffer: { date: '' },
         interviewRejected: { date: '' },
-        userId: this.props.cookies.userId
+        userId: ''
       }
     };
   },
@@ -115,6 +115,8 @@ const JobForm = React.createClass({
     }
 
     const nextJob = Object.assign({}, result.value);
+
+    nextJob.userId = this.props.cookies.userId;
 
     this.props.updateJob(nextJob);
   },

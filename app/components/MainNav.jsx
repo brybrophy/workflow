@@ -8,6 +8,8 @@ import { withRouter } from 'react-router';
 const MainNav = React.createClass({
   handleTouchTap(event) {
     if (event.currentTarget.textContent === 'Logout') {
+      Cookie.remove('loggedIn');
+      Cookie.remove('userId');
       Cookie.remove('token', { path: '/' });
 
       return this.props.router.push('/');

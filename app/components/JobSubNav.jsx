@@ -268,7 +268,8 @@ const JobSubNav = React.createClass({
   render() {
     const styles = {
       swipeableViews: {
-        marginBottom: '90px'
+        marginBottom: '30px',
+        overflow: 'auto'
       },
       tab: {
         color: 'black',

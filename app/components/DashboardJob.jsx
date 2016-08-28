@@ -7,6 +7,7 @@ import {
 
 import Close from 'material-ui/svg-icons/navigation/close';
 import { Col } from 'react-bootstrap';
+import EditMode from 'material-ui/svg-icons/editor/mode-edit';
 import Eyeball from 'material-ui/svg-icons/image/remove-red-eye';
 import FlatButton from 'material-ui/FlatButton';
 import JobAddressTable from 'components/JobAddressTable';
@@ -141,17 +142,30 @@ const DashboardJob = React.createClass({
             title={job.companyName}
             titleStyle={styles.title}
           >
-            <CardActions>
-              <FlatButton
-                backgroundColor="#327F9E"
-                icon={<Eyeball />}
-                id={job.id}
-                label="View More"
-                onTouchTap={this.handleExpand}
-                style={styles.viewMoreButton}
-              />
-            </CardActions>
+          <a
+            href={job.jobPostUrl}
+            style={{ left: '15px', position: 'absolute', top: '90px' }}
+          >
+            {job.jobPostUrl}
+          </a>
           </CardHeader>
+          <CardActions>
+          <FlatButton
+          backgroundColor="#327F9E"
+          icon={<Eyeball />}
+          id={job.id}
+          label="View More"
+          onTouchTap={this.handleExpand}
+          style={styles.viewMoreButton}
+          />
+          <FlatButton
+          icon={<EditMode />}
+          label="Edit"
+          onTouchTap={this.handleTouchTap}
+          primary={true}
+          style={styles.viewMoreButton}
+          />
+          </CardActions>
           <ProgressStepper />
           <CardTitle expandable={true} style={styles.CardTitle} />
           <CardText expandable={true} style={styles.cardText}>

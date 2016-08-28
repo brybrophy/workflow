@@ -33,8 +33,6 @@ const JobAddressTable = React.createClass({
         <Table selectable={false} style={styles.table}>
           <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
             <TableRow>
-              <TableHeaderColumn>NAME</TableHeaderColumn>
-              <TableHeaderColumn>TITLE</TableHeaderColumn>
               <TableHeaderColumn>ADDRESS</TableHeaderColumn>
               <TableHeaderColumn>CITY</TableHeaderColumn>
               <TableHeaderColumn>STATE</TableHeaderColumn>
@@ -44,8 +42,6 @@ const JobAddressTable = React.createClass({
           </TableHeader>
           <TableBody displayRowCheckbox={false} showRowHover={true}>
             <TableRow>
-              <TableRowColumn>{job.companyName}</TableRowColumn>
-              <TableRowColumn>{job.title}</TableRowColumn>
               <TableRowColumn>{job.companyStreetAddress}</TableRowColumn>
               <TableRowColumn>{job.companyCity}</TableRowColumn>
               <TableRowColumn>{job.companyState}</TableRowColumn>

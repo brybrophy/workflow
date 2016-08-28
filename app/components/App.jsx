@@ -73,7 +73,6 @@ const App = React.createClass({
   },
 
   render() {
-    console.log(this.state.jobs);
     return <div>
       <Snackbar
         autoHideDuration={3000}

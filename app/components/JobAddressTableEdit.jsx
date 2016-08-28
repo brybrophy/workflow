@@ -84,8 +84,6 @@ const JobAddressTableEdit = React.createClass({
         <Table selectable={false} style={styles.table}>
           <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
             <TableRow>
-              <TableHeaderColumn>NAME</TableHeaderColumn>
-              <TableHeaderColumn>TITLE</TableHeaderColumn>
               <TableHeaderColumn>ADDRESS</TableHeaderColumn>
               <TableHeaderColumn>CITY</TableHeaderColumn>
               <TableHeaderColumn>STATE</TableHeaderColumn>
@@ -95,22 +93,6 @@ const JobAddressTableEdit = React.createClass({
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
             <TableRow>
-              <TableRowColumn>
-                <TextField
-                  defaultValue={job.companyName}
-                  hintText="Name"
-                  name="companyName"
-                  onChange={this.handleChange}
-                />
-              </TableRowColumn>
-              <TableRowColumn>
-                <TextField
-                  defaultValue={job.title}
-                  hintText="Title"
-                  name="title"
-                  onChange={this.handleChange}
-                />
-              </TableRowColumn>
               <TableRowColumn>
                 <TextField
                   defaultValue={job.companyStreetAddress}
