@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const router = express.Router();
+const router = express.Router(); // eslint-disable-line new-cap
 
 const knex = require('../knex');
 
@@ -28,30 +28,6 @@ router.post('/contacts', ev(validations.post), (req, res, next) => {
   if (phone) {
     phone = phone.replace(/[^\d]/g, '');
   }
-
-  // knex('contacts')
-  //   .select(knex.raw('1=1'))
-  //   .where('email', email)
-  //   .first()
-  //   .then((exists) => {
-  //     if (exists) {
-  //       throw boom.create(409, 'Contact already exists.')
-  //     }
-  //
-  //     const newContact = {
-  //       firstName,
-  //       lastName,
-  //       email,
-  //       phone,
-  //       title,
-  //       company,
-  //       linkedInUrl,
-  //       userId: 1
-  //     }
-  //     const row = decamelizeKeys(newContact);
-  //
-  //     return knex('contacts').insert(row, '*');
-  //   })
 
   const newContact = {
     firstName,
@@ -81,7 +57,7 @@ router.get('/contacts', (req, res, next) => {
     .orderBy('first_name')
     .then((contacts) => {
       if (contacts.length <= 0) {
-        throw boom.create(404, 'You don\'t have any contacts yet. :(')
+        throw boom.create(404, 'You don\'t have any contacts yet. :(');
       }
 
       res.send(camelizeKeys(contacts));
@@ -111,76 +87,76 @@ router.get('/contacts/:id/jobs', (req, res, next) => {
     });
 });
 
-router.patch('/contacts/:contactId', ev(validations.patch), (req, res, next) => {
-  const contactId = Number.parseInt(req.params.contactId);
-  let {
-    firstName,
-    lastName,
-    email,
-    phoneNumber,
-    title,
-    company,
-    linkedInUrl } = req.body;
+router.patch('/contacts/:contactId', ev(validations.patch),
+  (req, res, next) => {
+    const contactId = Number.parseInt(req.params.contactId);
+    let {
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      title,
+      company,
+      linkedInUrl } = req.body;
 
-  if (Number.isNaN(contactId)) {
-    throw boom.create(400, 'Invalid Contact Id');
-  }
+    if (Number.isNaN(contactId)) {
+      throw boom.create(400, 'Invalid Contact Id');
+    }
 
-  knex('contacts')
-    .where('id', contactId)
-    .first()
-    .then((contact) => {
-      if (!firstName) {
-        firstName = contact.first_name;
-      }
+    knex('contacts')
+      .where('id', contactId)
+      .first()
+      .then((contact) => { // eslint-disable-line max-statements
+        if (!firstName) {
+          firstName = contact.first_name;
+        }
 
-      if (!lastName) {
-        lastName = contact.last_name;
-      }
+        if (!lastName) {
+          lastName = contact.last_name;
+        }
 
-      if (!email) {
-        email = contact.email;
-      }
+        if (!email) {
+          email = contact.email;
+        }
 
-      if (!phoneNumber) {
-        phoneNumber = contact.phone;
-      }
+        if (!phoneNumber) {
+          phoneNumber = contact.phone;
+        }
 
-      if (!title) {
-        title = contact.title;
-      }
+        if (!title) {
+          title = contact.title;
+        }
 
-      if (!company) {
-        company = contact.company;
-      }
+        if (!company) {
+          company = contact.company;
+        }
 
-      if (!linkedInUrl) {
-        linkedInUrl = contact.linked_in_url;
-      }
+        if (!linkedInUrl) {
+          linkedInUrl = contact.linked_in_url;
+        }
 
-      const phone = phoneNumber.replace(/[^\d]/g, '');
-      const updatedContact = {
-        firstName,
-        lastName,
-        email,
-        phone,
-        title,
-        company,
-        linkedInUrl
-      }
-      const row = decamelizeKeys(updatedContact);
+        const phone = phoneNumber.replace(/[^\d]/g, '');
+        const updatedContact = {
+          firstName,
+          lastName,
+          email,
+          phone,
+          title,
+          company,
+          linkedInUrl
+        };
+        const row = decamelizeKeys(updatedContact);
 
-      return knex('contacts')
-        .update(row, '*')
-        .where('id', contactId)
-    })
-    .then((contacts) => {
-      res.send(contacts[0]);
-    })
-    .catch((err) => {
-      next(err);
-    });
-});
-
+        return knex('contacts')
+          .update(row, '*')
+          .where('id', contactId);
+      })
+      .then((contacts) => {
+        res.send(contacts[0]);
+      })
+      .catch((err) => {
+        next(err);
+      });
+  });
 
 module.exports = router;
