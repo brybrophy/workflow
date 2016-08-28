@@ -13,7 +13,11 @@ const JobNotesDashboardEdit = React.createClass({
   },
 
   handleChange(event) {
-    this.updateNotes(event.target.value);
+    const nextJob = Object.assign({}, this.state.job, {
+      [event.target.name]: event.target.value
+    });
+
+    this.setState({ job: nextJob });
   },
 
   handleSaveTouchTap() {
@@ -60,7 +64,7 @@ const JobNotesDashboardEdit = React.createClass({
           onChange={this.handleChange}
           style={{ fontFamily: 'MontserratLight' }}
           underlineShow={false}
-          value={job.notes}
+          defaultValue={job.notes}
         />
       </Paper>
     </div>;

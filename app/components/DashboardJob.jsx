@@ -136,7 +136,9 @@ const DashboardJob = React.createClass({
       },
       paragraph: {
         color: 'black',
-        fontFamily: 'MontserratLight'
+        fontFamily: 'MontserratLight',
+        position: 'relative',
+        top: '5px'
       },
       paper: {
         padding: '10px'
