@@ -13,8 +13,8 @@ exports.seed = function(knex) {
         company_state: 'WA',
         company_zip: '98109-5210',
         company_phone: '6072223456',
-        interview_status: '{"applied":{"date": "2016-08-12 10:00:00-07"},"informational":{"date":""},"phone":{"date":""},"technical":{"date":""},"onsite":{"date":""},"takeHome":{"date":""},"offer":{"date":""},"rejected":{"date":""}}',
-        notes: 'I found the job on Indeed and then my friend at Amazon encouraged me to apply.',
+        interview_status: '{"applied":{"date": "2016-08-12 10:00:00-07"},"informational":{"date":""},"phone":{"date":""},"technical":{"date":""},"onsite":{"date":""},"takeHome":{"date":""},"offer":{"date":""},"rejected":{"date":""}}', // eslint-disable-line max-len
+        notes: 'I found the job on Indeed and then my friend at Amazon encouraged me to apply.', // eslint-disable-line max-len
         user_id: 1,
         created_at: new Date('2016-08-13 13:00:00 UTC'),
         updated_at: new Date('2016-08-13 13:00:00 UTC')
@@ -29,7 +29,7 @@ exports.seed = function(knex) {
         company_state: 'NV',
         company_zip: '89109',
         company_phone: '5674325678',
-        interview_status: '{"applied":{"date":"2016-06-20 07:00:00-07"},"informational":{"date":""},"phone":{"date":"2016-07-10 09:00:00-07"},"technical":{"date":""},"onsite":{"date":"2016-08-03 08:00:00-07"},"takeHome":{"date":""},"offer":{"date":""},"rejected":{"date":""}}',
+        interview_status: '{"applied":{"date":"2016-06-20 07:00:00-07"},"informational":{"date":""},"phone":{"date":"2016-07-10 09:00:00-07"},"technical":{"date":""},"onsite":{"date":"2016-08-03 08:00:00-07"},"takeHome":{"date":""},"offer":{"date":""},"rejected":{"date":""}}', // eslint-disable-line max-len
         notes: 'I\'ve always wanted to be a clown. Here\'s my chance!',
         user_id: 1,
         created_at: new Date('2016-06-21 13:00:00 UTC'),
