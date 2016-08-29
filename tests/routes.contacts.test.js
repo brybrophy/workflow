@@ -31,15 +31,17 @@ suite('Routes contacts', () => {
 
   test('GET /api/contacts/1', (done) => {
     request(server)
-      .get('/api/contacts')
+      .get('/api/contacts/1')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200, [{
         id: 1,
-        firstName: 'bobby',
-        lastName: 'kennedy',
+        firstName: 'Bobby',
+        lastName: 'Kennedy',
         email: 'admin@workflow.com',
         phone: '5555555555',
+        title: 'President and CEO',
+        company: 'ABC Company',
         linkedInUrl: 'https://www.linkedin.com/in/bobby-joe-kennedy-40b5b0a2',
         userId: 1,
         createdAt: new Date('2016-08-13 11:14:00 UTC').toISOString(),
@@ -52,26 +54,30 @@ suite('Routes contacts', () => {
       .post('/api/contacts')
       .set('Accept', 'application/json')
       .send({
-        firstName: 'neil',
-        lastName: 'armstrong',
+        firstName: 'Neil',
+        lastName: 'Armstrong',
         email: 'neil@themoon.space',
-        phoneNumber: '(123)456-7890',
+        phone: '(123)456-7890',
+        title: 'Chief Astronaut',
+        company: 'NASA',
         linkedInUrl: 'https://www.linkedin.com/in/neil-armstrong-8b6b59b',
         userId: 1
       })
       .expect('Content-Type', /json/)
       .expect((res) => {
-        delete res.body.created_at;
-        delete res.body.updated_at;
+        delete res.body.createdAt;
+        delete res.body.updatedAt;
       })
       .expect(200, {
         id: 2,
-        first_name: 'neil',
-        last_name: 'armstrong',
+        firstName: 'Neil',
+        lastName: 'Armstrong',
         email: 'neil@themoon.space',
         phone: '1234567890',
-        linked_in_url: 'https://www.linkedin.com/in/neil-armstrong-8b6b59b',
-        user_id: 1
+        title: 'Chief Astronaut',
+        company: 'NASA',
+        linkedInUrl: 'https://www.linkedin.com/in/neil-armstrong-8b6b59b',
+        userId: 1
       }, done);
   });
 
@@ -80,22 +86,24 @@ suite('Routes contacts', () => {
       .patch('/api/contacts/1')
       .set('Accept', 'application/json')
       .send({
-        firstName: 'Bobby',
-        lastName: 'Kennedy'
+        firstName: 'Robert',
+        lastName: 'Dole'
       })
       .expect('Content-Type', /json/)
       .expect((res) => {
-        delete res.body.created_at;
-        delete res.body.updated_at;
+        delete res.body.createdAt;
+        delete res.body.updatedAt;
       })
       .expect(200, {
         id: 1,
-        first_name: 'Bobby',
-        last_name: 'Kennedy',
+        firstName: 'Robert',
+        lastName: 'Dole',
         email: 'admin@workflow.com',
         phone: '5555555555',
-        linked_in_url: 'https://www.linkedin.com/in/bobby-joe-kennedy-40b5b0a2',
-        user_id: 1
+        title: 'President and CEO',
+        company: 'ABC Company',
+        linkedInUrl: 'https://www.linkedin.com/in/bobby-joe-kennedy-40b5b0a2',
+        userId: 1
       }, done);
   });
 });

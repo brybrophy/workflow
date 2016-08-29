@@ -58,7 +58,6 @@ router.get('/contacts/:userId', (req, res, next) => {
     .where('user_id', userId)
     .orderBy('first_name')
     .then((contacts) => {
-      console.log(contacts);
       res.send(camelizeKeys(contacts));
     })
     .catch((err) => {
@@ -151,7 +150,7 @@ router.patch('/contacts/:contactId', ev(validations.patch),
           .where('id', contactId);
       })
       .then((contacts) => {
-        res.send(contacts[0]);
+        res.send(camelizeKeys(contacts[0]));
       })
       .catch((err) => {
         next(err);

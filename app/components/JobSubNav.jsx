@@ -59,7 +59,8 @@ const JobSubNav = React.createClass({
       phone: '',
       title: '',
       company: '',
-      linkedInUrl: ''
+      linkedInUrl: '',
+      userId: window.COOKIES.userId
     };
 
     const nextEditing = this.state.contactEditing.concat(contact);

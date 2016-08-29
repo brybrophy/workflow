@@ -29,7 +29,7 @@ suite('Migrations', () => {
             defaultValue: 'nextval(\'users_id_seq\'::regclass)'
           },
 
-          username: {
+          linkedin_id: {
             type: 'character varying',
             maxLength: 255,
             nullable: false,
@@ -43,9 +43,9 @@ suite('Migrations', () => {
             defaultValue: '\'\'::character varying'
           },
 
-          hashed_password: {
-            type: 'character',
-            maxLength: 60,
+          access_token: {
+            type: 'character varying',
+            maxLength: 255,
             nullable: false,
             defaultValue: null
           },

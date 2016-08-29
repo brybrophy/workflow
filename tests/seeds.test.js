@@ -32,11 +32,11 @@ suite('Seeds', () => {
       .then((actual) => {
         const expected = [{
           id: 1,
-          username: 'admin',
+          linkedin_id: 'admin',
           email: 'admin@workflow.com',
 
           // eslint-disable-next-line max-len
-          hashed_password: '$2a$12$Q3fh1jeJZ2Q19Yr12aVOxO54a/IvBhS01qWCqxNAZc0ABRxq0NnYq',
+          access_token: 'AQXrS9hwpgJ1xB6o7e3EMiYTQQwqjSDjaBlW9SwHa7WkBiAa1NEH7X979Ukp18CxW47yyeUfdrvgo_7VlYhgZ9v7OgGlS0HdmnAUY3bkflwXqs4RDmVMPNAd_Vkyg2Lvutrg4Qo0U8Y3zIyTY50Gz0f3oqKZJGt7ns5EclyoVINfaV9O1FQ',
           created_at: new Date('2016-07-23 14:26:16 UTC'),
           updated_at: new Date('2016-07-23 14:26:16 UTC')
         }];
@@ -68,10 +68,10 @@ suite('Seeds', () => {
           company_city: 'Seattle',
           company_state: 'WA',
           company_zip: '98109-5210',
-          company_phone: '',
+          company_phone: '6072223456',
 
           // eslint-disable-next-line max-len
-          interview_status: {"applied":{"date": "2016-08-12 10:00:00-07"},"informational":{},"phone":{},"technical":{},"onsite":{},"takeHome":{},"offer":{},"rejected":{}},
+          interview_status: {"applied":{"date": "2016-08-12 10:00:00-07"},"informational":{"date": ""},"phone":{"date": ""},"technical":{"date": ""},"onsite":{"date": ""},"takeHome":{"date": ""},"offer":{"date": ""},"rejected":{"date": ""}},
           notes: 'I found the job on Indeed and then my friend at Amazon encouraged me to apply.',
           user_id: 1,
           created_at: new Date('2016-08-13 13:00:00 UTC'),
@@ -86,8 +86,8 @@ suite('Seeds', () => {
           company_city: 'Las Vegas',
           company_state: 'NV',
           company_zip: '89109',
-          company_phone: '',
-          interview_status: {"applied":{"date":"2016-06-20 07:00:00-07"},"informational":{},"phone":{"date":"2016-07-10 09:00:00-07"},"technical":{},"onsite":{"date":"2016-08-03 08:00:00-07"},"takeHome":{},"offer":{},"rejected":{}},
+          company_phone: '5674325678',
+          interview_status: {"applied":{"date":"2016-06-20 07:00:00-07"},"informational":{"date": ""},"phone":{"date":"2016-07-10 09:00:00-07"},"technical":{"date": ""},"onsite":{"date":"2016-08-03 08:00:00-07"},"takeHome":{"date": ""},"offer":{"date": ""},"rejected":{"date": ""}},
           notes: 'I\'ve always wanted to be a clown. Here\'s my chance!',
           user_id: 1,
           created_at: new Date('2016-06-21 13:00:00 UTC'),
@@ -114,10 +114,12 @@ suite('Seeds', () => {
       .then((actual) => {
         const expected = [{
           id: 1,
-          first_name: 'bobby',
-          last_name: 'kennedy',
+          first_name: 'Bobby',
+          last_name: 'Kennedy',
           email: 'admin@workflow.com',
           phone: '5555555555',
+          title: 'President and CEO',
+          company: 'ABC Company',
           linked_in_url: 'https://www.linkedin.com/in/bobby-joe-kennedy-40b5b0a2',
           user_id: 1,
           created_at: new Date('2016-08-13 11:14:00 UTC'),
