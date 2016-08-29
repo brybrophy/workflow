@@ -43,7 +43,7 @@ const DashboardJobHeaderEdit = React.createClass({
         top: '105px',
         width: '80%'
       }
-    }
+    };
 
     return <div>
       <CardHeader
@@ -61,36 +61,36 @@ const DashboardJobHeaderEdit = React.createClass({
           <TextField
             defaultValue={job.companyName}
             hintText="Company Name"
+            inputStyle={stylesThis.companyNameField}
             name="companyName"
             onChange={this.handleChange}
-            inputStyle={stylesThis.companyNameField}
           />
         }
         titleStyle={styles.title}
       >
-      <TextField
-        defaultValue={job.jobPostUrl}
-        hintText="Job Post Url"
-        name="jopPostUrl"
-        onChange={this.handleChange}
-        style={stylesThis.urlField}
-      />
-      <FlatButton
-        icon={<Check />}
-        label="Save"
-        onTouchTap={this.handleSaveTouchTap}
-        primary={true}
-        style={{ position: 'absolute', right: '17%' }}
-      />
-      <FlatButton
-        icon={<Clear />}
-        label="Cancel"
-        onTouchTap={this.handleTouchTap}
-        secondary={true}
-        style={{ position: 'absolute', right: '25%' }}
-      />
+        <TextField
+          defaultValue={job.jobPostUrl}
+          hintText="Job Post Url"
+          name="jopPostUrl"
+          onChange={this.handleChange}
+          style={stylesThis.urlField}
+        />
+        <FlatButton
+          icon={<Check />}
+          label="Save"
+          onTouchTap={this.handleSaveTouchTap}
+          primary={true}
+          style={{ position: 'absolute', right: '17%' }}
+        />
+        <FlatButton
+          icon={<Clear />}
+          label="Cancel"
+          onTouchTap={this.handleTouchTap}
+          secondary={true}
+          style={{ position: 'absolute', right: '25%' }}
+        />
       </CardHeader>
-    </div>
+    </div>;
   }
 });
 
