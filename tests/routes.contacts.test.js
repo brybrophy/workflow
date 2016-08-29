@@ -2,16 +2,14 @@
 
 process.env.NODE_ENV = 'test';
 
-const { assert, expect, should } = require('chai');
+const { expect } = require('chai');
 const { suite, test } = require('mocha');
 const request = require('supertest');
 const server = require('../server');
 const knex = require('../knex');
 
-const posts = require('../routes/contacts');
-
 suite('Routes contacts', () => {
-  before((done) => {
+  before((done) => { // eslint-disable-line no-undef
     knex.migrate.latest()
       .then(() => {
         done();
@@ -21,7 +19,7 @@ suite('Routes contacts', () => {
       });
   });
 
-  beforeEach((done) => {
+  beforeEach((done) => { // eslint-disable-line no-undef
     knex.seed.run()
       .then(() => {
         done();

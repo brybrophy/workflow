@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 'use strict';
 
 process.env.NODE_ENV = 'test';
@@ -7,7 +8,7 @@ const { suite, test } = require('mocha');
 const knex = require('../knex');
 
 suite('Migrations', () => {
-  before((done) => {
+  before((done) => { // eslint-disable-line no-undef
     knex.migrate.latest()
       .then(() => {
         done();

@@ -7,7 +7,7 @@ const { suite, test } = require('mocha');
 const knex = require('../knex');
 
 suite('Seeds', () => {
-  before((done) => {
+  before((done) => { // eslint-disable-line no-undef
     knex.migrate.latest()
       .then(() => {
         done();
@@ -17,7 +17,7 @@ suite('Seeds', () => {
       });
   });
 
-  beforeEach((done) => {
+  beforeEach((done) => { // eslint-disable-line no-undef
     knex.seed.run()
       .then(() => {
         done();
@@ -34,6 +34,8 @@ suite('Seeds', () => {
           id: 1,
           username: 'admin',
           email: 'admin@workflow.com',
+
+          // eslint-disable-next-line max-len
           hashed_password: '$2a$12$Q3fh1jeJZ2Q19Yr12aVOxO54a/IvBhS01qWCqxNAZc0ABRxq0NnYq',
           created_at: new Date('2016-07-23 14:26:16 UTC'),
           updated_at: new Date('2016-07-23 14:26:16 UTC')
@@ -67,6 +69,8 @@ suite('Seeds', () => {
           company_state: 'WA',
           company_zip: '98109-5210',
           company_phone: '',
+
+          // eslint-disable-next-line max-len
           interview_status: {"applied":{"date": "2016-08-12 10:00:00-07"},"informational":{},"phone":{},"technical":{},"onsite":{},"takeHome":{},"offer":{},"rejected":{}},
           notes: 'I found the job on Indeed and then my friend at Amazon encouraged me to apply.',
           user_id: 1,
