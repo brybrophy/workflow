@@ -57,6 +57,7 @@ const JobNotesDashboardEdit = React.createClass({
       />
       <Paper style={styles.section}>
         <TextField
+          defaultValue={job.notes}
           fullWidth={true}
           hintText="Type job notes here"
           multiLine={true}
@@ -64,7 +65,6 @@ const JobNotesDashboardEdit = React.createClass({
           onChange={this.handleChange}
           style={{ fontFamily: 'MontserratLight' }}
           underlineShow={false}
-          defaultValue={job.notes}
         />
       </Paper>
     </div>;
