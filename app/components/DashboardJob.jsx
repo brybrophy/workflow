@@ -257,6 +257,7 @@ const DashboardJob = React.createClass({
               editing={this.state.editing}
               editingId={this.state.editingId}
               job={job}
+              onHandleEditing={this.handleEditing}
               styles={styles}
             />
 

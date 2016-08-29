@@ -94,7 +94,7 @@ const App = React.createClass({
       />
       <MainNav />
       {React.cloneElement(this.props.children, {
-        addNewjob: this.addNewJob,
+        addNewJob: this.addNewJob,
         contacts: this.state.contacts,
         cookies: this.state.cookies,
         jobs: this.state.jobs,
