@@ -37,7 +37,7 @@ const ProgressStepper = React.createClass({
         marginTop: '35px',
         width: '80%'
       }
-    }
+    };
 
     return <div>
       <Stepper activeStep={stepIndex} linear={false} style={styles.stepper}>
