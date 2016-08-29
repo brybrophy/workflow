@@ -18,7 +18,7 @@ const App = React.createClass({
   },
 
   componentWillMount() {
-    this.setCookies()
+    this.setCookies();
 
     axios.get(`/api/jobs/${window.COOKIES.userId}/users`)
       .then((res) => {
@@ -36,13 +36,15 @@ const App = React.createClass({
     axios.get(`api/contacts/${window.COOKIES.userId}`)
       .then((res) => {
         this.setState({ contacts: res.data });
-    })
-    .catch((err) => {
-      const nextSnackbar = {
-        message: 'Unable to load contacts information',
-        open: true
-      }
-    });
+      })
+      .catch(() => {
+        const nextSnackbar = {
+          message: 'Unable to load contacts information',
+          open: true
+        };
+
+        this.showSnackbar(nextSnackbar);
+      });
   },
 
   handleRequestCloseSnackbar() {
@@ -76,7 +78,6 @@ const App = React.createClass({
       var propValue = prop.split('=')[1];
 
       window.COOKIES[propKey] = propValue;
-
     });
   },
 
