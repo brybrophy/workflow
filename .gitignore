@@ -3,3 +3,4 @@ npm-debug.log
 public
 pg
 .DS_Store
+.env
