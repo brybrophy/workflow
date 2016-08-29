@@ -1,7 +1,6 @@
 import {
   Card,
   CardActions,
-  CardHeader,
   CardText,
   CardTitle } from 'material-ui/Card';
 
@@ -10,7 +9,6 @@ import { Col } from 'react-bootstrap';
 import DashboardJobHeader from 'components/DashboardJobHeader';
 import DashboardJobHeaderEdit from 'components/DashboardJobHeaderEdit';
 import DeleteButton from 'components/DeleteButton';
-import EditMode from 'material-ui/svg-icons/editor/mode-edit';
 import Eyeball from 'material-ui/svg-icons/image/remove-red-eye';
 import FlatButton from 'material-ui/FlatButton';
 import JobAddressTable from 'components/JobAddressTable';
@@ -197,14 +195,14 @@ const DashboardJob = React.createClass({
               styles={styles}
             />
             <CardActions>
-            <FlatButton
-              backgroundColor="#327F9E"
-              icon={<Eyeball />}
-              id={job.id}
-              label="View More"
-              onTouchTap={this.handleExpand}
-              style={styles.viewMoreButton}
-            />
+              <FlatButton
+                backgroundColor="#327F9E"
+                icon={<Eyeball />}
+                id={job.id}
+                label="View More"
+                onTouchTap={this.handleExpand}
+                style={styles.viewMoreButton}
+              />
             </CardActions>
           </div>
         }
