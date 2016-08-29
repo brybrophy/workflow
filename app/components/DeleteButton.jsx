@@ -22,8 +22,7 @@ const DeleteButton = React.createClass({
         onTouchTap={this.handleTouchTap}
         style={styles.deleteButton}
       />
-    </CardActions>
-
+    </CardActions>;
   }
 });
 
