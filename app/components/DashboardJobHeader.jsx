@@ -20,21 +20,21 @@ const DashboardJobHeader = React.createClass({
         title={job.companyName}
         titleStyle={styles.title}
       >
-      <a
-        href={job.jobPostUrl}
-        style={{ left: '15px', position: 'absolute', top: '92px' }}
-      >
-        {job.jobPostUrl}
-      </a>
-      <FlatButton
-        icon={<EditMode />}
-        label="Edit"
-        onTouchTap={this.handleTouchTap}
-        primary={true}
-        style={{ position: 'absolute', right: '17%' }}
-      />
+        <a
+          href={job.jobPostUrl}
+          style={{ left: '15px', position: 'absolute', top: '92px' }}
+        >
+          {job.jobPostUrl}
+        </a>
+        <FlatButton
+          icon={<EditMode />}
+          label="Edit"
+          onTouchTap={this.handleTouchTap}
+          primary={true}
+          style={{ position: 'absolute', right: '17%' }}
+        />
       </CardHeader>
-    </div>
+    </div>;
   }
 });
 
