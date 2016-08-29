@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-spacing, quotes, quote-props, key-spacing, comma-spacing, indent, max-len */
 'use strict';
 
 process.env.NODE_ENV = 'test';

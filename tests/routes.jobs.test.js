@@ -2,16 +2,13 @@
 
 process.env.NODE_ENV = 'test';
 
-const { assert, expect, should } = require('chai');
 const { suite, test } = require('mocha');
 const request = require('supertest');
 const server = require('../server');
 const knex = require('../knex');
 
-const posts = require('../routes/jobs');
-
 suite('Routes jobs', () => {
-  before((done) => {
+  before((done) => { // eslint-disable-line no-undef
     knex.migrate.latest()
       .then(() => {
         done();
@@ -21,7 +18,7 @@ suite('Routes jobs', () => {
       });
   });
 
-  beforeEach((done) => {
+  beforeEach((done) => { // eslint-disable-line no-undef
     knex.seed.run()
       .then(() => {
         done();
@@ -54,7 +51,7 @@ suite('Routes jobs', () => {
         interviewTakeHome: { date: '' },
         interviewOffer: { date: '' },
         interviewRejected: { date: '' },
-        notes: 'I found the job on Indeed and then my friend at Amazon encouraged me to apply.',
+        notes: 'I found the job on Indeed and then my friend at Amazon encouraged me to apply.', // eslint-disable-line max-len
         userId: 1,
         createdAt: new Date('2016-08-13 13:00:00 UTC').toISOString(),
         updatedAt: new Date('2016-08-13 13:00:00 UTC').toISOString()
@@ -107,7 +104,7 @@ suite('Routes jobs', () => {
         interviewTakeHome: { date: '' },
         interviewOffer: { date: '' },
         interviewRejected: { date: '' },
-        notes: 'I found the job on Indeed and then my friend at Amazon encouraged me to apply.',
+        notes: 'I found the job on Indeed and then my friend at Amazon encouraged me to apply.', // eslint-disable-line max-len
         userId: 1,
         createdAt: new Date('2016-08-13 13:00:00 UTC').toISOString(),
         updatedAt: new Date('2016-08-13 13:00:00 UTC').toISOString()
@@ -148,7 +145,7 @@ suite('Routes jobs', () => {
         companyState: 'WA',
         companyZip: '98104',
         interviewApplied: { date: '2016-06-20 14:00:00 UTC' },
-        notes: 'I applied online and reached out to my friend Sam who works at Indeed.',
+        notes: 'I applied online and reached out to my friend Sam who works at Indeed.', // eslint-disable-line max-len
         userId: 1
       })
       .expect('Content-Type', /json/)
@@ -167,7 +164,7 @@ suite('Routes jobs', () => {
         companyZip: '98104',
         companyPhone: '',
         interviewApplied: { date: '2016-06-20 14:00:00 UTC' },
-        notes: 'I applied online and reached out to my friend Sam who works at Indeed.',
+        notes: 'I applied online and reached out to my friend Sam who works at Indeed.', // eslint-disable-line max-len
         userId: 1
       }, done);
   });
@@ -181,7 +178,7 @@ suite('Routes jobs', () => {
         interviewApplied: { date: '2016-06-20 07:00:00-07' },
         interviewPhone: { date: '2016-07-10 09:00:00-07' },
         interviewOnsite: { date: '2016-08-03 08:00:00-07' },
-        notes: 'I\'ve always wanted to be a clown. Here\'s my chance! I got an offer but I\'ll have to give it some thought.'
+        notes: 'I\'ve always wanted to be a clown. Here\'s my chance! I got an offer but I\'ll have to give it some thought.' // eslint-disable-line max-len
       })
       .expect('Content-Type', /json/)
       .expect((res) => {
@@ -202,7 +199,7 @@ suite('Routes jobs', () => {
         interviewPhone: { date: '2016-07-10 09:00:00-07' },
         interviewOnsite: { date: '2016-08-03 08:00:00-07' },
         interviewOffer: { date: '2016-09-10 15:00:00-07' },
-        notes: 'I\'ve always wanted to be a clown. Here\'s my chance! I got an offer but I\'ll have to give it some thought.',
+        notes: 'I\'ve always wanted to be a clown. Here\'s my chance! I got an offer but I\'ll have to give it some thought.', // eslint-disable-line max-len
         userId: 1
       }, done);
   });
