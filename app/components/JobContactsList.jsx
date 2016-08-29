@@ -20,7 +20,8 @@ const JobContactsList = React.createClass({
     const deleteButton = () => {
       if (this.props.editing && this.props.editingId) {
         return <IconButton
-          iconClassName="muidocs-icon-custom-github" tooltip="bottom-right"
+          iconClassName="muidocs-icon-custom-github"
+          tooltip="bottom-right"
           tooltipPosition="bottom-right"
         />;
       }
