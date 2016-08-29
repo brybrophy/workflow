@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 import { Tab, Tabs } from 'material-ui/Tabs';
 import ContactView from 'components/ContactView';
 import DeleteDialog from 'components/DeleteDialog';
