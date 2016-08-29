@@ -1,7 +1,7 @@
 'use strict';
 
 const jwt = require('jsonwebtoken');
-const tokenSecret = process.env.TOKEN_SECRET
+const tokenSecret = process.env.TOKEN_SECRET;
 
 const checkAuth = function(req, res, next) {
   jwt.verify(req.cookies.accessToken, tokenSecret, (err, decoded) => {
@@ -12,6 +12,6 @@ const checkAuth = function(req, res, next) {
     req.token = decoded;
     next();
   });
-}
+};
 
 module.exports = { checkAuth };
