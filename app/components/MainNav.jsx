@@ -16,7 +16,7 @@ const MainNav = React.createClass({
     }
 
     if (event.currentTarget.textContent.includes('workflow')) {
-      return this.props.router.push('/dashboard');
+      return this.props.router.push('/');
     }
 
     const path = `/${event.currentTarget.textContent.toLowerCase()}`;
@@ -33,8 +33,7 @@ const MainNav = React.createClass({
       flatButton: {
         height: '125px',
         lineHeight: '125px',
-        margin: '0 10px',
-        minWidth: '60px'
+        width: '108px'
       },
       flatButtonLabel: {
         fontFamily: 'MontserratHairline',
@@ -52,8 +51,8 @@ const MainNav = React.createClass({
         color: 'white',
         fontFamily: 'MontserratHairline',
         fontSize: '2rem',
-        marginLeft: '18px',
-        marginRight: '15px',
+        marginLeft: '8px',
+        marginRight: '5px',
         paddingTop: '30px'
       },
       subTitle: {

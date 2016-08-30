@@ -19,7 +19,7 @@ const WelcomeNav = React.createClass({
       flatButton: {
         height: '125px',
         lineHeight: '125px',
-        minWidth: '60px'
+        width: '108px'
       },
       flatButtonAlt: {
         height: '125px',
@@ -51,7 +51,7 @@ const WelcomeNav = React.createClass({
         fontFamily: 'MontserratHairline',
         fontSize: '2rem',
         marginLeft: '18px',
-        marginRight: '15px',
+        marginRight: '5px',
         paddingTop: '30px'
       },
       subTitle: {
