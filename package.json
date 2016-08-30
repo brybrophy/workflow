@@ -12,7 +12,14 @@
     "flow",
     "workflow"
   ],
-  "author": "bryanbrophy <brybrophy@gmail.com>",
+  "contributors": [
+    {"name": "bryanbrophy",
+      "email": "brybrophy@gmail.com"
+    },
+    {"name": "jakebell",
+      "email": "jakebrbell@gmail.com>"
+    }
+  ],
   "scripts": {
     "heroku-postbuild": "brunch build --production",
     "knex": "knex",
