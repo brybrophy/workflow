@@ -5,6 +5,20 @@ import React from 'react';
 import TwitterLogo from 'components/TwitterLogo';
 
 const Footer = React.createClass({
+  handleTouchTap(event) {
+    if (event.currentTarget.id === 'gitHub') {
+      window.location.href = 'https://github.com/brybrophy/workflow';
+    }
+
+    else if (event.currentTarget.id === 'twitter') {
+      window.location.href = 'https://twitter.com/jakebrbell';
+    }
+
+    else if (event.target.id === 'logo') {
+      window.location.href = '/home';
+    }
+  },
+
   render() {
     const styles = {
       flatButtonBottom: {
@@ -42,17 +56,25 @@ const Footer = React.createClass({
         <FooterLogo />
       </div>
 
-      <p className="hairline-font space-letters" style={styles.textBottom}>
+      <p
+        id="logo"
+        onTouchTap={this.handleTouchTap}
+        style={styles.textBottom}
+      >
         workflow © 2016-2017
       </p>
 
       <div style={styles.pullRight}>
         <FlatButton
+          id="gitHub"
           label={<GithubLogo />}
+          onTouchTap={this.handleTouchTap}
           style={styles.flatButtonBottom}
         />
         <FlatButton
+          id="twitter"
           label={<TwitterLogo />}
+          onTouchTap={this.handleTouchTap}
           style={styles.flatButtonBottom}
         />
       </div>
