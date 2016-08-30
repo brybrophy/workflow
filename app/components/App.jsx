@@ -20,7 +20,7 @@ const App = React.createClass({
   componentWillMount() {
     this.setCookies();
 
-    axios.get(`/api/jobs/${1}/users`)
+    axios.get(`/api/jobs/${window.COOKIES.userId}/users`)
       .then((res) => {
         this.setState({ cookies: window.COOKIES, jobs: res.data });
       })
@@ -33,7 +33,7 @@ const App = React.createClass({
         this.showSnackbar(nextSnackbar);
       });
 
-    axios.get(`api/contacts/${1}`)
+    axios.get(`api/contacts/${window.COOKIES.userId}`)
       .then((res) => {
         this.setState({ contacts: res.data });
       })

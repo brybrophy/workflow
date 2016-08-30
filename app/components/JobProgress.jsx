@@ -76,6 +76,13 @@ const JobProgress = React.createClass({
         margin: '30px',
         textAlign: 'center'
       },
+      paragraph: {
+        fontFamily: 'MontserratLight',
+        fontSize: '16px',
+        lineHeight: '200%',
+        marginBottom: '20px',
+        textAlign: 'center'
+      },
       section: {
         backgroundColor: 'white',
         borderRadius: '5px',
@@ -89,6 +96,11 @@ const JobProgress = React.createClass({
 
     return <div>
       <h4 style={styles.header}>Add Interview Progress Points</h4>
+        <p style={styles.paragraph}>
+          Below you can add common progress points for the interview process.
+          For example, if you have already applied for this job, add the date
+          and time that you applied. You can add progress points later if you dont have any now.
+        </p>
       <Paper style={styles.section}>
         <Table selectable={false} style={styles.table}>
           <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
