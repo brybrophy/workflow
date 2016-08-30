@@ -30,39 +30,48 @@ const SignUp = React.createClass({
         marginTop: '20%'
       },
       flatButton1: {
-        backgroundColor: '#E7E4DB',
+        backgroundColor: '#327F9E',
         borderRadius: '3px 0 0 0',
         borderBottom: '1px solid #D1CFC8',
         borderRight: '1px solid #D1CFC8',
         fontFamily: 'MontserratLight',
         height: '60px',
-        width: '50%'
+        width: '50%',
+        zIndex: '1000'
       },
       flatButton2: {
         backgroundColor: 'white',
         borderRadius: '0 3px 0 0',
         fontFamily: 'MontserratLight',
         height: '60px',
-        width: '50%'
+        width: '50%',
+        zIndex: '1000'
       },
       flatButtonAlt: {
-        backgroundColor: '#E7E4DB',
+        backgroundColor: '#327F9E',
         borderRadius: '3px',
         fontFamily: 'MontserratLight',
         height: '70px',
         margin: '10px 23% 15% 23%',
         paddingTop: '15px',
         postiton: 'relative',
-        width: '55%'
+        width: '55%',
+        zIndex: '1000'
       },
-      flatButtonLabel: {
+      flatButtonLabel1: {
+        color: '#FFF',
+        fontFamily: 'MontserratLight',
+        fontSize: '1.4rem',
+        letterSpacing: '0.12rem'
+      },
+      flatButtonLabel2: {
         color: '#A6A399',
         fontFamily: 'MontserratLight',
         fontSize: '1.4rem',
         letterSpacing: '0.12rem'
       },
       flatButtonLabelAlt: {
-        color: '#A6A399',
+        color: '#FFF',
         fontFamily: 'MontserratLight',
         fontSize: '1.4rem',
         letterSpacing: '0.12rem',
@@ -80,14 +89,14 @@ const SignUp = React.createClass({
     return <div style={styles.box}>
       <FlatButton
         label="Login"
-        labelStyle={styles.flatButtonLabel}
+        labelStyle={styles.flatButtonLabel1}
         onTouchTap={this.handleTouchTap}
         style={styles.flatButton1}
       />
 
       <FlatButton
         label="Sign Up"
-        labelStyle={styles.flatButtonLabel}
+        labelStyle={styles.flatButtonLabel2}
         style={styles.flatButton2}
       />
 
