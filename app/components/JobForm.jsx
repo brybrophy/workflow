@@ -129,7 +129,7 @@ const JobForm = React.createClass({
       },
       dropDownArrow: {
         left: '95%',
-        top: '6px'
+        top: '12px'
       },
       errors: {
         color: '#E48C8C',
@@ -162,7 +162,7 @@ const JobForm = React.createClass({
         fontFamily: 'MontserratLight',
         height: '35px',
         margin: '5px',
-        padding: '5px 10px',
+        padding: '0 10px 35px 10px',
         width: '100%'
       },
       textField: {
