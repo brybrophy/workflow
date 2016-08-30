@@ -27,8 +27,20 @@ const JobNotes = React.createClass({
       flatButtonLabel: {
         color: 'white'
       },
+      header: {
+        fontSize: '30px',
+        margin: '30px',
+        textAlign: 'center'
+      },
       paper: {
         padding: '25px 75px'
+      },
+      paragraph: {
+        fontFamily: 'MontserratLight',
+        fontSize: '16px',
+        lineHeight: '200%',
+        marginBottom: '20px',
+        textAlign: 'center'
       },
       textField: {
         fontFamily: 'MontserratLight'
@@ -46,6 +58,14 @@ const JobNotes = React.createClass({
             onTouchTap={this.handleSaveTouchTap}
             style={styles.flatButton}
           />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <h4 style={styles.header}>Notes</h4>
+          <p style={styles.paragraph}>
+            Click in the box below to add notes about this job. This is a place where you can keep any information that will help you along your path to success!
+          </p>
         </Col>
       </Row>
       <Row>
