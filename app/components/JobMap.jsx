@@ -42,7 +42,7 @@ const JobMap = React.createClass({
 
     return <Paper style={styleMapContainer}>
       <GoogleMapLoader
-        containerElement={<div style={{ height: '165px' }} />}
+        containerElement={<div style={{ height: '265px' }} />}
         googleMapElement={<GoogleMap
           center={this.state.latLngLocation}
           defaultZoom={16}
