@@ -130,7 +130,7 @@ const DashboardJob = React.createClass({
         borderRadius: '3px',
         color: '#A6A399',
         marginBottom: '10px',
-        padding: '10px 20px'
+        padding: '10px 20px 50px 20px'
       },
       paragraph: {
         color: 'black',
@@ -206,7 +206,7 @@ const DashboardJob = React.createClass({
             </CardActions>
           </div>
         }
-          <ProgressStepper />
+          {/* <ProgressStepper /> */}
           <CardTitle expandable={true} style={styles.CardTitle} />
           <CardText expandable={true} style={styles.cardText}>
 
