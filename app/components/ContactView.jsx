@@ -32,11 +32,22 @@ const ContactView = React.createClass({
         margin: '30px auto',
         maxWidth: '700px'
       },
+      header: {
+        fontSize: '30px',
+        margin: '30px',
+        textAlign: 'center'
+      },
       paper: {
         padding: '25px 75px',
         marginLeft: '6px'
       },
-      paragraph: {
+      paragraph1: {
+        fontFamily: 'MontserratLight',
+        fontSize: '16px',
+        lineHeight: '200%',
+        textAlign: 'center'
+      },
+      paragraph2: {
         fontSize: '16px',
         fontWeight: 'bold',
         lineHeight: '200%'
@@ -70,12 +81,20 @@ const ContactView = React.createClass({
           />
         </Col>
       </Row>
+      <Row>
+        <Col>
+          <h4 style={styles.header}>Contacts</h4>
+          <p style={styles.paragraph1}>
+            Below you can associate any of your contacts with this job. You can pick an existing contact, add a new one, or skip this step.
+          </p>
+        </Col>
+      </Row>
       {contacts.length === 0
         ? // eslint-disable-line operator-linebreak
         <Row>
           <Col style={styles.column} xs={12}>
             <Paper style={styles.paper} zDepth={2}>
-              <p style={styles.paragraph}>
+              <p style={styles.paragraph2}>
                 Click "Add a Contact" to associate a contact with{' '}
                 {this.props.job.title} at {this.props.job.companyName}. <br />
                 If you don't have any contacts for this job,

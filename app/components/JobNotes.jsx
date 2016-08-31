@@ -33,7 +33,7 @@ const JobNotes = React.createClass({
         textAlign: 'center'
       },
       paper: {
-        padding: '25px 75px'
+        padding: '15px 25px'
       },
       paragraph: {
         fontFamily: 'MontserratLight',
