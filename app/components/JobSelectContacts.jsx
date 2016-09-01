@@ -1,16 +1,23 @@
 import { Col, Grid, Row } from 'react-bootstrap';
+import {List, ListItem} from 'material-ui/List';
+import Avatar from 'material-ui/Avatar';
+import Checkbox from 'material-ui/Checkbox';
 import Contact from 'components/Contact';
 import ContactForm from 'components/ContactForm';
 import FlatButton from 'material-ui/FlatButton';
+import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 import React from 'react';
+import SelectField from 'material-ui/SelectField';
 import weakKey from 'weak-key';
 import { withRouter } from 'react-router';
 
 const ContactView = React.createClass({
   getInitialState() {
     return {
-      contact: {}
+      addNew: false,
+      contact: {},
+      select: false
     }
   },
   handleTouchTapAdd() {
@@ -18,15 +25,11 @@ const ContactView = React.createClass({
   },
 
   handleTouchTapCancel() {
-    this.props.router.push('/dashboard');
+    this.props.onTouchTapSelect(false);
   },
 
   handleTouchTapSave() {
     this.props.saveContacts(this.props.contacts);
-  },
-
-  handleTouchTapSelect() {
-    this.props.onTouchTapSelect(true);
   },
 
   handleSelectFieldChange(event, index, value) {
@@ -35,12 +38,6 @@ const ContactView = React.createClass({
     });
 
     this.setState({ contact: nextContact });
-  },
-
-  cancelSelect(item, boolean) {
-    const nextSelect = boolean;
-
-    this.setState({ [item]: nextSelect });
   },
 
   render() {
@@ -113,50 +110,24 @@ const ContactView = React.createClass({
         <Col>
           <h4 style={styles.header}>Contacts</h4>
           <p style={styles.paragraph1}>
-            Below you can associate any of your contacts with this job. You can select existing contacts, add a new one, or skip this step.
+            Select the contacts you wish to associate with this job and click done, or click cancel to go back.
           </p>
         </Col>
       </Row>
       <Row>
-        <Col style={styles.centerCol} xs={12}>
-          <FlatButton
-            backgroundColor="#47B4E0"
-            hoverColor="#327F9E"
-            label="Select Existing Contacts"
-            labelStyle={{ color: '#FFF' }}
-            onTouchTap={this.handleTouchTapSelect}
-            style={styles.flatButtonAlt}
-          />
-        </Col>
-        <Col style={styles.centerCol} xs={12}>
-          <FlatButton
-            backgroundColor="#47B4E0"
-            hoverColor="#327F9E"
-            label="Add New Contact"
-            labelStyle={{ color: '#FFF' }}
-            onTouchTap={this.handleTouchTapAdd}
-            style={styles.flatButtonAlt}
-          />
-        </Col>
+          <List>
+            <ListItem
+              primaryText="Chelsea Otakan"
+              rightAvatar={<Avatar src="http://www.fillmurray.com/100/100" />}
+              leftCheckbox={<Checkbox />}
+            />
+            <ListItem
+              primaryText="James Anderson"
+              rightAvatar={<Avatar src="http://www.fillmurray.com/200/200" />}
+              leftCheckbox={<Checkbox />}
+            />
+          </List>
       </Row>
-      {contacts.map((contact) => {
-          if (this.props.editing.indexOf(contact) !== -1) {
-            return <ContactForm
-              contact={contact}
-              key={weakKey(contact)}
-              stopEditingContact={this.props.stopEditingContact}
-              updateContact={this.props.updateContact}
-            />;
-          }
-
-          return <Contact
-            contact={contact}
-            key={weakKey(contact)}
-            openDeleteDialog={this.props.openDeleteDialog}
-            startEditingContact={this.props.startEditingContact}
-          />;
-        })
-      }
       <Row style={styles.row}>
         <Col sm={6} style={styles.column} xs={12}>
           <FlatButton
@@ -171,7 +142,7 @@ const ContactView = React.createClass({
           <FlatButton
             backgroundColor="#327F9E"
             hoverColor="#47B4E0"
-            label="Save and Next"
+            label="Done"
             labelStyle={{ color: '#FFF' }}
             onTouchTap={this.handleTouchTapSave}
             style={styles.flatButton}

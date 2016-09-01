@@ -6,6 +6,7 @@ import DeleteDialog from 'components/DeleteDialog';
 import JobForm from 'components/JobForm';
 import JobNotes from 'components/JobNotes';
 import JobProgressView from 'components/JobProgressView';
+import JobSelectContacts from 'components/JobSelectContacts';
 import React from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import axios from 'axios';
@@ -14,6 +15,7 @@ import { withRouter } from 'react-router';
 const JobSubNav = React.createClass({
   getInitialState() {
     return {
+      addContat: false,
       contactEditing: [],
       contacts: [],
 
@@ -43,6 +45,7 @@ const JobSubNav = React.createClass({
         userId: window.COOKIES.userId
       },
 
+      selectContacts: false,
       slideIndex: 0
     };
   },
@@ -84,6 +87,10 @@ const JobSubNav = React.createClass({
     const nextDeleteDialog = { open: true, contact };
 
     this.setState({ deleteDialog: nextDeleteDialog });
+  },
+
+  selectContactsStatus(boolean) {
+    this.setState({ selectContacts: boolean });
   },
 
   startEditingContact(contact) {
@@ -286,6 +293,39 @@ const JobSubNav = React.createClass({
       }
     };
 
+    let contactView;
+
+    if (!this.state.selectContacts && !this.state.addContact) {
+      contactView = <ContactView
+        addContact={this.state.addContact}
+        contacts={this.state.contacts}
+        createContact={this.createContact}
+        editing={this.state.contactEditing}
+        job={this.state.job}
+        onTouchTapSelect={this.selectContactsStatus}
+        openDeleteDialog={this.openDeleteDialog}
+        saveContacts={this.saveContacts}
+        selectContacts={this.state.selectContacts}
+        startEditingContact={this.startEditingContact}
+        stopEditingContact={this.stopEditingContact}
+        updateContact={this.updateContact}
+      />
+    }
+    else if (this.state.selectContacts) {
+      contactView = <JobSelectContacts
+        contacts={this.state.contacts}
+        createContact={this.createContact}
+        editing={this.state.contactEditing}
+        job={this.state.job}
+        onTouchTapSelect={this.selectContactsStatus}
+        openDeleteDialog={this.openDeleteDialog}
+        saveContacts={this.saveContacts}
+        startEditingContact={this.startEditingContact}
+        stopEditingContact={this.stopEditingContact}
+        updateContact={this.updateContact}
+      />
+    }
+
     return <div>
       <DeleteDialog
         closeDeleteDialog={this.closeDeleteDialog}
@@ -330,17 +370,9 @@ const JobSubNav = React.createClass({
           cookies={this.props.cookies}
           updateJob={this.updateJob}
         />
-        <ContactView
-          contacts={this.state.contacts}
-          createContact={this.createContact}
-          editing={this.state.contactEditing}
-          job={this.state.job}
-          openDeleteDialog={this.openDeleteDialog}
-          saveContacts={this.saveContacts}
-          startEditingContact={this.startEditingContact}
-          stopEditingContact={this.stopEditingContact}
-          updateContact={this.updateContact}
-        />
+
+        {contactView}
+
         <JobProgressView
           job={this.state.job}
           updateInterviewStep={this.updateInterviewStep}

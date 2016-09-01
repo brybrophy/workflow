@@ -1,9 +1,7 @@
 import { Col, Row } from 'react-bootstrap';
 import FlatButton from 'material-ui/FlatButton';
 import Joi from 'joi';
-import MenuItem from 'material-ui/MenuItem';
 import React from 'react';
-import SelectField from 'material-ui/SelectField';
 import TextField from 'material-ui/TextField';
 
 const schema = Joi.object({
@@ -94,9 +92,6 @@ const ContactForm = React.createClass({
       column: {
         padding: '0 3px'
       },
-      dropDownArrow: {
-        top: '6px'
-      },
       errors: {
         color: '#E48C8C',
         marginTop: '10px'
@@ -105,25 +100,6 @@ const ContactForm = React.createClass({
         borderRadius: '3px',
         fontFamily: 'MontserratHairline',
         margin: '5px',
-        width: '100%'
-      },
-      menuItem: {
-        fontFamily: 'MontserratLight',
-        left: '-10px',
-        lineHeight: '35px',
-        padding: '0 10px',
-        top: '-5px',
-        width: '100%'
-      },
-      selectField: {
-        backgroundColor: '#E7E4DB',
-        border: '1px solid lightgray',
-        borderRadius: '3px',
-        fontFamily: 'MontserratLight',
-        lineHeight: 'inherit',
-        height: '35px',
-        margin: '5px',
-        padding: '5px 10px',
         width: '100%'
       },
       textField: {
@@ -142,33 +118,6 @@ const ContactForm = React.createClass({
     };
 
     return <Row style={{ margin: '20px auto' }}>
-      <Col style={styles.column} xs={12}>
-        <SelectField
-          hintStyle={styles.textFieldHint}
-          hintText="SELECT EXISTING CONTACT"
-          iconStyle={styles.dropDownArrow}
-          maxHeight={200}
-          menuStyle={styles.menuItem}
-          name="existingContact"
-          onChange={this.handleSelectFieldChange}
-          style={styles.selectField}
-          underlineShow={false}
-          value={contact.existingContact}
-        >
-          <MenuItem
-            key={1}
-            primaryText="Bobby Kennedy"
-            secondaryText="Test Engineer at Amazon"
-            value={1}
-          />
-          <MenuItem
-            key={2}
-            primaryText="Neil Armstrong"
-            secondaryText="UX/UI Designer at Amazon"
-            value={2}
-          />
-        </SelectField>
-      </Col>
       <Col style={styles.column} xs={12}>
         <p style={{ marginTop: '20px', textAlign: 'center' }}>ADD CONTACT</p>
       </Col>

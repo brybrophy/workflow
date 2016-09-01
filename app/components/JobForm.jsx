@@ -142,8 +142,13 @@ const JobForm = React.createClass({
         width: '100%'
       },
       grid: {
-        margin: '30px auto',
+        margin: '0 auto',
         maxWidth: '700px'
+      },
+      header: {
+        fontSize: '30px',
+        margin: '30px',
+        textAlign: 'center'
       },
       menuItem: {
         fontFamily: 'MontserratLight',
@@ -152,6 +157,13 @@ const JobForm = React.createClass({
         padding: '0 10px',
         top: '-5px',
         width: '100%'
+      },
+      paragraph: {
+        fontFamily: 'MontserratLight',
+        fontSize: '16px',
+        lineHeight: '200%',
+        marginBottom: '20px',
+        textAlign: 'center'
       },
       row: {
         marginBottom: '5px'
@@ -191,25 +203,13 @@ const JobForm = React.createClass({
     return <Grid style={styles.grid}>
       <Row>
         <Col sm={12} xs={12}>
-          <Row style={{ marginBottom: '20px' }}>
-            <Col sm={6} style={styles.column} xs={12}>
-              <FlatButton
-                backgroundColor="#E48C8C"
-                hoverColor="#ED4C4C"
-                label="Cancel"
-                onTouchTap={this.handleTouchTapCancel}
-                style={styles.flatButton}
-              />
-            </Col>
-            <Col sm={6} style={styles.column} xs={12}>
-              <FlatButton
-                backgroundColor="#327F9E"
-                hoverColor="#47B4E0"
-                label="Save and Next"
-                labelStyle={{ color: 'white' }}
-                onTouchTap={this.handleTouchTapSave}
-                style={styles.flatButton}
-              />
+
+          <Row>
+            <Col>
+              <h4 style={styles.header}>New Job</h4>
+              <p style={styles.paragraph}>
+                Use the form below to add a new job, then you can add contacts, interview progress, and notes.
+              </p>
             </Col>
           </Row>
           <Row style={styles.row}>
@@ -340,6 +340,27 @@ const JobForm = React.createClass({
                 style={styles.textField}
                 underlineShow={false}
                 value={job.jobPostUrl}
+              />
+            </Col>
+          </Row>
+          <Row style={{ marginBottom: '20px' }}>
+            <Col sm={6} style={styles.column} xs={12}>
+              <FlatButton
+                backgroundColor="#E48C8C"
+                hoverColor="#ED4C4C"
+                label="Cancel"
+                onTouchTap={this.handleTouchTapCancel}
+                style={styles.flatButton}
+              />
+            </Col>
+            <Col sm={6} style={styles.column} xs={12}>
+              <FlatButton
+                backgroundColor="#327F9E"
+                hoverColor="#47B4E0"
+                label="Save and Next"
+                labelStyle={{ color: 'white' }}
+                onTouchTap={this.handleTouchTapSave}
+                style={styles.flatButton}
               />
             </Col>
           </Row>
